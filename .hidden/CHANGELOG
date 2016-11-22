@@ -1,0 +1,66 @@
+* Fri Nov 18 2016 tincho <planeta4@openmailbox.org> 0.0.19
+- Aviso de ejecucion desde el IDE otra prueba
+
+* Fri Nov 18 2016 tincho <planeta4@openmailbox.org> 0.0.18
+- Aviso de ejecucion desde el IDE
+
+* Thu Nov 10 2016 tincho <planeta4@openmailbox.org> 0.0.16
+- empaquetado para verificar iconos
+
+* Wed Nov 09 2016 tincho <planeta4@openmailbox.org> 0.0.15
+- Compilacion para hacer demo en video
+
+* Wed Nov 09 2016 tincho <planeta4@openmailbox.org> 0.0.13
+- empaquetado para maquina remota
+
+* Mon Nov 07 2016 tincho <planeta4@openmailbox.org> 0.0.13
+- otro intento
+
+* Mon Nov 07 2016 tincho <planeta4@openmailbox.org> 0.0.13
+- intento de correccion del menu en lubuntu
+
+* Mon Nov 07 2016 tincho <planeta4@openmailbox.org> 0.0.13
+- Empaquetado de distribución
+
+* Sun Nov 06 2016 tincho <planeta4@openmailbox.org> 0.0.13
+- inclusion de varias mejoras
+
+* Thu Nov 03 2016 Martín <planeta4@openmailbox.org> 0.0.11
+- Ajuste d edependencias
+
+* Wed Nov 02 2016 Martín <planeta4@openmailbox.org> 0.0.10
+- Modificacion del drop de la imagen
+
+* Wed Nov 02 2016 Martín <planeta4@openmailbox.org> 0.0.9
+- Implementacion completa de los botones de reproducción, carga de la letra de la cancion desde internet y otras mejoras.
+
+* Thu Oct 27 2016 Martín <planeta4@openmailbox.org> 0.0.6
+- Compilacion para manjaro para usar con escritorio mate t x2go
+
+* Mon Oct 24 2016 Martín <planeta4@openmailbox.org> 0.0.6
+- Debian mate
+
+* Sun Oct 23 2016 Martín <planeta4@openmailbox.org> 0.0.6
+- Prueba con rutina que averigua el color del formulario
+
+* Sun Oct 23 2016 Martín <planeta4@openmailbox.org> 0.0.6
+- Intento de categorizar programa en el menu una vez instalado
+
+* Sun Oct 23 2016 Martín <planeta4@openmailbox.org> 0.0.6
+- Correccion de errores e incorporacion de nuevas caracteristicas
+
+* Sat Oct 22 2016 Martín <planeta4@openmailbox.org> 0.0.4
+- Creacion de paquete para Debian
+
+* Sat Oct 22 2016 Martín <planeta4@openmailbox.org> 0.0.4
+- Creacion de paqueta para Arch
+
+* Sun Oct 16 2016 Martín <planeta4@openmailbox.org> 0.0.2
+- Creación de paquete para ubuntu
+
+* Sun Oct 16 2016 Martín <planeta4@openmailbox.org> 0.0.2
+- antes dio error pidiendo lla dependencia gambas3-gb-qt5-ext, quite el componente del proyecto ya que no se usaba para hacer esta prueba.
+
+* Sun Oct 16 2016 Martín <planeta4@openmailbox.org> 0.0.2
+- Lanzamiento inicial
+

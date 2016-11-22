@@ -1,0 +1,99 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,58,61)
+  Icon = Picture["logo.png"]
+  Arrangement = Arrange.Vertical
+  { Panel5 Panel
+    MoveScaled(1,0,58,5)
+    Arrangement = Arrange.Horizontal
+    { tobSave ToolButton
+      MoveScaled(3,1,4,4)
+      Picture = Picture["icon:/22/save"]
+    }
+    { tobLyric ToolButton
+      MoveScaled(10,1,4,4)
+      Picture = Picture["icon:/22/text"]
+    }
+    { tobWiki ToolButton
+      MoveScaled(18,1,4,4)
+      Picture = Picture["Wikipedia-logo-v2.svg"]
+    }
+  }
+  { Panel1 Panel
+    MoveScaled(0,5,58,11)
+    Arrangement = Arrange.Horizontal
+    Padding = 4
+    { Panel2 Panel
+      MoveScaled(1,0,39,11)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      Padding = 2
+      { Panel6 Panel
+        MoveScaled(1,0,37,4)
+        Expand = True
+        Arrangement = Arrange.Horizontal
+        { lblArtist Label
+          MoveScaled(0,0,9,3)
+        }
+        { btoArtist ButtonBox
+          MoveScaled(10,0,20,4)
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+          Border = False
+        }
+      }
+      { Panel7 Panel
+        MoveScaled(0,3,37,4)
+        Expand = True
+        Arrangement = Arrange.Horizontal
+        { lblAlbum Label
+          MoveScaled(0,0,9,3)
+        }
+        { btoAlbum ButtonBox
+          MoveScaled(10,0,20,4)
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+          Border = False
+        }
+      }
+      { Panel8 Panel
+        MoveScaled(0,8,37,4)
+        Expand = True
+        Arrangement = Arrange.Horizontal
+        { lblTitle Label
+          MoveScaled(0,0,9,3)
+        }
+        { btoATitle ButtonBox
+          MoveScaled(10,0,20,4)
+          Background = Color.Background
+          Expand = True
+          ReadOnly = True
+          Border = False
+        }
+      }
+    }
+    { Panel3 Panel
+      MoveScaled(46,0,11,11)
+      Arrangement = Arrange.Vertical
+      { pioCover PictureBox
+        MoveScaled(0,0,11,11)
+        Stretch = True
+      }
+    }
+  }
+  { Panel4 Panel
+    MoveScaled(0,16,58,45)
+    Expand = True
+    Arrangement = Arrange.Vertical
+    Padding = 4
+    { txaLyric TextArea
+      MoveScaled(6,6,25,22)
+      Font = Font["+1"]
+      Expand = True
+      Wrap = True
+    }
+  }
+}

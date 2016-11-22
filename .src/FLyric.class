@@ -1,0 +1,193 @@
+' Gambas class file
+
+Private strLyPath As String
+
+Private strArt As String
+Private strArtx As String
+Private strAlb As String
+Private strAlbx As String
+
+Private strTit As String
+Private strTitx As String
+
+Private strLyric As String
+Private strCCo As String
+Private strCtr As String
+Private strCtrx As String
+
+Private strGen As String
+Private strGenx As String
+
+Private strDir As String
+
+Private stxFileParts As New String[]
+
+Public Sub Form_Open()
+
+  ' Dim strArt As String
+  ' Dim strAlb As String
+  ' Dim strTit As String
+  ' Dim strDir As String
+  ' Dim strLyric As String
+  ' Dim stxFileParts As New String[]
+
+  'Dim strLyPath As String
+  Dim strCoverPath As String
+  Dim strYea As String
+  Dim strFlagPath As String
+
+  'Me.Close
+
+  ' If Me.Tag <> "" Then
+  '   If InStr(Me.Tag, ":") <> 0 Then
+  '     strArt = Split(Me.Tag, ":")[0]
+  '     strArtx = Split(Me.Tag, ":")[1]
+  '
+  '     strAlb = Split(Me.Tag, ":")[2]
+  '     strAlbx = Split(Me.Tag, ":")[3]
+  '
+  '     strYea = Split(Me.Tag, ":")[4]
+  '
+  '     strTit = Split(Me.Tag, ":")[5]
+  '     strTitx = Split(Me.Tag, ":")[6]
+  '
+  '     strCCo = Split(Me.Tag, ":")[7]
+  '     strCtr = Split(Me.Tag, ":")[8]
+  '     strCtrx = Split(Me.Tag, ":")[9]
+  '
+  '     strGen = Split(Me.Tag, ":")[10]
+  '     strGenx = Split(Me.Tag, ":")[11]
+  '
+  '     strDir = Split(Me.Tag, ":")[12]
+  '   Endif
+  ' Endif
+
+  If Me.Tag <> Null Then
+    If Me.Tag.Count > 0 Then
+      strArt = Me.Tag[0]
+      strArtx = Me.Tag[1]
+
+      strAlb = Me.Tag[2]
+      strAlbx = Me.Tag[3]
+
+      strYea = Me.Tag[4]
+
+      strTit = Me.Tag[5]
+      strTitx = Me.Tag[6]
+
+      strCCo = Me.Tag[7]
+      strCtr = Me.Tag[8]
+      strCtrx = Me.Tag[9]
+
+      strGen = Me.Tag[10]
+      strGenx = Me.Tag[11]
+
+      strDir = Me.Tag[12]
+    Endif
+  Endif
+
+  lblArtist.Text = ("Artista") & ": " ' & strArt
+  btoArtist.Text = strArt
+
+  lblAlbum.Text = ("Álbum") & ": " '& strAlb & " [" & strYea & "]"
+  btoAlbum.Text = strAlb & " [" & strYea & "]"
+
+  lblTitle.Text = ("Título") & ": " ' & strTit
+  btoATitle.Text = strTit
+
+  If Exist(strDir) Then
+    If Stat(strDir).Type = gb.Directory Then ' Directorio validado
+      stxFileParts.Add(strArt)
+      stxFileParts.Add(strTit)
+
+      ' Carga de la tapa del disco
+      strCoverPath = strDir &/ "cover.jpg"
+
+      If Exist(strCoverPath) Then
+        If Stat(strCoverPath).Type = gb.File Then
+          pioCover.Picture = Picture.Load(strCoverPath)
+
+        Endif
+      Else
+        pioCover.Picture = Picture.Load("logo.png")
+      Endif
+
+      ' Carga de la bandera del pais del artista
+
+      strFlagPath = "flags" &/ String.LCase(strCCo) & ".png"
+
+      If Exist(strFlagPath) Then
+        If Stat(strFlagPath).Type = gb.File Then
+          'pioFlag.Picture = Picture.Load(strFlagPath)
+          btoArtist.Picture = Picture.Load(strFlagPath)
+        Endif
+      Else
+        'pioFlag.Picture = Picture["icon:/22/flag"]
+        btoArtist.Picture = Picture["icon:/22/flag"]
+      Endif
+
+      ' Carga de la letra de la cancion
+      strLyPath = FMain.strLyricDir &/ MUtility.FileNospace(stxFileParts, "#", "txt")
+      If Exist(strLyPath) Then
+        If Stat(strLyPath).Type = gb.File Then
+          strLyric = File.Load(strLyPath)
+          txaLyric.Text = strLyric
+
+        Endif
+      Endif
+    Endif
+  Endif
+
+End
+
+Public Sub tobSave_Click()
+
+  File.Save(strLyPath, txaLyric.Text)
+
+End
+
+Public Sub tobLyric_Click()
+
+  If strArt <> "" And strAlb <> "" Then
+    MHttp.OpenLyricWeb(strArt, strTit)
+  Endif
+
+End
+
+Public Sub tobWiki_Click()
+
+  If strArt <> "" Then
+    MHttp.OpenArtistWeb(strArt, "wikipedia")
+  Endif
+
+End
+
+Public Sub btoArtist_Click()
+
+  Dim frmArtist As New FArtist
+  '  Dim stxDataArtist As New String[]
+
+  frmArtist.X = btoArtist.ScreenX + btoArtist.Width
+  frmArtist.Y = btoArtist.ScreenY
+  'frmArtist.Height = Me.Height
+  frmArtist.Title = ("Ficha del Artista")
+
+  frmArtist.Tag = CInt(strArtx)
+
+  frmArtist.Show()
+
+  '  Print strArt & "[" & strArtx & "]"
+
+End
+
+Public Sub btoAlbum_Click()
+
+  Print strAlb & "[" & strAlbx & "]"
+
+End
+
+Public Sub btoATitle_Click()
+
+  Print strTit & "[" & strTitx & "]"
+
+End

@@ -1,0 +1,1993 @@
+' Gambas class file
+
+'
+' Catalogador musical
+' Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools.
+'
+' Copyright (C) Martín Belmonte
+'
+' This program is free software; you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation; either version 2 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program; if not, write to the Free Software
+' Foundation, Inc., 51 Franklin St, Fifth Floor,
+' Boston, MA  02110-1301  USA
+'
+' Variables de las bases de datos
+Public strEngineActual As String ' Motor de base de datos actual.
+Public strDBHost As String ' Servidor de BBDD. SQLite un direcotorio, PostgreSQL y Mysql una dirección IP.
+Public strDBName As String ' Nombre de la BDD SQLite un nombre de archivo., PostgreSQL y Mysql una nombre.
+
+Public conDB As New Connection ' Es la coneccion a la base de datos
+Public strDBActual As String ' Este es el nombre de la base de datos actual.
+Public strTBActual As String ' Nombre de la tabla actual de la coneccion a BBDD
+
+Public stxTBAFieldsNames As New String[] ' Lista de nombres de campos de la tabla actual
+Public stxTBAFieldsTypes As New String[] ' Lista de tipos de campos de la tabla actual
+Public strTBActualType As String ' El tipo de tabla actual, Table o View
+Public stxTBFields1Keys As New String[] ' Es la lista de campos prymary key de la tabla actual (siempre que no sea una vista)
+Public stxTables As New String[] ' Lista de tablas de la conexion
+Public stxViews As New String[] ' Lista de vistas de la conexion
+'Variables especiales para los diversos motores de base de datos
+'SQLite3
+Public stxKeyWordsSQLite As New String[] ' Lista de palabras clave de sqlite3
+Public stxTypesSQLite As New String[] ' Lista de tipos de datos de sqlite3
+
+'Variables para los nombr es tipicos de los controles
+Public stxName As New String[]
+Public stxNam3 As New String[]
+
+'Variables para la configuracion
+Public stxConfiguration As New String[]
+
+'Variables para los campos con foreign keys
+Public stxOrigin As New String[]
+Public stxReference As New String[]
+Public stxFDShow As New String[]
+
+'Variables para mostrar los datos (canciones)
+Public resQry As Result
+
+'Variables para las carpetas y directorios
+Public strCurrentFolder As String ' La carpeta donde esta alojado el archivo que se esta escuchando
+Public strCurrentPic As String ' La imagen del album actual
+Public strDefCoverFile As String ' El nombre por defecto de la imagen para usar como portada
+Public strArtistDelim As String
+Public strLyricDir As String ' Directorio raíz donde se guardan las letras de las canciones
+
+'Variables para el archivo actual
+Public strNum As String ' Numero de pista
+Public strTitle As String ' Titulo de la canción
+Public strTitleIdx As String
+
+Public strArtist As String ' Artista
+Public strArtistIdx As String
+
+Public strCCode As String ' Codigo 2 digitos del país del airtista
+Public strCountry As String ' País del airtista
+Public strCountryIdx As String
+
+Public strAlbum As String ' Album
+Public strAlbumIdx As String
+
+Public strGenre As String 'Genero musical de la cancion
+Public strGenreIdx As String
+
+Public strYear As String ' Año
+Public strLeng As String ' Duración de la canción
+Public strBits As String
+Public strSamp As String
+Public strType As String
+Public strVers As String
+Public strDirectory As String
+Public strFile As String
+Public strCounter As String
+Public strTotal As String
+
+'Variables de las preferencias
+Public stxSacanDir As New String[]
+Public strSacanXDGDir As String
+Public bolSacanXDGDir As Boolean
+Public stxXDGFolders As New String[]
+Public bolPkgAlarm As Boolean
+
+'Variables para el layout
+Public strMode As String
+
+'Variables para la reproduccion de audio
+Private bolStoped As Boolean
+Public intVolume As Integer
+Public intMaxTime As Integer
+Public intCurrTime As Integer
+Private intState As Integer ' Estado del banner, 1,2,3 para mostrar Cancion, album, datos
+
+Public Sub Form_Open()
+
+  ' Dim hPict As Picture
+  '  Dim strTime As String
+
+  If conDB.Opened = False
+    tobConnection.Picture = Picture["icon:/22/disconnect"]
+    tobScan.Enabled = False
+  Endif
+
+  If Starter() = 1 Then
+    'cmdMode(strMode)
+    cmdMode()
+
+    cmdConn()
+  Endif
+
+  bolPkgAlarm = Settings["Preferences/alarm", True]
+
+End
+
+Public Function Starter() As Integer
+
+  Dim stxNCon As New String[]
+  Dim strName As String
+  Dim strNam3 As String
+  Dim intN As Integer
+  Dim stxPackages As New String[]
+  Dim stxPackagesInstall As New String[]
+  Dim intPkg As Integer
+  Dim strMessage As String
+  Dim strCommand As String
+  Dim stxFiles As New String[]
+
+  stxXDGFolders = Msys.XDGFolder()
+  bolStoped = True
+  tmrBanner.Stop
+  tmrClock.Stop
+
+  ' Definicion del motor de bases de datos a usar
+  strEngineActual = "sqlite3"
+  strDBHost = User.Home &/ "." & Application.Name
+  strDBName = "vinilo.db"
+
+  ' Palabras clave para leer el sql de creacion de las BBDD Sqlite3
+  stxKeyWordsSQLite = Split("not null,primary key,autoincrement,unique,default", ",")
+
+  ' Tipos de datos de las BBDD Sqlite3
+  stxTypesSQLite = Split("integer,float,real,datetime,varchar,text,bool" ",")
+
+  ' Nombres tipicos de los controles
+  stxNCon = MUtility.NamingCon()
+
+  For intN = 0 To stxNCon.Max
+    strName = Split(stxNCon[intN], ":")[0]
+    strNam3 = Split(stxNCon[intN], ":")[1]
+    stxName.Add(strName)
+    stxNam3.Add(strNam3)
+  Next
+
+  'Comprobacion de la existencia de directorios y archivos locales
+
+  If Exist(User.Home &/ "." & Application.Name) = False Then
+    Mkdir User.Home &/ "." & Application.Name
+  Endif
+
+  If Exist(User.Home &/ "." & Application.Name &/ "artist") = False Then
+    Mkdir User.Home &/ "." & Application.Name &/ "artist"
+  Endif
+
+  If Exist(User.Home &/ "." & Application.Name &/ "album") = False Then
+    Mkdir User.Home &/ "." & Application.Name &/ "album"
+  Endif
+
+  If Exist(User.Home &/ "." & Application.Name &/ "lyrics") = False Then
+    Mkdir User.Home &/ "." & Application.Name &/ "lyrics"
+  Endif
+
+  If Exist(User.Home &/ "." & Application.Name &/ "flags") = False Then
+    Mkdir User.Home &/ "." & Application.Name &/ "flags"
+    Wait 0.3
+  Endif
+  stxFiles.Clear
+  stxFiles = MUtility.ScanFolder("flags", "png")
+  For Each strFile In stxFiles
+    If Exist(User.Home &/ "." & Application.Name &/ "flags" &/ File.BaseName(strFile) & "." & File.Ext(strFile)) = False Then
+      Copy strFile To User.Home &/ "." & Application.Name &/ "flags" &/ File.BaseName(strFile) & "." & File.Ext(strFile)
+    Endif
+  Next
+
+  If Exist(User.Home &/ "." & Application.Name &/ "album/0.png") = False Then
+    Copy "logo.png" To User.Home &/ "." & Application.Name &/ "album/0.png"
+  Endif
+
+  ' If Exist(User.Home &/ "." & Application.Name &/ "album/0.png") = False Then
+  '   Copy "flags" To User.Home &/ "." & Application.Name &/ "flags"
+  ' Endif
+
+  ' Verificacion de la existencia del archivo de configuración xml
+  If Exist(User.Home &/ "." & Application.Name &/ "config.xml") = False Then
+
+    If MUtility.MkConfXml(User.Home &/ "." & Application.Name &/ "config.xml") = 1 Then
+      Print ("Xml creado con exito")
+      'Desktop.Open(User.Home &/ "." & Application.Name &/ "config.xml")
+    Endif
+
+  Endif
+
+  ' Verificacion de la existencia del archivo de tags exif
+  If Exist(User.Home &/ "." & Application.Name &/ "exiftags.txt") = False Then
+    Copy "exiftags.txt" To User.Home &/ "." & Application.Name &/ "exiftags.txt"
+  Endif
+
+  ' Verificacion de la existencia del archivo de idiomas
+  If Exist(User.Home &/ "." & Application.Name &/ "languages.txt") = False Then
+    Copy "languages.txt" To User.Home &/ "." & Application.Name &/ "languages.txt"
+  Endif
+
+  'Ajustes visuales del counter
+
+  lblPlay.Text = "0000 / 0000"
+
+  'Tooltips para los controles fijos
+  tobAlbum.Tooltip = ("Haga clic para abrir la carpeta contenedora con el administrador de archivos")
+  '  lblInfo.Text = ("No se esta reproduciendo ninguna pista.")
+  ' lblInfo.Tooltip = ("No se esta reproduciendo ninguna pista.")
+
+  'Comprobacion de la existencia de la base de datos
+  cmdClearDB("start")
+
+  LoadSettings()
+
+  'Panel8.Background = &00454947
+  Panel8.Background = Me.Background
+
+  tobConnection.Tooltip = ("Conexión a la base de datos")
+  tobAlbum.Tooltip = ("Clic izquierdo para abrir carpeta contenedora, derecho para buscar tapa en internet")
+  tobAbout.Tooltip = ("Acerca de") & " " & Application.Name
+  tobScan.Tooltip = ("Actualizacion de la colección")
+  tobPreferences.Tooltip = ("Preferencias de") & " " & Application.Name
+
+  'Ajuste de proportciones y tamaño de la ventana
+  strMode = Settings["Graphical/Mode", "list"]
+
+  'Verificacion de la dependencias, por si se usa en modo runtime y no se instala el paquete
+  stxPackages = Split("libimage-exiftool-perl:elinks", ":")
+  For intPkg = 0 To stxPackages.Max
+    If Msys.PkgStat(stxPackages[intPkg]) = False Then
+      stxPackagesInstall.Add(stxPackages[intPkg])
+    Endif
+  Next
+
+  If stxPackagesInstall.Count > 0 Then
+    Select stxPackagesInstall.Count
+      Case 1
+        strMessage = ("Falta instalar el paquete")
+      Case Else
+        strMessage = ("Faltan instalar los siguientes paquetes")
+    End Select
+
+    Select Msys.DistroShort()
+      Case "debian", "ubuntu", "mint"
+        strCommand = "sudo apt-get install " & stxPackagesInstall.Join(" ")
+      Case "manjaro", "arch"
+        strCommand = "sudo pacman -S " & stxPackagesInstall.Join(" ")
+      Case "fedora", "redhat"
+        strCommand = "sudo dnf install " & stxPackagesInstall.Join(" ")
+      Case "gentoo"
+        strCommand = "sudo emerge -a " & stxPackagesInstall.Join(" ")
+      Case "suse", "opensuse"
+        strCommand = "sudo zipper install " & stxPackagesInstall.Join(" ")
+    End Select
+
+    Select Message.Question(strMessage & ":" & gb.NewLine &
+          stxPackagesInstall.Join(gb.NewLine) & gb.NewLine &
+          ("Puede usar el siguente commando") & ":" & gb.NewLine &
+          strCommand & gb.NewLine &
+          ("¿Quiere abrir la terminal para poceder?"), ("Sí"), ("No"))
+
+      Case 1
+        Desktop.OpenTerminal
+        Wait 0.25
+        Desktop.SendKeys(strCommand)
+
+    End Select
+
+  Endif
+
+  'Otras preferencias
+  strDefCoverFile = Settings["Preferences/cover", "cover.jpg"]
+  strArtistDelim = Settings["Preferences/artistdelimiter", ";"]
+  intVolume = Settings["Preferences/volume", 65]
+  strLyricDir = Settings["Preferences/lyricsdir", User.Home &/ "." & Application.Name &/ "lyrics"]
+
+  Music.Volume = intVolume
+
+  Return 1
+
+End
+
+Public Sub cmdClearDB(strMod As String)
+
+  Dim conCreate As New Connection
+  Dim strDBpath As String
+  Dim strTimeStamp As String
+  Dim strDBZip As String
+  Dim strSQLCreate As String
+
+  If conCreate.Opened Then
+    conCreate.Close
+  Endif
+
+  strTimeStamp = MUtility.Timestamp(Now())
+
+  strDBHost = User.Home &/ "." & Application.Name
+  strDBName = "vinilo.db"
+  strDBpath = strDBHost &/ strDBName
+
+  strDBZip = File.Dir(strDBpath) &/ File.BaseName(strDBpath) & "-" & strTimeStamp & ".zip"
+
+  Select strMod
+    Case "reset"
+
+      If Exist(strDBpath) = False Then
+        Shell "zip -j " & strDBZip & " " & strDBpath
+        Wait 0.5
+        Kill strDBpath
+      Endif
+
+  End Select
+
+  conCreate.Type = "sqlite3"
+  conCreate.Host = strDBHost
+  conCreate.Name = ""
+  conCreate.Open
+
+  If Not conCreate.Databases.Exist(strDBName) Then
+    conCreate.Databases.Add(strDBName)
+    Wait 0.4
+    conCreate.Close
+    conCreate.Name = strDBName
+    conCreate.Open
+
+    strSQLCreate = File.Load("vinilo.sql")
+
+    conCreate.Exec(strSQLCreate)
+
+    Wait 0.4
+    conCreate.Close
+  Endif
+
+End
+
+Public Sub LoadSettings()
+
+  Dim strScanDir As String
+  Dim stxScanDirTmp As New String[]
+  Dim intT As Integer
+
+  ' Carga de las preferencias de gb.settings
+  strScanDir = Settings["folders/media", User.Home]
+  If InStr(strScanDir, "\n") <> 0 Then
+    stxScanDirTmp = Split(strScanDir, "\n")
+  Else
+    If strScanDir <> "" Then
+      If Exist(strScanDir) Then
+        stxScanDirTmp.Add(strScanDir)
+      Endif
+
+    Else
+
+    Endif
+
+  Endif
+
+  If stxScanDirTmp.Count > 0 Then
+    For intT = 0 To stxScanDirTmp.Max
+      If Exist(stxScanDirTmp[intT]) Then
+        If stxSacanDir.Find(stxScanDirTmp[intT]) = -1 Then
+          stxSacanDir.Add(stxScanDirTmp[intT])
+        Endif
+
+      Endif
+
+    Next
+  Endif
+
+  stxXDGFolders = Msys.XDGFolder()
+
+  For Each strDirectory In stxXDGFolders
+    If InStr(strDirectory, "music:") Then
+      strSacanXDGDir = Settings["folders/xdgmusicfolder", Split(strDirectory, ":")[1]]
+      Break
+    Endif
+  Next
+
+  bolSacanXDGDir = Settings["folders/xdgmusic", False]
+
+End
+
+Public Sub Form_Arrange()
+
+  scwData1L.Width = Me.Width * 0.25
+  pnlData1R.Width = Me.Width - scwData1L.Width
+
+  Me.Caption = String.UCaseFirst(Application.Name)
+
+End
+
+Public Sub tobScan_Click()
+
+  cmdLookup()
+
+End
+
+Public Sub cmdLookup() ''Actualiza la coleccion de música
+
+  Dim stxFilesRaw As New String[]
+  Dim intR As Integer
+  Dim stxFiles As New String[]
+  Dim intF As Integer
+  Dim stxFileInfo As New String[]
+  Dim stxReff As New String[]
+  Dim strTag As String
+  Dim stxTag As New String[]
+  Dim strVal As String
+  Dim stxVal As New String[]
+  Dim stxTagOk As New String[]
+  Dim stxValues As New String[]
+  Dim intI As Integer
+  Dim intK As Integer
+  Dim intU As Integer
+  Dim strPathRaw As String
+  Dim strPathPro As String
+  Dim intE As Integer
+  Dim stxFilesTmp As New String[]
+  Dim strFileTmp As String
+  Dim stxFileError As New String[]
+  Dim strFileTempPath As String
+  Dim strFileTempTime As String
+  Dim strFileDBPath As String
+  Dim strFileDBTime As String
+  Dim strQFiles As String
+  Dim resFiles As Result
+  Dim strFileTempDir As String
+  Dim strFileTempName As String
+  Dim strFileTempExt As String
+  Dim strQrefresh As String
+  Dim resFilesRefresh As Result
+
+  If bolSacanXDGDir = True Then
+    stxSacanDir.Add(strSacanXDGDir)
+  Endif
+
+  stxFilesRaw.Clear
+  stxFiles.Clear
+  stxTagOk.Clear
+  stxFileError.Clear
+
+  stxTagOk.Add("Title")
+  stxTagOk.Add("Track")
+  stxTagOk.Add("Artist")
+  stxTagOk.Add("Album")
+  stxTagOk.Add("Genre")
+  stxTagOk.Add("Year")
+  stxTagOk.Add("FileType")
+  stxTagOk.Add("AudioBitrate")
+  stxTagOk.Add("ChannelMode")
+  stxTagOk.Add("Duration")
+  stxTagOk.Add("SampleRate")
+  stxTagOk.Add("FileSize")
+  stxTagOk.Add("FileTime")
+  stxTagOk.Add("FileCRC32")
+  stxTagOk.Add("FileVersion")
+  stxTagOk.Add("FileDirectory")
+  stxTagOk.Add("FileName")
+
+  stxReff.Clear
+
+  stxReff.Add("trackartist:artist:artistindx:artistname")
+  stxReff.Add("trackalbum:album:albumindx:albumname")
+  stxReff.Add("trackgenre:genre:genreindx:genrename")
+  stxReff.Add("tracktype:type:typeindx:typename")
+  stxReff.Add("trackfileversion:fileversions:fverindx:fvername")
+
+  For intE = 0 To stxSacanDir.Max
+
+    strDirectory = stxSacanDir[intE]
+
+    stxFilesTmp.Clear
+    stxFilesTmp = Mutility.ScanFolder(strDirectory, "mp3,ogg")
+
+    For Each strFileTmp In stxFilesTmp
+      stxFilesRaw.Add(strFileTmp)
+    Next
+    stxFilesTmp.Clear
+  Next
+
+  stxFilesRaw = MUtility.ListDeldup(stxFilesRaw)
+
+  'Primero analizo si el archivo existe y si es así verifico si la fecha cambio
+  'Todo con la finalidad de obtener una lista de archivos a procesar
+
+  For intR = 0 To stxFilesRaw.Max
+    strFileTempPath = ""
+    strFileTempTime = ""
+    strFileTempDir = ""
+    strFileTempName = ""
+    strFileTempExt = ""
+
+    strFileDBPath = ""
+    strFileDBTime = ""
+
+    strFileTempPath = stxFilesRaw[intR]
+
+    If Stat(stxFilesRaw[intR]).Type = gb.File Then
+      strFileTempTime = Format$((Stat(stxFilesRaw[intR]).Time), "yyyymmddhhnnss")
+      strFileTempDir = File.Dir(stxFilesRaw[intR])
+      strFileTempName = File.BaseName(stxFilesRaw[intR])
+      strFileTempExt = File.Ext(stxFilesRaw[intR])
+
+    Endif
+
+    strQFiles = "select filpath,filtime from files where filpath='" & strFileTempPath & "'"
+    resFiles = FMain.conDB.Exec(strQFiles)
+
+    If resFiles.Available Then
+      Select resFiles.Count
+        Case 1 ' El registro si existe [update]
+
+          stxFiles.Add(strFileTempPath)
+          resFiles.MoveFirst
+          strFileDBPath = resFiles["filpath"]
+          strFileDBTime = resFiles["filtime"]
+
+          If strFileTempTime <> strFileDBTime Then
+            strQrefresh = "update files set filtime='" & strFileTempTime & "' where filpath='" & strFileTempPath & "'"
+            stxFiles.Add(strFileTempPath)
+          Endif
+
+      End Select
+
+    Else ' El registro no existe [insert]
+      stxFiles.Add(strFileTempPath)
+      strQrefresh = "insert into files (filindx,filpath,filtime,filcrc32,fildir,filname,filext,filsize) values(Null" &
+        ",'" & strFileTempPath & "'" &
+        ",'" & strFileTempTime & "'" &
+        ",'" & "" & "'" &
+        ",'" & strFileTempDir & "'" &
+        ",'" & strFileTempName & "'" &
+        ",'" & strFileTempExt & "'" &
+        ",'" & "" & "')"
+
+      resFilesRefresh = FMain.conDB.Exec(strQrefresh)
+
+    Endif
+
+    ' If
+    '   strFileDBPath = ""
+    '   strFileDBTime = ""
+    '
+    ' Next
+
+    For intF = 0 To stxFiles.Max
+      strPathRaw = stxFiles[intF]
+      strPathPro = MUtility.ConvertPath(strPathRaw)
+      strPathPro = MUtility.Chek4SQL(strPathPro)
+
+      If strPathRaw <> strPathPro Then
+        'Move strPathRaw To strPathPro
+        stxFileInfo.Clear
+        ' El nombre del archivo tiene problemas
+        stxFileError.Add("Bad File Name" & ":" & strPathRaw)
+      Else
+        stxFileInfo.Clear
+        stxFileInfo = MUtility.FileInfo(strPathPro)
+      Endif
+      Wait 0.1
+
+      'Segundo analizo si el CRC32 cambio o no existe
+
+      'stxFileInfo.Clear
+
+      'stxFileInfo = MUtility.FileInfo(strPathPro)
+
+      'Agrego la carpeta inicial porque RDir devuelvel la ruta relativa
+
+      stxTag.Clear
+      stxVal.Clear
+
+      For intI = 0 To stxFileInfo.Max
+
+        strTag = Split(stxFileInfo[intI], ":")[0]
+        strVal = MUtility.Chek4SQL(Split(stxFileInfo[intI], ":")[1])
+
+        Select String.LCase(strTag)
+          Case "year"
+            stxTag.Add(strTag)
+            Select strVal
+              Case ""
+                strVal = "1000"
+              Case Else
+                strVal = Format(strVal, "0000")
+            End Select
+
+            stxVal.Add(strVal)
+
+          Case Else
+            stxTag.Add(strTag)
+            stxVal.Add(strVal)
+
+        End Select
+
+      Next
+
+      stxValues.Clear
+
+      stxValues.Add("Null") ' indx
+
+      For intK = 0 To stxTagOk.Max
+        intU = stxTag.Find(stxTagOk[intK])
+        If intU <> -1 Then
+          stxValues.Add(stxVal[intU])
+        Else
+          stxValues.Add("")
+        Endif
+
+      Next
+
+      stxTag.Clear
+      stxVal.Clear
+
+      If stxValues.Find("") = -1 Then
+        MData.ImportFileMetadata(conDB, "track", stxReff, stxValues)
+      Else
+
+      Endif
+
+      stxValues.Clear
+
+      ArrangeNav()
+
+    Next
+  Next
+
+End
+
+Public Sub tobPreferences_Click()
+
+  FPreferences.ShowModal
+
+End
+
+Public Sub tobConnection_Click()
+
+  cmdConn()
+
+End
+
+Public Sub cmdConn()
+
+  Select conDB.Opened
+
+    Case True ' Se porcede a deconectar
+
+      conDB.Close
+
+      'Verificacion del estado
+      If conDB.Opened = False Then
+
+        tobConnection.Picture = Picture["icon:/22/disconnect"]
+        mnuConnection.Picture = Picture["icon:/22/disconnect"]
+        tobScan.Enabled = False
+      Endif
+
+    Case False ' Se porcede a conectar
+
+      conDB.Type = strEngineActual
+      conDB.Host = strDBHost
+      conDB.Name = strDBName
+
+      conDB.Open
+
+      'Verificacion del estado
+      If conDB.Opened = True Then
+        tobConnection.Picture = Picture["icon:/22/connect"]
+        mnuConnection.Picture = Picture["icon:/22/connect"]
+        tobScan.Enabled = True
+        mnuScan.Enabled = True
+      Endif
+  End Select
+
+  Wait 0.1
+
+  If conDB.Opened = True Then
+    ArrangeNav()
+  Else
+    'trvData.Clear
+  Endif
+
+End
+
+Public Sub tobExit_Click()
+
+  grwData.Rows.Selection.Clear
+  cmdStop()
+  Me.Close
+
+End
+
+Public Sub ArrangeNav()
+
+  Dim strQuery1 As String ' Albums
+  Dim resNav As Result
+  Dim strNavDir As String ' Artista
+  Dim strNavAlbum As String ' Álbum
+  Dim strAlbumKey As String ' Álbum indice para la tapa del disco
+  Dim strNavYear As String ' Año del álbum
+  Dim strAlbumPic As String
+  Dim strAlbumPicNone As String
+  Dim strNavArtist As String
+
+  'Dim picArtist As Picture
+  Dim picAlbum As Picture
+  Dim imgAlbum As Image
+
+  'Dim lbla, lbly, lblt As Label
+  Dim pnl As Panel
+  Dim tob As ToolButton
+  Dim strQuery2 As String ' Artists
+  Dim strQuery3 As String ' Years
+  Dim resYears As Result
+  Dim stxAlbumYears As New String[]
+
+  Dim stxAlbumArtists As New String[]
+  Dim resArtists As Result
+
+  strQuery1 = "select * from view_dirs_albums"
+  resNav = conDB.Exec(strQuery1)
+
+  If conDB.Opened = True Then
+
+    'trvData.Clear
+
+    If resNav.Available = True Then
+
+      scwData1L.Children.Clear ' Borro todo control preexistente dentro del panel
+
+      While resNav.Available
+
+        '---------------------------------------------------------
+        strQuery2 = "select albumkey,artistkey,artist from view_albums where albumkey='" &
+          resNav["albumkey"] & "' group by albumkey,artistkey"
+
+        stxAlbumArtists.Clear
+
+        resArtists = conDB.Exec(strQuery2)
+
+        Select resArtists.Count
+          Case 0
+            strNavArtist = "#"
+            ' Case 1
+            '   strNavYear = resYears["trackyear"]
+          Case Else
+
+            While resArtists.Available
+              stxAlbumArtists.Add(resArtists["artist"])
+              resArtists.MoveNext
+            Wend
+            If strArtistDelim = "" Then
+              strArtistDelim = ";"
+            Endif
+            strNavArtist = stxAlbumArtists.Join(strArtistDelim)
+
+        End Select
+        '---------------------------------------------------------
+
+        strNavDir = resNav["folder"]
+        strNavAlbum = resNav["album"]
+
+        '---------------------------------------------------------
+        strQuery3 = "select trackalbum,trackyear from track where trackalbum='" &
+          resNav["albumkey"] & "' group by trackalbum,trackyear"
+
+        stxAlbumYears.Clear
+
+        resYears = conDB.Exec(strQuery3)
+
+        Select resYears.Count
+          Case 0
+            strNavYear = "0000"
+            ' Case 1
+            '   strNavYear = resYears["trackyear"]
+          Case Else
+
+            While resYears.Available
+              stxAlbumYears.Add(resYears["trackyear"])
+              resYears.MoveNext
+            Wend
+
+            strNavYear = stxAlbumYears.Join(",")
+
+        End Select
+        '---------------------------------------------------------
+
+        strAlbumKey = resNav["albumkey"]
+
+        strAlbumPic = strNavDir &/ "cover.jpg"
+        strAlbumPicNone = User.Home &/ "." & Application.Name &/ "album/0.png"
+
+        If Exist(strAlbumPic) = True Then
+          imgAlbum = Image.Load(strAlbumPic)
+          'picAlbum = imgAlbum.Picture
+        Else
+          imgAlbum = Image.Load(strAlbumPicNone)
+          'imgAlbum.Stretch(32, 32)
+          'imgAlbum.Resize(32, 32)
+        Endif
+        picAlbum = imgAlbum.Picture
+        'Creacion del bloque del disco, tapa y datos
+
+        pnl = New Panel(scwData1L) ' Panel global
+
+        With pnl
+          '.Width = 320
+          .Width = 49
+          .Height = 49
+          .Name = "pnl" & strAlbumKey
+          .AutoResize = False
+          .Expand = False
+          .Arrangement = 5 ' Horizontal
+          .Border = 0
+          .Padding = 3
+          '.Background = Color.TextBackground
+        End With
+
+        '--------------------------------------------
+        ' pnlf = New Panel(pnl) ' Panel de la foto
+        '
+        ' With pnlf
+        '   .Name = "pnl" & strAlbumKey & "f"
+        '   .Expand = False
+        '   .Arrangement = 5
+        '   .Padding = 2
+        '   .Width = 47
+        '   .Height = 47
+        ' End With
+
+        'tob = New ToolButton(pnlf) As "GAlbumCommand"
+        tob = New ToolButton(pnl) As "GAlbumCommand"
+        With tob
+          .AutoResize = False
+          .Picture = picAlbum
+          .Name = "tob" & strAlbumKey
+          .tag = strAlbumKey & ":" & strNavArtist & ":" & strNavAlbum & ":" & strNavYear & ":" & strNavDir
+          .Expand = True
+          .Drop = True
+          .Tooltip = strNavArtist & ":" & strNavAlbum & ":" & strNavYear
+
+        End With
+        '--------------------------------------------
+        ' pnld = New Panel(pnl) ' Panel de los datos
+        '
+        ' With pnld
+        '   .Name = "pnl" & strAlbumKey & "d"
+        '   .AutoResize = False
+        '   .Expand = True
+        '   .Arrangement = 2 ' Vertical
+        ' End With
+        '
+        ' lbla = New Label(pnld) ' Etiqueta del album
+        ' With lbla
+        '   .Name = "lbl" & strAlbumKey & "a"
+        '   .Text = strNavAlbum
+        '   .Alignment = Align.Normal
+        '   .Expand = True
+        ' End With
+        '
+        ' lbly = New Label(pnld) ' Etiqueta de datos, año etc
+        ' With lbly
+        '   .Name = "lbl" & strAlbumKey & "y"
+        '   .Text = strNavYear
+        '   .Alignment = Align.Normal
+        '   .Expand = True
+        ' End With
+        '
+        ' lblt = New Label(pnld) ' Etiqueta del artista
+        ' With lblt
+        '   .Name = "lbl" & strAlbumKey & "t"
+        '   .Text = strNavArtist
+        '   .Alignment = Align.Normal
+        '   .Expand = True
+        ' End With
+        '--------------------------------------------
+
+        resNav.MoveNext
+      Wend
+
+    Endif
+
+  Endif
+
+End
+
+' Public Sub GAlbumCommand_Click()
+'
+'   SongsToGrid()
+'   grwData.Rows.Select(0, 1)
+'
+' End
+
+Public Sub GAlbumCommand_MouseDown()
+
+  Dim intAction As Integer
+  'Dim intClick As Integer
+  Dim strSearchText As String
+  Dim tobLast As ToolButton
+  Dim strCurrDir As String
+  Dim strSArtist As String
+  Dim strSAlbum As String
+  Dim strSYear As String
+
+  tobLast = Last
+
+  strSArtist = Split(CStr(tobLast.tag), ":")[1]
+  strSAlbum = Split(CStr(tobLast.tag), ":")[2]
+  strSYear = Split(CStr(tobLast.tag), ":")[3]
+  strCurrDir = Split(CStr(tobLast.tag), ":")[4]
+
+  Select Mouse.Button
+    Case 1
+      SongsToGrid()
+      grwData.Rows.Select(0, 1)
+    Case 2
+      intAction = Message.Question(("¿Que quiere hacer?") & gb.NewLine &
+        ("Puede abrir el directorio del disco") & gb.NewLine &
+        ("o buscar una caratula en internet"), ("Abrir directorio"), ("Buscar con") & "DuckDuck", ("Buscar con") & "Google")
+      Select intAction
+        Case 1
+
+          If Exist(strCurrDir) = True Then
+            Desktop.Open(strCurrDir)
+          Endif
+        Case 2
+          strSearchText = Replace(strSArtist, " ", "-")
+          strSearchText &= "%2B" & Replace(strSAlbum, " ", "%2B")
+          Desktop.Open("https://duckduckgo.com/?q=" & strSearchText & "&atb=v28-2__&iax=1&ia=images&iaf=size%3Am")
+
+        Case 3
+          strSearchText = Replace(strSArtist, " ", "+")
+          strSearchText &= "+" & Replace(strSAlbum, " ", "+")
+
+          Desktop.Open("https://www.google.es/search?as_st=y&tbm=isch&hl=es&as_q=" & strSearchText & "&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=&safe=images&tbs=isz:m,itp:photo,iar:s,ift:jpg")
+
+      End Select
+  End Select
+
+End
+
+Public Sub GAlbumCommand_Drop()
+
+  Dim strUrl As String
+  Dim bolDownload As Boolean
+  Dim prsDownload As Process
+  Dim bolRefresh As Boolean
+  Dim tobLast As ToolButton
+  Dim strCurrDir As String
+
+  bolRefresh = False
+
+  tobLast = Last
+  strCurrDir = Split(CStr(tobLast.tag), ":")[4]
+
+  strCurrentPic = strCurrDir &/ "cover.jpg"
+
+  Select strCurrentPic
+    Case ""
+
+    Case Else
+
+      bolDownload = False
+      Print Drag.Paste("text/uri-list")
+
+      strUrl = Mutility.ArrangePath((Drag.Paste("text/uri-list")))
+      Print strUrl
+      Print strCurrentPic
+
+      If Exist(strCurrentPic) = True Then
+        Select Message.Question(("El archivo ya existe.") & gb.NewLine &
+              ("¿Desea remplazarlo?"), ("Remplazar"), ("Cancelar"))
+          Case 1
+            bolDownload = True
+            bolRefresh = True
+          Case 2
+            bolDownload = False
+        End Select
+      Else
+        bolDownload = True
+        bolRefresh = True
+      Endif
+
+      Select bolDownload
+        Case True
+          Select InStr(strUrl, "file://")
+            Case 0
+              If Exist("/tmp/cover.jpg") Then
+                Shell "kill /tmp/cover.jpg"
+              Endif
+              prsDownload = Shell "wget " & strUrl & " --output-document=" & "/tmp/cover.jpg"
+
+              While prsDownload.State = prsDownload.Running
+                Wait 0.1
+              Wend
+
+              Shell "mv /tmp/cover.jpg '" & strCurrentPic & "'"
+              Wait 0.2
+
+            Case Else
+              Shell "cp " & Replace(strUrl, "file://", "") & " '" & strCurrentPic & "'"
+              Print "Copiando foto local a " & strCurrentPic
+              Wait 0.2
+
+          End Select
+
+      End Select
+
+  End Select
+
+  Select bolRefresh
+    Case True
+      tobAlbum.Picture = Picture.Load(strCurrentPic)
+      tobAlbum.Refresh
+  End Select
+
+End
+
+Public Sub GAlbumCommand_DblClick()
+
+  SongsToGrid()
+  grwData.Rows.Select(0, 1)
+  cmdPlay(0)
+
+End
+
+Public Sub SongsToGrid()
+
+  Dim tobLast As ToolButton
+  Dim strEntity As String ' Entidad que desencadenara las consultas, artista, carpeta, genero etc.
+  Dim strShow As String
+  ' Dim strMod As String
+  Dim stxTitles As New String[]
+  Dim stxFields As New String[]
+  Dim intT As Integer
+  Dim inxWidths As New Integer[]
+  'Dim strKey As String
+
+  tobLast = Last
+
+  Print tobLast.Name
+  Print tobLast.tag
+
+  strEntity = Split(CStr(tobLast.tag), ":")[0]
+
+  stxFields.Add("tracknum")
+  stxTitles.Add(("Nº"))
+  inxWidths.Add(25)
+
+  stxFields.Add("tracktitle")
+  stxTitles.Add(("Canción"))
+  inxWidths.Add(250)
+
+  stxFields.Add("trackindx")
+  stxTitles.Add(("Canción índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackartist")
+  stxTitles.Add(("Artista"))
+  inxWidths.Add(150)
+
+  stxFields.Add("trackartistid")
+  stxTitles.Add(("Artista índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackctrycode2")
+  stxTitles.Add(("CC"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackctryname")
+  stxTitles.Add(("País"))
+  inxWidths.Add(75)
+
+  stxFields.Add("trackctryid")
+  stxTitles.Add(("País índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackalbum")
+  stxTitles.Add(("Álbum"))
+  inxWidths.Add(150)
+
+  stxFields.Add("trackalbumid")
+  stxTitles.Add(("Álbum índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackgenre")
+  stxTitles.Add(("Género"))
+  inxWidths.Add(75)
+
+  stxFields.Add("trackgenreid")
+  stxTitles.Add(("Género índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackyear")
+  stxTitles.Add(("Año"))
+  inxWidths.Add(75)
+
+  stxFields.Add("tracklength")
+  stxTitles.Add(("Duración"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackbits")
+  stxTitles.Add(("Rango"))
+  inxWidths.Add(0)
+
+  stxFields.Add("tracksample")
+  stxTitles.Add(("Muestreo"))
+  inxWidths.Add(0)
+
+  stxFields.Add("tracktype")
+  stxTitles.Add(("Tipo"))
+  inxWidths.Add(75)
+
+  stxFields.Add("trackversion")
+  stxTitles.Add(("Clase"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackfolder")
+  stxTitles.Add(("Carpeta"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackfile")
+  stxTitles.Add(("Archivo"))
+  inxWidths.Add(0)
+
+  'Parametros de comportamiento y caracteristicas del TableView
+  grwData.Columns.Count = stxTitles.Count
+  grwData.Header = 1 ' Muestra solo el encabezado
+  grwData.ScrollBar = 3 ' Muestra los scrol vertical y horizontal
+
+  For intT = 0 To stxTitles.Max
+
+    grwData.Columns[intT].Title = stxTitles[intT]
+    grwData.Columns[intT].Width = inxWidths[intT]
+
+  Next
+
+  strShow = "select " & stxFields.Join(",") & " from view_song where trackalbumid='" & strEntity & "'"
+
+  If strShow <> "" Then
+
+    resQry = conDB.Exec(strShow)
+
+    grwData.Rows.Count = 0
+
+    If resQry.Available Then
+
+      If resQry.Count > 0 Then
+        grwData.Rows.Count = 0
+        grwData.Rows.Count = resQry.Count
+
+      Endif
+
+    Endif
+
+  Endif
+
+  Print strEntity
+
+End
+
+Public Sub trvData_Click()
+
+  Dim strEntity As String ' Entidad que desencadenara las consultas, artista, carpeta, genero etc.
+  Dim strShow As String
+  Dim strMod As String
+  Dim stxTitles As New String[]
+  Dim stxFields As New String[]
+  Dim intT As Integer
+  Dim inxWidths As New Integer[]
+  Dim strKey As String
+
+  strEntity = trvData.Current.Key
+
+  stxFields.Add("tracknum")
+  stxTitles.Add(("Nº"))
+  inxWidths.Add(25)
+
+  stxFields.Add("tracktitle")
+  stxTitles.Add(("Canción"))
+  inxWidths.Add(250)
+
+  stxFields.Add("trackindx")
+  stxTitles.Add(("Canción índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackartist")
+  stxTitles.Add(("Artista"))
+  inxWidths.Add(150)
+
+  stxFields.Add("trackartistid")
+  stxTitles.Add(("Artista índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackctrycode2")
+  stxTitles.Add(("CC"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackctryname")
+  stxTitles.Add(("País"))
+  inxWidths.Add(75)
+
+  stxFields.Add("trackctryid")
+  stxTitles.Add(("País índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackalbum")
+  stxTitles.Add(("Álbum"))
+  inxWidths.Add(150)
+
+  stxFields.Add("trackalbumid")
+  stxTitles.Add(("Álbum índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackgenre")
+  stxTitles.Add(("Género"))
+  inxWidths.Add(75)
+
+  stxFields.Add("trackgenreid")
+  stxTitles.Add(("Género índice"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackyear")
+  stxTitles.Add(("Año"))
+  inxWidths.Add(75)
+
+  stxFields.Add("tracklength")
+  stxTitles.Add(("Duración"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackbits")
+  stxTitles.Add(("Rango"))
+  inxWidths.Add(0)
+
+  stxFields.Add("tracksample")
+  stxTitles.Add(("Muestreo"))
+  inxWidths.Add(0)
+
+  stxFields.Add("tracktype")
+  stxTitles.Add(("Tipo"))
+  inxWidths.Add(75)
+
+  stxFields.Add("trackversion")
+  stxTitles.Add(("Clase"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackfolder")
+  stxTitles.Add(("Carpeta"))
+  inxWidths.Add(0)
+
+  stxFields.Add("trackfile")
+  stxTitles.Add(("Archivo"))
+  inxWidths.Add(0)
+
+  'Parametros de comportamiento y caracteristicas del TableView
+  grwData.Columns.Count = stxTitles.Count
+  grwData.Header = 1 ' Muestra solo el encabezado
+  grwData.ScrollBar = 3 ' Muestra los scrol vertical y horizontal
+
+  For intT = 0 To stxTitles.Max
+
+    grwData.Columns[intT].Title = stxTitles[intT]
+    grwData.Columns[intT].Width = inxWidths[intT]
+
+  Next
+
+  If InStr(strEntity, ":") <> 0 Then
+    strKey = Split(strEntity, ":")[0]
+    strMod = Split(trvData.Current.Key, ":")[1]
+
+    Select strKey
+      Case "artist"
+        strShow = "select " & stxFields.Join(",") & " from view_song where trackartist='" & strMod & "'"
+
+      Case "folder"
+        strShow = "select " & stxFields.Join(",") & " from view_song where trackfolder='" & strMod & "'"
+
+    End Select
+
+  Endif
+
+  If strShow <> "" Then
+
+    resQry = conDB.Exec(strShow)
+
+    grwData.Rows.Count = 0
+
+    If resQry.Available Then
+
+      If resQry.Count > 0 Then
+        grwData.Rows.Count = 0
+        grwData.Rows.Count = resQry.Count
+
+      Endif
+
+    Endif
+
+  Endif
+
+  Print strEntity
+
+End
+
+Public Sub grwData_Data(Row As Integer, Column As Integer)
+
+  If resQry.Available Then
+
+    resQry.MoveTo(Row)
+
+    grwData.Data.Text = resQry[resQry.Fields[Column].Name]
+
+  Else
+    grwData.Data.Text = ""
+  Endif
+
+End
+
+Public Sub tobPlay_Click()
+
+  cmdPlay(grwData.Row)
+
+End
+
+Public Sub tobPause_Click()
+
+  cmdPause()
+
+End
+
+Public Sub tobPrev_Click()
+
+  cmdPrev()
+
+End
+
+Public Sub tobNext_Click()
+
+  cmdNext()
+
+End
+
+Public Sub tobStop_Click()
+
+  cmdStop()
+
+End
+
+Public Sub cmdPlay(Optional intR As Integer, Optional floPosition As Float)
+  'Optional strJump As String
+
+  Dim stxCovers As New String[]
+  Dim strPathFile As String
+  Dim intCov As Integer
+  ' Dim strLyricFile As String
+  Dim strLyric As String
+  Dim stxLyric As New String[]
+  Dim intLine As Integer
+  Dim intLeter As Integer
+  Dim stxLyricTmp As New String[]
+  Dim stxFileParts As New String[]
+  Dim strLyPath As String
+  Dim strLyricError As String
+
+  tmrBanner.Start
+  tmrClock.Start
+
+  bolStoped = False
+  If grwData.Rows.Count > 0 Then
+    Select Music.State
+
+      Case Music.Stopped, Music.Playing
+
+        If grwData.Rows.Selection.Count = 0 Then
+          grwData.Row = 0
+        Endif
+
+        If intR = -1 Then
+          intR = 0
+        Endif
+
+        strNum = grwData[intR, 0].Text
+        strTitle = grwData[intR, 1].Text
+        strTitleIdx = grwData[intR, 2].Text
+
+        strArtist = grwData[intR, 3].Text
+        strArtistIdx = grwData[intR, 4].Text
+
+        strCCode = grwData[intR, 5].Text
+        strCountry = grwData[intR, 6].Text
+        strCountryIdx = grwData[intR, 7].Text
+
+        strAlbum = grwData[intR, 8].Text
+        strAlbumIdx = grwData[intR, 9].Text
+
+        strGenre = grwData[intR, 10].Text
+        strGenreIdx = grwData[intR, 11].Text
+
+        strYear = grwData[intR, 12].Text
+
+        strLeng = grwData[intR, 13].Text
+        strBits = grwData[intR, 14].Text
+        strSamp = grwData[intR, 15].Text
+        strType = grwData[intR, 16].Text
+        strVers = grwData[intR, 17].Text
+        strDirectory = grwData[intR, 18].Text
+        strFile = grwData[intR, 19].Text
+
+        strPathFile = strDirectory &/ strFile
+
+        If Exist(strPathFile) = True Then
+          If Stat(strPathFile).Type = gb.File Then
+
+            Music.Load(strPathFile)
+
+            stxCovers.Clear
+            stxCovers = MUtility.ScanFolder(strDirectory, "jpg")
+
+            strCurrentFolder = strDirectory
+
+            If stxCovers.Count > 0 Then
+              Select stxCovers.Count
+                Case 1
+                  strCurrentPic = stxCovers[0]
+                Case Else
+                  strCurrentPic = stxCovers[0]
+                  For intCov = 0 To stxCovers.Max
+                    If InStr(stxCovers[intCov], strDefCoverFile) <> 0 Then
+                      strCurrentPic = stxCovers[intCov]
+                      Break
+
+                    Endif
+                  Next
+              End Select
+
+            Else
+              strCurrentPic = "logo.png"
+            Endif
+
+            tobAlbum.Picture = Picture.Load(strCurrentPic)
+            'txaLyric.Clear
+
+            ' strLyricFile = Replace(String.LCase(strArtist), " ", "-") & "#" & Replace(String.LCase(strTitle), " ", "-")
+            ' strLyricFile = Replace(strLyricFile, "_", "-")
+            ' strLyricFile = Replace(strLyricFile, "--", "-")
+            stxFileParts.Clear
+            stxFileParts.Add(strArtist)
+            stxFileParts.Add(strTitle)
+
+            strLyPath = strLyricDir &/ MUtility.FileNospace(stxFileParts, "#", "txt")
+            strLyricError = ""
+
+            If Exist(strLyPath) = False Then
+              'txaLyric.Text = MHttp.ReadLyric(strArtist, strTitle)
+              strLyric = MHttp.ReadLyric(strArtist, strTitle)
+              ' Comprobaciones sobre la calidad del texto recuperado de internet
+
+              If InStr(strLyric, "http://lyrics.wikia.com") = 0 Then
+
+                stxLyricTmp = Split(strLyric, "\n")
+
+                For intLine = 0 To stxLyricTmp.Max
+                  For intLeter = 1 To String.Len(stxLyricTmp[intLine])
+                    If String.Mid(stxLyricTmp[intLine], intLeter, 1) <> " " Then
+                      stxLyric.Add(String.Mid(stxLyricTmp[intLine], intLeter))
+                      Break
+                    Endif
+                  Next
+                Next
+
+                File.Save(strLyPath, stxLyric.Join("\n"))
+
+              Else
+                strLyricError = ("La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente")
+                File.Save(strLyPath, strLyricError)
+              Endif
+            Endif
+
+            Music.Play
+
+          Endif
+        Endif
+
+      Case Music.Paused
+        If floPosition > 0 Then
+          Music.Pos = floPosition
+        Endif
+
+        Music.Play()
+        grwData.Rows.Select(intR, 1)
+
+    End Select
+  Endif
+
+End
+
+Public Sub cmdStop()
+
+  If Music.Playing = 1 Then
+    bolStoped = True
+    tmrBanner.Start
+    tmrClock.Start
+    Music.Stop
+  Endif
+
+End
+
+Public Sub cmdPause()
+
+  If Music.Playing = 1 Then
+    Music.Pause
+  Endif
+
+End
+
+Public Sub cmdPrev()
+
+  Dim intRowPlaned As Integer
+
+  intRowPlaned = grwData.Row - 1
+
+  If intRowPlaned >= 0 Then
+    Select Music.State
+      Case Music.Playing, Music.Paused
+        cmdStop()
+    End Select
+    cmdPlay(intRowPlaned)
+    grwData.Rows.Select(intRowPlaned, 1)
+    grwData.Refresh
+  Endif
+
+End
+
+Public Sub cmdNext()
+
+  Dim intRowPlaned As Integer
+
+  intRowPlaned = grwData.Row + 1
+
+  If intRowPlaned <= grwData.Rows.Max Then
+    Select Music.State
+      Case Music.Playing, Music.Paused
+        cmdStop()
+    End Select
+    cmdPlay(intRowPlaned)
+    grwData.Rows.Select(intRowPlaned, 1)
+  Endif
+
+End
+
+Public Sub cmdMute()
+
+  If Music.Playing = 1 Then
+    Music.Volume = 0
+  Endif
+
+End
+
+Public Sub grwData_DblClick()
+
+  cmdPlay(grwData.Row)
+
+End
+
+Public Sub mnuConnection_Click()
+
+  cmdConn()
+
+End
+
+Public Sub mnuScan_Click()
+
+  cmdLookup()
+
+End
+
+Public Sub mnuPreferences_Click()
+
+  FPreferences.ShowModal
+
+End
+
+Public Sub tobMute_Click()
+
+  cmdMute()
+
+End
+
+Public Sub tobAlbum_Drop()
+
+  Dim strUrl As String
+  Dim bolDownload As Boolean
+  Dim prsDownload As Process
+  Dim bolRefresh As Boolean
+
+  bolRefresh = False
+
+  strCurrentPic = strCurrentFolder &/ "cover.jpg"
+
+  Select strCurrentPic
+    Case ""
+
+    Case Else
+
+      bolDownload = False
+      Print Drag.Paste("text/uri-list")
+
+      strUrl = Mutility.ArrangePath((Drag.Paste("text/uri-list")))
+      Print strUrl
+      Print strCurrentPic
+
+      If Exist(strCurrentPic) = True Then
+        Select Message.Question(("El archivo ya existe.") & gb.NewLine &
+              ("¿Desea remplazarlo?"), ("Remplazar"), ("Cancelar"))
+          Case 1
+            bolDownload = True
+            bolRefresh = True
+          Case 2
+            bolDownload = False
+        End Select
+      Else
+        bolDownload = True
+        bolRefresh = True
+      Endif
+
+      Select bolDownload
+        Case True
+          Select InStr(strUrl, "file://")
+            Case 0
+              If Exist("/tmp/cover.jpg") Then
+                Shell "kill /tmp/cover.jpg"
+              Endif
+              prsDownload = Shell "wget " & strUrl & " --output-document=" & "/tmp/cover.jpg"
+
+              While prsDownload.State = prsDownload.Running
+                Wait 0.1
+              Wend
+
+              Shell "mv /tmp/cover.jpg '" & strCurrentPic & "'"
+              Wait 0.2
+
+            Case Else
+              Shell "cp " & Replace(strUrl, "file://", "") & " '" & strCurrentPic & "'"
+              Print "Copiando foto local a " & strCurrentPic
+              Wait 0.2
+
+          End Select
+
+      End Select
+
+  End Select
+
+  Select bolRefresh
+    Case True
+      tobAlbum.Picture = Picture.Load(strCurrentPic)
+      tobAlbum.Refresh
+  End Select
+
+End
+
+' Public Sub tobAlbum_MouseDown()
+'
+'   Dim intClick As Integer
+'   Dim strSearchText As String
+'
+'   intClick = Mouse.Button
+'   Select intClick
+'     Case 1 ' Abrir directorio contenedor
+'       If Exist(strCurrentFolder) = True Then
+'         Desktop.Open(strCurrentFolder)
+'       Endif
+'
+'     Case 2 ' Preguntar acciones
+'       strSearchText = Replace(strArtist, " ", "+")
+'       strSearchText &= "+" & Replace(strAlbum, " ", "+")
+'
+'       Desktop.Open("https://www.google.es/search?as_st=y&tbm=isch&hl=es&as_q=" & strSearchText & "&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=&safe=images&tbs=isz:m,itp:photo,iar:s,ift:jpg")
+'
+'   End Select
+'
+'   Print intClick
+'
+' End
+
+Public Sub tobAbout_Click()
+
+  FAbout.ShowModal
+
+End
+
+Public Sub tobCleanDB_Click()
+
+  cmdDropDB()
+
+End
+
+Public Sub cmdDropDB()
+
+  Select Message.Question(("Esta operacion borrara por completo la base de datos"), ("Aceptar"), ("Cancelar"))
+    Case 1
+      cmdClearDB("reset")
+    Case 2
+      '
+  End Select
+
+End
+
+Public Sub Form_Close()
+
+  grwData.Rows.Selection.Clear
+
+  cmdStop()
+  Me.Close
+
+End
+
+Public Sub tobMode_Click()
+
+  Select strMode
+    Case "", "list"
+      strMode = "smal"
+    Case "smal"
+      strMode = "list"
+  End Select
+
+  'cmdMode(strMode)
+  cmdMode()
+
+End
+
+'Public Sub cmdMode(strMode As String)
+Public Sub cmdMode()
+
+  Select strMode
+    Case "list"
+      Me.Menus.Visible = True
+      Me.Width = 800
+      Me.Height = 600
+      vesData0.Layout = [1, 3]
+      tobMode.Picture = Picture["icon:/22/zoom-out"]
+
+    Case "smal"
+      Me.Menus.Visible = False
+      Me.Width = 600
+      Me.Height = Panel3.Height
+      tobMode.Picture = Picture["icon:/22/zoom-normal"]
+
+  End Select
+
+End
+
+Public Sub sldTime_MouseDown()
+
+  cmdPause()
+
+End
+
+Public Sub tmrBanner_Timer()
+
+  'Dim intState As Integer
+
+  txlInfo1.Text = "... " & ("Título") & ":   " & strTitle
+  txlInfo2.Text = "... " & ("Artista") & ":   " & strArtist
+  txlInfo3.Text = "... " & ("Album") & ":   " & strAlbum
+  'Print "Banner:" & CStr(intState)
+
+  Select intState
+    Case 0
+      txlInfo3.Foreground = Color.LightForeground
+      Wait 0.2
+      txlInfo3.Visible = False
+      Wait 0.2
+      txlInfo1.Visible = True
+      txlInfo1.Foreground = Color.LightForeground
+      Wait 0.2
+      txlInfo1.Foreground = Color.Foreground
+
+      txlInfo2.Visible = False
+
+      Inc intState
+
+    Case 1
+      txlInfo1.Foreground = Color.LightForeground
+      Wait 0.2
+      txlInfo1.Visible = False
+      Wait 0.2
+      txlInfo2.Visible = True
+      txlInfo2.Foreground = Color.LightForeground
+      Wait 0.2
+      txlInfo2.Foreground = Color.Foreground
+
+      txlInfo3.Visible = False
+      Inc intState
+
+    Case 2
+      txlInfo2.Foreground = Color.LightForeground
+      Wait 0.2
+      txlInfo2.Visible = False
+      Wait 0.2
+      txlInfo3.Visible = True
+      txlInfo3.Foreground = Color.LightForeground
+      Wait 0.2
+      txlInfo3.Foreground = Color.Foreground
+
+      txlInfo1.Visible = False
+
+      intState = 0
+
+  End Select
+
+End
+
+Public Sub tmrClock_Timer()
+
+  Dim intRowPlaned As Integer
+  'Dim intCounter As Integer
+
+  intRowPlaned = grwData.Row + 1
+
+  Music.Volume = intVolume
+
+  Select Music.State
+    Case Music.Playing
+
+      intMaxTime = CInt(strLeng) * 1000
+
+      intCurrTime = Round(Round(Music.Pos, -3) * 1000, 0)
+
+      strCounter = Format(CStr(Round(Music.Pos, 0)), "0000")
+      strTotal = Format(strLeng, "0000")
+
+      lblPlay.Text = strCounter & " / " & strTotal
+
+    Case Music.Stopped
+      If bolStoped = False
+        intRowPlaned = grwData.Row + 1
+
+        If intRowPlaned <= grwData.Rows.Max Then
+          cmdPlay(intRowPlaned)
+          grwData.Row = intRowPlaned
+          grwData.Refresh
+        Endif
+      Endif
+  End Select
+
+End
+
+Public Sub tomTerminal_Click()
+
+  Desktop.OpenTerminal
+  'Wait 0.25
+  'Desktop.SendKeys("sudo apt-get install unpaquete")
+
+End
+
+Public Sub mnuPrev_Click()
+
+  cmdPrev()
+
+End
+
+Public Sub mnuNext_Click()
+
+  cmdNext()
+
+End
+
+Public Sub mmnuPlay_Click()
+
+  cmdPlay(grwData.Row)
+
+End
+
+Public Sub mnuPause_Click()
+
+  cmdPause()
+
+End
+
+Public Sub Menu4_Click()
+
+  cmdNext()
+
+End
+
+Public Sub mnuAbout_Click()
+
+  FAbout.ShowModal
+
+End
+
+Public Sub mnuDrop_Click()
+
+  cmdDropDB()
+
+End
+
+Public Sub tobVolume_Click()
+
+  Dim frmVolume As New FVolume
+
+  frmVolume.X = Me.X + tobVolume.X
+  frmVolume.Y = Me.Y + tobVolume.Y + tobVolume.Height / 2 + frmVolume.Height / 2
+  frmVolume.Width = tobVolume.Width
+  frmVolume.Show()
+
+End
+
+' Public Sub tobVolume_Click()
+'
+'   Dim frmVolume As New FVolume(Me.X + tobVolume.X, Me.Y + tobVolume.Y + tobVolume.Height / 2 + frmVolume.Height / 2)
+'
+'   frmVolume.Width = tobVolume.Width
+'   frmVolume.ShowModal()
+'
+' End
+
+Public Sub tobTimeLine_Click()
+
+  Dim frmTime As New FTime
+
+  frmTime.X = tobTimeLine.ScreenX + tobTimeLine.Width
+  frmTime.Y = tobTimeLine.ScreenY
+  frmTime.Height = tobTimeLine.Height
+  frmTime.Show()
+
+End
+
+Public Sub tobLyric_Click()
+
+  Dim frmLyric As New FLyric
+  Dim stxDataTrack As New String[]
+
+  frmLyric.X = tobTimeLine.ScreenX + tobTimeLine.Width
+  frmLyric.Y = tobTimeLine.ScreenY
+  frmLyric.Height = Me.Height
+  frmLyric.Title = ("Ficha de la canción")
+
+  stxDataTrack.Clear
+
+  stxDataTrack.Add(strArtist)
+  stxDataTrack.Add(strArtistIdx)
+  stxDataTrack.Add(strAlbum)
+  stxDataTrack.Add(strAlbumIdx)
+  stxDataTrack.Add(strYear)
+  stxDataTrack.Add(strTitle)
+  stxDataTrack.Add(strTitleIdx)
+  stxDataTrack.Add(strCCode)
+  stxDataTrack.Add(strCountry)
+  stxDataTrack.Add(strCountryIdx)
+  stxDataTrack.Add(strGenre)
+  stxDataTrack.Add(strGenreIdx)
+  stxDataTrack.Add(strDirectory)
+
+  frmLyric.Tag = stxDataTrack 'strArtist & ":" & strAlbum & ":" & strYear & ":" & strTitle & ":" & strCCode & ":" & strCountry & ":" & strDirectory
+
+  frmLyric.Show()
+
+End
+
+Public Sub grwData_Click()
+
+  Print grwData.Row
+
+End

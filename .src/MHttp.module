@@ -1,0 +1,126 @@
+' Gambas module file
+
+'
+' Catalogador musical
+' Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools y elinks.
+'
+' Copyright (C) Martín Belmonte
+'
+' This program is free software; you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation; either version 2 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program; if not, write to the Free Software
+' Foundation, Inc., 51 Franklin St, Fifth Floor,
+' Boston, MA  02110-1301  USA
+'
+
+Public strHtml As String
+
+Public Function ReadLyric(strArtist As String, strTitle As String) As String
+
+  Dim strBoxBeg As String
+  Dim intBoxBeg As Integer
+  Dim intBoxEnd As Integer
+  Dim strHtmlTmp As String
+  Dim intMessage As Integer
+
+  Select Msys.PkgStat("elinks")
+
+    Case True
+
+      If InStr(strArtist, " ") <> 0 Then
+        strArtist = Replace(strArtist, " ", "_")
+        strArtist = MUtility.Capital(strArtist)
+      Endif
+
+      If InStr(strTitle, " ") <> 0 Then
+        strTitle = Replace(strTitle, " ", "_")
+        strTitle = MUtility.Capital(strTitle)
+      Endif
+
+      Shell "elinks http://lyrics.wikia.com/" & strArtist & ":" & strTitle & " 2>&1" To strHtmlTmp
+
+      strBoxBeg = "licensing agreement with music Gracenote."
+      intBoxBeg = InStr(strHtmlTmp, strBoxBeg) + String.Len(strBoxBeg)
+      intBoxEnd = InStr(strHtmlTmp, "   External links", intBoxBeg)
+
+      strHtml = Mid(strHtmlTmp, intBoxBeg, intBoxEnd - intBoxBeg)
+      strHtml = Replace(strHtml, "\n\n", "\n")
+
+    Case False
+      intMessage = Message.Question(("Tiene que instalar el progrma") & "elinks", ("Aceptar"), ("Instalar"))
+
+      Select intMessage
+        Case 1
+          '
+        Case 2
+          Desktop.OpenTerminal
+        Case 3
+          Settings["Preferences/alarm"] = False
+
+          FMain.bolPkgAlarm = False
+
+      End Select
+
+  End Select
+
+  Return strHtml
+
+End
+
+Public Sub OpenLyricWeb(strArtist As String, strTitle As String, Optional strSite As String)
+
+  If InStr(strArtist, " ") <> 0 Then
+    strArtist = Replace(strArtist, " ", "_")
+    strArtist = MUtility.Capital(strArtist)
+  Endif
+
+  If InStr(strTitle, " ") <> 0 Then
+    strTitle = Replace(strTitle, " ", "_")
+    strTitle = MUtility.Capital(strTitle)
+  Endif
+
+  Select strSite
+    Case "", "wikia"
+      Desktop.Open("http://lyrics.wikia.com/" & strArtist & ":" & strTitle)
+    Case Else
+      '
+  End Select
+
+End
+
+Public Sub OpenArtistWeb(strArtist As String, Optional strSite As String)
+
+  Dim stxArtist As New String[]
+  Dim intArt As Integer
+
+  If InStr(strArtist, " ") <> 0 Then
+    stxArtist = Split(strArtist, " ")
+    For intArt = 0 To stxArtist.Max
+      Select intArt
+        Case 0
+          strArtist = MUtility.Capital(stxArtist[intArt])
+        Case Else
+          strArtist &= "_" & MUtility.Capital(stxArtist[intArt])
+      End Select
+
+    Next
+
+  Endif
+
+  Select strSite
+    Case "", "wikipedia"
+      Desktop.Open("http://wikipedia.org/wiki/" & strArtist)
+    Case Else
+      '
+  End Select
+
+End

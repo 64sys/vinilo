@@ -1,0 +1,246 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,119,73)
+  Icon = Picture["logo.png"]
+  Arrangement = Arrange.Vertical
+  { mnuFile Menu
+    Text = ("Archivo")
+    { mnuConnection Menu
+      Text = ("Conección")
+      Picture = Picture["icon:/22/disconnect"]
+    }
+    { mnuScan Menu
+      Text = ("Actualizar coleccón")
+      Picture = Picture["icon:/22/refresh"]
+      Enabled = False
+    }
+    { mnuDrop Menu
+      Text = ("Borrar la base de datos")
+      Picture = Picture["icon:/22/clear"]
+    }
+  }
+  { mnuControl Menu
+    Text = ("Control")
+    { mnuPrev Menu
+      Text = ("Previo")
+      Picture = Picture["icon:/22/start"]
+    }
+    { mmnuPlay Menu
+      Text = ("Reproducir")
+      Picture = Picture["icon:/22/play"]
+    }
+    { mnuPause Menu
+      Text = ("Pausa")
+      Picture = Picture["icon:/22/pause"]
+    }
+    { mnuStop Menu
+      Text = ("Parar")
+      Picture = Picture["icon:/22/stop"]
+    }
+    { mnuNext Menu
+      Text = ("Siguiente")
+      Picture = Picture["icon:/22/end"]
+    }
+  }
+  { mnuTools Menu
+    Text = ("Herramientas")
+    { mnuPreferences Menu
+      Text = ("Preferencias")
+      Picture = Picture["icon:/22/options"]
+    }
+  }
+  { mnuHelp Menu
+    Text = ("Ayuda")
+    { mnuAbout Menu
+      Text = ("Acerca de")
+      Picture = Picture["icon:/22/question"]
+    }
+  }
+  { Panel2 Panel
+    MoveScaled(0,0,118,11)
+    Arrangement = Arrange.Horizontal
+    Spacing = True
+    { Panel3 Panel
+      MoveScaled(0,0,106,11)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      { Panel8 Panel
+        MoveScaled(0,0,104,6)
+        Arrangement = Arrange.Horizontal
+        { tobPrev ToolButton
+          MoveScaled(1,1,5,5)
+          Picture = Picture["icon:/22/start"]
+        }
+        { tobPlay ToolButton
+          MoveScaled(5,1,5,5)
+          Picture = Picture["icon:/22/play"]
+        }
+        { tobPause ToolButton
+          MoveScaled(9,1,5,5)
+          Picture = Picture["icon:/22/pause"]
+        }
+        { tobStop ToolButton
+          MoveScaled(14,1,5,5)
+          Picture = Picture["icon:/22/stop"]
+        }
+        { tobNext ToolButton
+          MoveScaled(18,1,5,5)
+          Picture = Picture["icon:/22/end"]
+        }
+        { tobLyric ToolButton
+          MoveScaled(33,1,5,5)
+          Picture = Picture["icon:/22/identity"]
+        }
+        { tobVolume ToolButton
+          MoveScaled(52,1,5,5)
+          Picture = Picture["icon:/22/volume"]
+        }
+        { tobConnection ToolButton
+          MoveScaled(60,1,5,5)
+          Picture = Picture["icon:/22/connect"]
+        }
+        { tobScan ToolButton
+          MoveScaled(65,1,5,5)
+          Picture = Picture["icon:/22/refresh"]
+        }
+        { tobCleanDB ToolButton
+          MoveScaled(70,1,5,5)
+          Picture = Picture["icon:/22/clear"]
+        }
+        { tobPreferences ToolButton
+          MoveScaled(75,1,5,5)
+          Picture = Picture["icon:/22/options"]
+        }
+        { tomTerminal ToolButton
+          MoveScaled(80,1,5,5)
+          Picture = Picture["icon:/22/terminal"]
+        }
+        { tobAbout ToolButton
+          MoveScaled(85,1,5,5)
+          Picture = Picture["icon:/22/question"]
+        }
+        { tobMode ToolButton
+          MoveScaled(92,1,5,5)
+          Picture = Picture["icon:/22/zoom-normal"]
+        }
+      }
+      { Panel6 Panel
+        MoveScaled(0,6,104,5)
+        Expand = True
+        Arrangement = Arrange.Horizontal
+        { Panel9 Panel
+          MoveScaled(0,0,21,5)
+          Arrangement = Arrange.Horizontal
+          { lblPlay Label
+            MoveScaled(1,1,14,3)
+            Expand = True
+            Alignment = Align.Right
+          }
+          { tobTimeLine ToolButton
+            MoveScaled(16,0,5,5)
+            Picture = Picture["icon:/22/jump"]
+          }
+        }
+        { Panel4 Panel
+          MoveScaled(22,0,70,5)
+          Expand = True
+          Arrangement = Arrange.Horizontal
+          { txlInfo1 TextLabel
+            MoveScaled(1,1,14,3)
+            Visible = False
+            Expand = True
+            Alignment = Align.Normal
+          }
+          { txlInfo2 TextLabel
+            MoveScaled(15,0,13,4)
+            Visible = False
+            Expand = True
+            Alignment = Align.Normal
+          }
+          { txlInfo3 TextLabel
+            MoveScaled(32,1,30,3)
+            Visible = False
+            Expand = True
+            Alignment = Align.Normal
+          }
+        }
+      }
+    }
+    { Panel12 Panel
+      MoveScaled(107,0,11,11)
+      Spacing = True
+      Padding = 3
+      { tobAlbum ToolButton
+        MoveScaled(1,1,9,9)
+        Drop = True
+        Expand = True
+        Picture = Picture["logo.png"]
+      }
+    }
+  }
+  { vesData0 HSplit
+    MoveScaled(0,11,118,56)
+    Expand = True
+    { Panel5 Panel
+      MoveScaled(3,6,27,46)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      { Panel7 Panel
+        MoveScaled(0,0,27,5)
+        Arrangement = Arrange.Horizontal
+        { btoFilter ButtonBox
+          MoveScaled(0,0,19,4)
+          Expand = True
+        }
+        { muoSet MenuButton
+          MoveScaled(20,0,6,4)
+        }
+      }
+      { scwData1L ScrollView
+        MoveScaled(2,7,23,35)
+        Expand = True
+        Arrangement = Arrange.Row
+        Border = False
+        { trvData TreeView
+          MoveScaled(3,3,16,16)
+          Expand = True
+          Sorted = True
+          Border = False
+        }
+      }
+    }
+    { pnlData1R Panel
+      MoveScaled(34,2,83,52)
+      Expand = True
+      Arrangement = Arrange.Vertical
+      { Panel1 Panel
+        MoveScaled(4,5,74,18)
+        Expand = True
+        Arrangement = Arrange.Fill
+        { grwData GridView
+          MoveScaled(0,0,75,9)
+          Expand = True
+          Border = False
+          Mode = Select.Single
+          Grid = False
+        }
+      }
+      { Frame1 Frame
+        MoveScaled(5,25,19,13)
+        Foreground = Color.DarkGreen
+        Margin = True
+      }
+      { tmrBanner #Timer
+        #MoveScaled(65,43)
+        Enabled = True
+        Delay = 4000
+      }
+    }
+  }
+  { tmrClock #Timer
+    #MoveScaled(108,56)
+    Enabled = True
+    Delay = 250
+  }
+}

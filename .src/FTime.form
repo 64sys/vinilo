@@ -1,0 +1,14 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,52,3)
+  Border = False
+  { sldTimeAvatar Slider
+    MoveScaled(1,0,50,3)
+    Expand = True
+  }
+  { tmrAvatar #Timer
+    #MoveScaled(39,-2)
+    Delay = 200
+  }
+}

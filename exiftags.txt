@@ -1,0 +1,11 @@
+Title
+Track
+Artist
+Album
+Genre
+Year
+FileType
+AudioBitrate
+ChannelMode
+Duration
+SampleRate

@@ -1,0 +1,72 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,69,88)
+  Icon = Picture["logo.png"]
+  Resizable = False
+  { Panel1 Panel About
+    Name = "Panel1"
+    MoveScaled(1,1,67,85)
+    { lblName TextLabel About
+      Name = "lblName"
+      MoveScaled(3,2,37,3)
+      Font = Font["DejaVu Sans,+3"]
+    }
+    { lblDescription TextLabel About
+      Name = "lblDescription"
+      MoveScaled(3,5,37,3)
+      Font = Font["DejaVu Sans"]
+    }
+    { lblVersion Label About
+      Name = "lblVersion"
+      MoveScaled(3,8,37,3)
+      Font = Font["DejaVu Sans"]
+    }
+    { lblLicencia TextLabel About
+      Name = "lblLicencia"
+      MoveScaled(3,17,37,3)
+      Font = Font["DejaVu Sans"]
+    }
+    { lblCopyright TextLabel About
+      Name = "lblCopyright"
+      MoveScaled(3,14,37,3)
+      Font = Font["DejaVu Sans"]
+    }
+    { lblGPL TextLabel About
+      Name = "lblGPL"
+      MoveScaled(1,28,64,56)
+      Font = Font["DejaVu Sans"]
+      Alignment = Align.TopLeft
+    }
+    { pioLogo PictureBox About
+      Name = "pioLogo"
+      MoveScaled(45,1,21,21)
+      Picture = Picture["logo.png"]
+      Stretch = True
+    }
+    { pioGambas PictureBox About
+      Name = "pioGambas"
+      MoveScaled(56,73,10,10)
+      Picture = Picture["gambas-powered.png"]
+      Stretch = True
+      AutoResize = True
+    }
+    { pioGNULinux PictureBox About
+      Name = "pioGNULinux"
+      MoveScaled(46,73,10,10)
+      Picture = Picture["gnulinux-powered.png"]
+      Stretch = True
+      AutoResize = True
+    }
+    { lblIDE TextLabel About
+      Name = "lblIDE"
+      MoveScaled(3,19,37,3)
+      Font = Font["DejaVu Sans"]
+    }
+  }
+  { lblAutor TextLabel About
+    Name = "lblAutor"
+    MoveScaled(4,12,37,3)
+    Font = Font["DejaVu Sans"]
+  }
+}

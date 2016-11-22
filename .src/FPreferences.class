@@ -1,0 +1,149 @@
+' Gambas class file
+
+'
+' Catalogador musical
+' Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools.
+'
+' Copyright (C) Martín Belmonte
+'
+' This program is free software; you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation; either version 2 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program; if not, write to the Free Software
+' Foundation, Inc., 51 Franklin St, Fifth Floor,
+' Boston, MA  02110-1301  USA
+'
+
+Public Sub Form_Open()
+
+  Dim intF As Integer
+  'Dim stxXDGFolders As New String[]
+  Dim strFolder As String
+
+  FMain.LoadSettings()
+
+  Wait 0.1
+
+  lsoScandirectory.Clear
+
+  For intF = 0 To FMain.stxSacanDir.Max
+    lsoScandirectory.Add(FMain.stxSacanDir[intF])
+  Next
+
+  'stxXDGFolders = Msys.XDGFolder()
+
+  swoPkgAlarm.Value = Settings["Preferences/alarm", True]
+  swoAutoLyric.Value = Settings["Preferences/autolyric", True]
+
+  txoCoverFile.Text = Settings["Preferences/cover", "cover.jpg"]
+  txoArtistDelim.Text = Settings["Preferences/artistdelimiter", ";"]
+  btoLyricDir.Text = Settings["Preferences/lyricsdir", User.Home &/ "." & Application.Name &/ "lyrics"]
+
+  For Each strFolder In FMain.stxXDGFolders
+    If InStr(strFolder, "music:") Then
+      lblScanXDGDirectory.Text = ("Escanear") & " " & Split(strFolder, ":")[1]
+      swoScanXDGDirectory.Value = FMain.bolSacanXDGDir
+
+      Break
+    Endif
+  Next
+
+  lblScanDirectory.Text = ("Carpetas de música a escanear")
+  lblScanXDGDirectory.Text = ("Directorio personal")
+  lblPkgAlarm.Text = ("Aviso de paquetes no instalados")
+  lblAutoLyric.Text = ("Descargar letras automáticamente")
+  lblCoverFile.Text = ("Nombre por defecto de la caratula")
+  lblArtistDelim.Text = ("Delimitador de artistas")
+  lblLyricDir.Text = ("Directorio de letras")
+
+End
+
+Public Sub tobSave_Click()
+
+  Dim intF As Integer
+  Dim strFMedia As String
+
+  FMain.stxSacanDir.Clear
+  Wait 0.1
+
+  For intF = 0 To lsoScandirectory.Count - 1
+
+    If FMain.stxSacanDir.Find(lsoScandirectory[intF].Text) = -1 Then
+      FMain.stxSacanDir.Add(lsoScandirectory[intF].Text)
+    Endif
+
+  Next
+
+  strFMedia = FMain.stxSacanDir.Join("\n")
+
+  Settings["folders/media"] = strFMedia
+  Settings["folders/xdgmusic"] = CStr(swoScanXDGDirectory.Value)
+  Settings["Preferences/alarm"] = CStr(swoPkgAlarm.Value)
+  Settings["Preferences/autolyric"] = CStr(swoAutoLyric.Value)
+
+  Settings["Preferences/lyricsdir"] = btoLyricDir.Text
+  FMain.strLyricDir = btoLyricDir.Text
+
+  If InStr(txoCoverFile.Text, ".jpg") <> 0 Then
+
+    Settings["Preferences/cover"] = txoCoverFile.Text
+  Else
+    Message.Info(("La extensión debe ser") & ".jpg")
+  Endif
+  Settings["Preferences/cover"] = txoCoverFile.Text
+
+  Settings["Preferences/artistdelimiter"] = txoArtistDelim.Text
+
+  Settings.Save
+
+  Me.Close
+
+End
+
+' Public Sub tobExit_Click()
+'
+'   Me.Close
+'
+' End
+
+Public Sub tobAdd_Click()
+
+  Dim strDir As String
+
+  strDir = MUtility.DirChooser(User.Home)
+
+  lsoScandirectory.Add(strDir)
+
+End
+
+Public Sub tobDelete_Click()
+
+  Dim strDir As String
+
+  strDir = lsoScandirectory.Current.Text
+
+  If lsoScandirectory.Current Then
+    lsoScandirectory.Remove(lsoScandirectory.Find(strDir))
+  Endif
+
+End
+
+Public Sub btoLyricDir_Click()
+
+  Dim strDirChooser As String
+
+  strDirChooser = btoLyricDir.Text
+
+  If Exist(strDirChooser) Then
+    MUtility.DirChooser(strDirChooser)
+  Endif
+
+End

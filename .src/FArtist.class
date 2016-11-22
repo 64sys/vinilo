@@ -1,0 +1,86 @@
+' Gambas class file
+
+Public intKey As Integer
+Public strArtist As String
+Public intCountry As Integer
+Public intCtryChange As Integer
+Public stxCtryIdx As New String[]
+Public stxCtryName As New String[]
+Public stxCtryCod2 As New String[]
+
+Public Sub Form_Open()
+
+  Dim strQArtist As String
+  Dim resArtist As Result
+
+  Dim strCountry As String
+  Dim resCountry As Result
+
+  Dim intC As Integer
+  Dim intItem As Integer
+
+  intKey = Me.Tag
+
+  strQArtist = "select * from artist where artistindx='" & intKey & "'"
+  resArtist = FMain.conDB.Exec(strQArtist)
+
+  If resArtist.Available Then
+
+    'resArtist.MoveFirst
+    strArtist = resArtist["artistname"]
+    txoName.Text = strArtist
+    cmoCountry.Tag = intCountry
+
+    intCountry = resArtist["artistcountry"]
+    intCtryChange = intCountry
+    strCountry = "select ctryindx,ctryname,ctrycode2 from country"
+    resCountry = FMain.conDB.Exec(strCountry)
+
+    While resCountry.Available
+      stxCtryIdx.Add(resCountry["ctryindx"])
+      stxCtryName.Add(resCountry["ctryname"])
+      stxCtryCod2.Add(resCountry["ctrycode2"])
+      resCountry.MoveNext
+
+    Wend
+
+    For intC = 0 To stxCtryIdx.Max
+      cmoCountry.Add(stxCtryName[intC])
+    Next
+
+    intItem = stxCtryIdx.Find(CStr(intCountry))
+
+    If intItem <> -1 Then
+      cmoCountry.Text = stxCtryName[intItem]
+    Endif
+
+  Endif
+
+End
+
+Public Sub Form_Leave()
+
+  '  Dim resArtist As Result
+  Dim strQSave As String
+  Dim resSArtist As Result
+
+  If intCtryChange <> intCountry Then
+    strQSave = "update artist set artistcountry='" & CStr(intCtryChange) & "' where artistindx='" & intKey & "'"
+    resSArtist = FMain.conDB.Exec(strQSave)
+  Endif
+
+  Me.Close
+
+End
+
+Public Sub cmoCountry_Change()
+
+  Dim intItemChanged As Integer
+
+  intItemChanged = stxCtryName.Find(cmoCountry.Text)
+
+  If intItemChanged <> -1 Then
+    intCtryChange = CInt(stxCtryIdx[intItemChanged])
+  Endif
+
+End

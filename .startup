@@ -1,0 +1,20 @@
+FMain
+Catalogador musical
+0
+0
+0.0.19
+
+gb.image
+gb.gui.qt
+gb.form
+gb.db
+gb.desktop.x11
+gb.desktop
+gb.settings
+gb.form.stock
+gb.inotify
+gb.sdl2.audio
+gb.util
+gb.xml
+gb.xml.html
+

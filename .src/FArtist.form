@@ -1,0 +1,18 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,26,26)
+  Border = False
+  { txoName TextBox
+    MoveScaled(1,11,24,4)
+  }
+  { cmoCountry ComboBox
+    MoveScaled(1,21,24,4)
+  }
+  { lblName Label
+    MoveScaled(1,7,24,4)
+  }
+  { lblCountry Label
+    MoveScaled(1,17,24,4)
+  }
+}

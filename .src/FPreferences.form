@@ -1,0 +1,104 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,61,71)
+  Icon = Picture["logo.png"]
+  { Frame1 Frame
+    MoveScaled(1,5,59,6)
+    Background = Color.ButtonBackground
+    Margin = True
+    { lblScanXDGDirectory Label
+      MoveScaled(1,1,37,4)
+    }
+    { swoScanXDGDirectory SwitchButton
+      MoveScaled(42,1,16,4)
+    }
+  }
+  { Panel8 Panel
+    MoveScaled(-1,0,62,4)
+    { tobSave ToolButton
+      MoveScaled(2,0,4,4)
+      Picture = Picture["icon:/22/save"]
+    }
+    { tobExit ToolButton
+      MoveScaled(56,0,4,4)
+      Visible = False
+      Picture = Picture["icon:/22/quit"]
+    }
+  }
+  { Frame2 Frame
+    MoveScaled(1,55,59,16)
+    Background = Color.ButtonBackground
+    { lblScanDirectory Label
+      MoveScaled(1,1,45,4)
+    }
+    { lsoScandirectory ListBox grpChange
+      Name = "lsoScandirectory"
+      MoveScaled(1,6,57,9)
+    }
+    { tobAdd ToolButton
+      MoveScaled(48,1,4,4)
+      Picture = Picture["icon:/22/add"]
+    }
+    { tobDelete ToolButton
+      MoveScaled(54,1,4,4)
+      Picture = Picture["icon:/22/delete"]
+    }
+  }
+  { Frame3 Frame
+    MoveScaled(1,13,59,6)
+    Background = Color.ButtonBackground
+    Margin = True
+    { lblPkgAlarm Label
+      MoveScaled(1,1,37,4)
+    }
+    { swoPkgAlarm SwitchButton
+      MoveScaled(42,1,16,4)
+    }
+  }
+  { Frame4 Frame
+    MoveScaled(1,21,59,6)
+    Background = Color.ButtonBackground
+    Margin = True
+    { lblCoverFile Label
+      MoveScaled(1,1,37,4)
+    }
+    { txoCoverFile TextBox
+      MoveScaled(42,1,16,4)
+    }
+  }
+  { Frame5 Frame
+    MoveScaled(1,29,59,6)
+    Background = Color.ButtonBackground
+    Margin = True
+    { lblAutoLyric Label
+      MoveScaled(1,0,37,6)
+    }
+    { swoAutoLyric SwitchButton
+      MoveScaled(42,1,16,4)
+    }
+  }
+  { Frame6 Frame
+    MoveScaled(1,37,59,6)
+    Background = Color.ButtonBackground
+    Margin = True
+    { lblArtistDelim Label
+      MoveScaled(1,0,37,6)
+    }
+    { txoArtistDelim TextBox
+      MoveScaled(42,1,16,4)
+    }
+  }
+  { Frame7 Frame
+    MoveScaled(1,45,59,9)
+    Background = Color.ButtonBackground
+    Margin = True
+    { lblLyricDir Label
+      MoveScaled(2,1,36,3)
+    }
+    { btoLyricDir ButtonBox
+      MoveScaled(1,4,57,4)
+      Picture = Picture["icon:/22/directory"]
+    }
+  }
+}
