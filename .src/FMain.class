@@ -453,6 +453,7 @@ Public Sub cmdLookup() ''Actualiza la coleccion de música
   Dim strFileDBTime As String
   Dim strQFiles As String
   Dim resFiles As Result
+  Dim strCurrTempDir As String
   Dim strFileTempDir As String
   Dim strFileTempName As String
   Dim strFileTempExt As String
@@ -539,7 +540,7 @@ Public Sub cmdLookup() ''Actualiza la coleccion de música
       Select resFiles.Count
         Case 1 ' El registro si existe [update]
 
-          stxFiles.Add(strFileTempPath)
+          'stxFilesTmp.Add(strFileTempPath)
           resFiles.MoveFirst
           strFileDBPath = resFiles["filpath"]
           strFileDBTime = resFiles["filtime"]
@@ -565,88 +566,92 @@ Public Sub cmdLookup() ''Actualiza la coleccion de música
       resFilesRefresh = FMain.conDB.Exec(strQrefresh)
 
     Endif
+  Next
 
-    For intF = 0 To stxFiles.Max
-      strPathRaw = stxFiles[intF]
-      strPathPro = MUtility.ConvertPath(strPathRaw)
-      strPathPro = MUtility.Chek4SQL(strPathPro)
+  For intF = 0 To stxFiles.Max
+    strPathRaw = stxFiles[intF]
+    strPathPro = MUtility.ConvertPath(strPathRaw)
+    strPathPro = MUtility.Chek4SQL(strPathPro)
 
-      If strPathRaw <> strPathPro Then
-        'Move strPathRaw To strPathPro
-        stxFileInfo.Clear
-        ' El nombre del archivo tiene problemas
-        stxFileError.Add("Bad File Name" & ":" & strPathRaw)
-      Else
-        stxFileInfo.Clear
-        stxFileInfo = MUtility.FileInfo(strPathPro)
-      Endif
-      Wait 0.1
+    If strPathRaw <> strPathPro Then
+      'Move strPathRaw To strPathPro
+      stxFileInfo.Clear
+      ' El nombre del archivo tiene problemas
+      stxFileError.Add("Bad File Name" & ":" & strPathRaw)
+    Else
+      stxFileInfo.Clear
+      stxFileInfo = MUtility.FileInfo(strPathPro)
+    Endif
+    Wait 0.1
 
-      'Segundo analizo si el CRC32 cambio o no existe
+    'Segundo analizo si el CRC32 cambio o no existe
 
-      'stxFileInfo.Clear
+    'stxFileInfo.Clear
 
-      'stxFileInfo = MUtility.FileInfo(strPathPro)
+    'stxFileInfo = MUtility.FileInfo(strPathPro)
 
-      'Agrego la carpeta inicial porque RDir devuelvel la ruta relativa
+    'Agrego la carpeta inicial porque RDir devuelvel la ruta relativa
 
-      stxTag.Clear
-      stxVal.Clear
+    stxTag.Clear
+    stxVal.Clear
 
-      For intI = 0 To stxFileInfo.Max
+    For intI = 0 To stxFileInfo.Max
 
-        strTag = Split(stxFileInfo[intI], ":")[0]
-        strVal = MUtility.Chek4SQL(Split(stxFileInfo[intI], ":")[1])
+      strTag = Split(stxFileInfo[intI], ":")[0]
+      strVal = MUtility.Chek4SQL(Split(stxFileInfo[intI], ":")[1])
 
-        Select String.LCase(strTag)
-          Case "year"
-            stxTag.Add(strTag)
-            Select strVal
-              Case ""
-                strVal = "1000"
-              Case Else
-                strVal = Format(strVal, "0000")
-            End Select
+      Select String.LCase(strTag)
+        Case "year"
+          stxTag.Add(strTag)
+          Select strVal
+            Case ""
+              strVal = "1000"
+            Case Else
+              strVal = Format(strVal, "0000")
+          End Select
 
-            stxVal.Add(strVal)
+          stxVal.Add(strVal)
 
-          Case Else
-            stxTag.Add(strTag)
-            stxVal.Add(strVal)
+        Case Else
+          stxTag.Add(strTag)
+          stxVal.Add(strVal)
 
-        End Select
-
-      Next
-
-      stxValues.Clear
-
-      stxValues.Add("Null") ' indx
-
-      For intK = 0 To stxTagOk.Max
-        intU = stxTag.Find(stxTagOk[intK])
-        If intU <> -1 Then
-          stxValues.Add(stxVal[intU])
-        Else
-          stxValues.Add("")
-        Endif
-
-      Next
-
-      stxTag.Clear
-      stxVal.Clear
-
-      If stxValues.Find("") = -1 Then
-        MData.ImportFileMetadata(conDB, "track", stxReff, stxValues)
-      Else
-
-      Endif
-
-      stxValues.Clear
-
-      ArrangeNav()
+      End Select
 
     Next
+
+    stxValues.Clear
+
+    stxValues.Add("Null") ' indx
+
+    For intK = 0 To stxTagOk.Max
+      intU = stxTag.Find(stxTagOk[intK])
+      If intU <> -1 Then
+        stxValues.Add(stxVal[intU])
+      Else
+        stxValues.Add("")
+      Endif
+
+    Next
+
+    stxTag.Clear
+    stxVal.Clear
+
+    If stxValues.Find("") = -1 Then
+      MData.ImportFileMetadata(conDB, "track", stxReff, stxValues)
+    Else
+
+    Endif
+
+    stxValues.Clear
+
+    If strCurrTempDir <> strFileTempDir Then
+      ArrangeNav()
+      strCurrTempDir = strFileTempDir
+    Endif
+
   Next
+  stxFiles.Clear
 
 End
 
@@ -965,13 +970,18 @@ Public Sub GAlbumCommand_Drop()
   Dim bolRefresh As Boolean
   Dim tobLast As ToolButton
   Dim strCurrDir As String
+  Dim strUrlTmp As Variant
 
   bolRefresh = False
 
   tobLast = Last
   strCurrDir = Split(CStr(tobLast.tag), ":")[4]
 
+  'strCurrentPic = "'" & strCurrDir &/ "cover.jpg'"
   strCurrentPic = strCurrDir &/ "cover.jpg"
+
+  strUrlTmp = Drag.Paste("text/uri-list")
+  Print strUrlTmp
 
   Select strCurrentPic
     Case ""
@@ -979,9 +989,12 @@ Public Sub GAlbumCommand_Drop()
     Case Else
 
       bolDownload = False
-      Print Drag.Paste("text/uri-list")
+      'Print Drag.Paste("text/uri-list")
+      'Print strUrlTmp
 
-      strUrl = Mutility.ArrangePath((Drag.Paste("text/uri-list")))
+      strUrl = Mutility.ArrangePath(strUrlTmp)
+      strCurrentPic = Mutility.ArrangePath(strCurrentPic)
+
       Print strUrl
       Print strCurrentPic
 
@@ -1001,6 +1014,9 @@ Public Sub GAlbumCommand_Drop()
 
       Select bolDownload
         Case True
+
+          bolRefresh = True
+
           Select InStr(strUrl, "file://")
             Case 0
               If Exist("/tmp/cover.jpg") Then
@@ -1016,7 +1032,7 @@ Public Sub GAlbumCommand_Drop()
               Wait 0.2
 
             Case Else
-              Shell "cp " & Replace(strUrl, "file://", "") & " '" & strCurrentPic & "'"
+              Shell "cp " & Replace(strUrl, "file://", "") & "'" & strCurrentPic & "'"
               Print "Copiando foto local a " & strCurrentPic
               Wait 0.2
 

@@ -193,9 +193,6 @@
           MoveScaled(0,0,19,4)
           Expand = True
         }
-        { muoSet MenuButton
-          MoveScaled(20,0,6,4)
-        }
       }
       { scwData1L ScrollView
         MoveScaled(2,7,23,35)
@@ -211,7 +208,7 @@
       }
     }
     { pnlData1R Panel
-      MoveScaled(34,2,83,52)
+      MoveScaled(32,0,83,52)
       Expand = True
       Arrangement = Arrange.Vertical
       { Panel1 Panel

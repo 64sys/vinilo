@@ -41,7 +41,7 @@ CREATE TABLE "fileversions" (
 CREATE TABLE "files" (
 	`filindx`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`filpath`	TEXT NOT NULL,
-	`filtime`	INTEGER,
+	`filtime`	TEXT,
 	`filcrc32`	TEXT NOT NULL,
 	`fildir`	TEXT NOT NULL,
 	`filname`	TEXT NOT NULL,
