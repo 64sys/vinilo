@@ -566,12 +566,6 @@ Public Sub cmdLookup() ''Actualiza la coleccion de música
 
     Endif
 
-    ' If
-    '   strFileDBPath = ""
-    '   strFileDBTime = ""
-    '
-    ' Next
-
     For intF = 0 To stxFiles.Max
       strPathRaw = stxFiles[intF]
       strPathPro = MUtility.ConvertPath(strPathRaw)
@@ -730,12 +724,9 @@ Public Sub ArrangeNav()
   Dim strAlbumPic As String
   Dim strAlbumPicNone As String
   Dim strNavArtist As String
-
-  'Dim picArtist As Picture
   Dim picAlbum As Picture
   Dim imgAlbum As Image
 
-  'Dim lbla, lbly, lblt As Label
   Dim pnl As Panel
   Dim tob As ToolButton
   Dim strQuery2 As String ' Artists
@@ -750,8 +741,6 @@ Public Sub ArrangeNav()
   resNav = conDB.Exec(strQuery1)
 
   If conDB.Opened = True Then
-
-    'trvData.Clear
 
     If resNav.Available = True Then
 
