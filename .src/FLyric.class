@@ -1,5 +1,27 @@
 ' Gambas class file
 
+'
+' Catalogador musical
+' Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools y elinks.
+'
+' Copyright (C) Martín Belmonte
+'
+' This program is free software; you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation; either version 2 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program; if not, write to the Free Software
+' Foundation, Inc., 51 Franklin St, Fifth Floor,
+' Boston, MA  02110-1301  USA
+'
+
 Private strLyPath As String
 
 Private strArt As String
@@ -22,45 +44,15 @@ Private strDir As String
 
 Private stxFileParts As New String[]
 
+Private strState As String
+
 Public Sub Form_Open()
 
-  ' Dim strArt As String
-  ' Dim strAlb As String
-  ' Dim strTit As String
-  ' Dim strDir As String
-  ' Dim strLyric As String
-  ' Dim stxFileParts As New String[]
-
-  'Dim strLyPath As String
   Dim strCoverPath As String
   Dim strYea As String
   Dim strFlagPath As String
 
-  'Me.Close
-
-  ' If Me.Tag <> "" Then
-  '   If InStr(Me.Tag, ":") <> 0 Then
-  '     strArt = Split(Me.Tag, ":")[0]
-  '     strArtx = Split(Me.Tag, ":")[1]
-  '
-  '     strAlb = Split(Me.Tag, ":")[2]
-  '     strAlbx = Split(Me.Tag, ":")[3]
-  '
-  '     strYea = Split(Me.Tag, ":")[4]
-  '
-  '     strTit = Split(Me.Tag, ":")[5]
-  '     strTitx = Split(Me.Tag, ":")[6]
-  '
-  '     strCCo = Split(Me.Tag, ":")[7]
-  '     strCtr = Split(Me.Tag, ":")[8]
-  '     strCtrx = Split(Me.Tag, ":")[9]
-  '
-  '     strGen = Split(Me.Tag, ":")[10]
-  '     strGenx = Split(Me.Tag, ":")[11]
-  '
-  '     strDir = Split(Me.Tag, ":")[12]
-  '   Endif
-  ' Endif
+  strState = "Loading"
 
   If Me.Tag <> Null Then
     If Me.Tag.Count > 0 Then
@@ -169,14 +161,13 @@ Public Sub btoArtist_Click()
 
   frmArtist.X = btoArtist.ScreenX + btoArtist.Width
   frmArtist.Y = btoArtist.ScreenY
-  'frmArtist.Height = Me.Height
   frmArtist.Title = ("Ficha del Artista")
 
   frmArtist.Tag = CInt(strArtx)
 
   frmArtist.Show()
 
-  '  Print strArt & "[" & strArtx & "]"
+  strState = "Loaded"
 
 End
 
@@ -189,5 +180,21 @@ End
 Public Sub btoATitle_Click()
 
   Print strTit & "[" & strTitx & "]"
+
+End
+
+Public Sub btoArtist_Change()
+
+  Dim intKey As Integer
+  Dim resArtista As Result
+
+  If strState = "Loaded" Then
+    intKey = Me.Tag[1]
+
+    resArtista = FMain.conDB.Edit("artist", "artistindx=&1", intKey)
+    resArtista["artistcountry"] = MUtility.GetForeignKey(btoArtist.Text, FMain.conDB, "country", "ctryindx", "ctryname")
+    resArtista.update
+
+  Endif
 
 End

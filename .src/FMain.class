@@ -109,10 +109,10 @@ Public intMaxTime As Integer
 Public intCurrTime As Integer
 Private intState As Integer ' Estado del banner, 1,2,3 para mostrar Cancion, album, datos
 
-Public Sub Form_Open()
+'Variables para el escaner de medios
+Public strMessageInfo As String
 
-  ' Dim hPict As Picture
-  '  Dim strTime As String
+Public Sub Form_Open()
 
   If conDB.Opened = False
     tobConnection.Picture = Picture["icon:/22/disconnect"]
@@ -120,7 +120,7 @@ Public Sub Form_Open()
   Endif
 
   If Starter() = 1 Then
-    'cmdMode(strMode)
+
     cmdMode()
 
     cmdConn()
@@ -147,6 +147,11 @@ Public Function Starter() As Integer
   bolStoped = True
   tmrBanner.Stop
   tmrClock.Stop
+
+  tmrMessages.Stop
+  tmrMessages.Start
+
+  strMessageInfo = ""
 
   ' Definicion del motor de bases de datos a usar
   strEngineActual = "sqlite3"
@@ -203,10 +208,6 @@ Public Function Starter() As Integer
     Copy "logo.png" To User.Home &/ "." & Application.Name &/ "album/0.png"
   Endif
 
-  ' If Exist(User.Home &/ "." & Application.Name &/ "album/0.png") = False Then
-  '   Copy "flags" To User.Home &/ "." & Application.Name &/ "flags"
-  ' Endif
-
   ' Verificacion de la existencia del archivo de configuración xml
   If Exist(User.Home &/ "." & Application.Name &/ "config.xml") = False Then
 
@@ -233,15 +234,12 @@ Public Function Starter() As Integer
 
   'Tooltips para los controles fijos
   tobAlbum.Tooltip = ("Haga clic para abrir la carpeta contenedora con el administrador de archivos")
-  '  lblInfo.Text = ("No se esta reproduciendo ninguna pista.")
-  ' lblInfo.Tooltip = ("No se esta reproduciendo ninguna pista.")
 
   'Comprobacion de la existencia de la base de datos
   cmdClearDB("start")
 
   LoadSettings()
 
-  'Panel8.Background = &00454947
   Panel8.Background = Me.Background
 
   tobConnection.Tooltip = ("Conexión a la base de datos")
@@ -332,12 +330,12 @@ Public Sub cmdClearDB(strMod As String)
   Select strMod
     Case "reset"
 
-      If Exist(strDBpath) = False Then
+      If Exist(strDBpath) = True Then
         Shell "zip -j " & strDBZip & " " & strDBpath
         Wait 0.5
         Kill strDBpath
       Endif
-
+      ArrangeNav()
   End Select
 
   conCreate.Type = "sqlite3"
@@ -420,238 +418,222 @@ End
 
 Public Sub tobScan_Click()
 
-  cmdLookup()
+  cmdRefreshFiles()
 
 End
 
-Public Sub cmdLookup() ''Actualiza la coleccion de música
+'----------------------------------------------------------------------------------------------------------------
+Public Sub cmdRefreshFiles() ''Actualiza la lista de archivos, agrega, actualiza y elimina.
 
-  Dim stxFilesRaw As New String[]
-  Dim intR As Integer
-  Dim stxFiles As New String[]
-  Dim intF As Integer
-  Dim stxFileInfo As New String[]
-  Dim stxReff As New String[]
-  Dim strTag As String
-  Dim stxTag As New String[]
-  Dim strVal As String
-  Dim stxVal As New String[]
-  Dim stxTagOk As New String[]
-  Dim stxValues As New String[]
-  Dim intI As Integer
-  Dim intK As Integer
-  Dim intU As Integer
-  Dim strPathRaw As String
-  Dim strPathPro As String
-  Dim intE As Integer
-  Dim stxFilesTmp As New String[]
-  Dim strFileTmp As String
-  Dim stxFileError As New String[]
-  Dim strFileTempPath As String
-  Dim strFileTempTime As String
-  Dim strFileDBPath As String
-  Dim strFileDBTime As String
-  Dim strQFiles As String
-  Dim resFiles As Result
-  Dim strCurrTempDir As String
-  Dim strFileTempDir As String
-  Dim strFileTempName As String
-  Dim strFileTempExt As String
-  Dim strQrefresh As String
-  Dim resFilesRefresh As Result
+  Dim strFilesDb As String
+  Dim resFilesDb As Result
+  Dim stxFilesDbPath As New String[]
+  Dim stxFilesDbTime As New String[]
+  Dim stxFilesDbKey As New String[]
 
-  If bolSacanXDGDir = True Then
-    stxSacanDir.Add(strSacanXDGDir)
-  Endif
+  Dim stxFilesExistTmp As New String[]
+  Dim stxFilesExist As New String[] ' Archivos existentes en la base de datos.
 
-  stxFilesRaw.Clear
-  stxFiles.Clear
-  stxTagOk.Clear
-  stxFileError.Clear
+  Dim intFile As Integer
+  Dim strFileTimeDb As String
+  Dim intKey As Integer
+  Dim strFileTime As String
 
-  stxTagOk.Add("Title")
-  stxTagOk.Add("Track")
-  stxTagOk.Add("Artist")
-  stxTagOk.Add("Album")
-  stxTagOk.Add("Genre")
-  stxTagOk.Add("Year")
-  stxTagOk.Add("FileType")
-  stxTagOk.Add("AudioBitrate")
-  stxTagOk.Add("ChannelMode")
-  stxTagOk.Add("Duration")
-  stxTagOk.Add("SampleRate")
-  stxTagOk.Add("FileSize")
-  stxTagOk.Add("FileTime")
-  stxTagOk.Add("FileCRC32")
-  stxTagOk.Add("FileVersion")
-  stxTagOk.Add("FileDirectory")
-  stxTagOk.Add("FileName")
+  Dim stxFileDataTmp As New String[]
+  Dim stxFileData As New String[]
+  Dim stxFileTag As New String[]
+  Dim resDelete As Result
 
-  stxReff.Clear
+  Dim resUpdate As Result
+  Dim intTmp As Integer
 
-  stxReff.Add("trackartist:artist:artistindx:artistname")
-  stxReff.Add("trackalbum:album:albumindx:albumname")
-  stxReff.Add("trackgenre:genre:genreindx:genrename")
-  stxReff.Add("tracktype:type:typeindx:typename")
-  stxReff.Add("trackfileversion:fileversions:fverindx:fvername")
+  Dim resIns As Result
+  Dim intDir As Integer
+  Dim intFileDB As Integer
+  Dim strAction As String
+  Dim strDirectory As String
 
-  For intE = 0 To stxSacanDir.Max
+  'Listar los archivos presentes en la base de datos
+  strFilesDb = "select trackindx,trackpath,tracktimefile from track"
+  resFilesDb = conDB.Exec(strFilesDb)
 
-    strDirectory = stxSacanDir[intE]
+  'Listo los archivos de DataBase ====================================="
+  While resFilesDb.Available
+    stxFilesDbPath.Add(resFilesDb["trackpath"])
+    stxFilesDbTime.Add(resFilesDb["tracktimefile"])
+    stxFilesDbKey.Add(resFilesDb["trackindx"])
+    resFilesDb.MoveNext
+  Wend
 
-    stxFilesTmp.Clear
-    stxFilesTmp = Mutility.ScanFolder(strDirectory, "mp3,ogg")
+  Wait 0.1
 
-    For Each strFileTmp In stxFilesTmp
-      stxFilesRaw.Add(strFileTmp)
-    Next
-    stxFilesTmp.Clear
+  'verificacion de archivos ya registrados en la base de datos ============================================"
+  stxFilesExist.Clear
+  For intDir = 0 To stxSacanDir.Max
+    stxFilesExistTmp.Clear
+    stxFilesExistTmp = MUtility.ScanFolder(stxSacanDir[intDir], "mp3:ogg:flac")
+    stxFilesExist.Insert(stxFilesExistTmp)
+
   Next
 
-  stxFilesRaw = MUtility.ListDeldup(stxFilesRaw)
+  Wait 0.1
 
-  'Primero analizo si el archivo existe y si es así verifico si la fecha cambio
-  'Todo con la finalidad de obtener una lista de archivos a procesar
+  ' Borrado de los registros que no se corresponden con un archivo en el sistema de archivos
+  If stxFilesDbPath.Count > 0 Then
+    For intFileDB = 0 To stxFilesDbPath.Max
+      If stxFilesExist.Find(stxFilesDbPath[intFileDB]) = -1 Then
+        resDelete = conDB.Delete("track", "trackpath=&1", stxFilesDbPath[intFileDB])
+        resDelete.update
+      Endif
+    Next
+  Endif
 
-  For intR = 0 To stxFilesRaw.Max
-    strFileTempPath = ""
-    strFileTempTime = ""
-    strFileTempDir = ""
-    strFileTempName = ""
-    strFileTempExt = ""
+  Wait 0.1
 
-    strFileDBPath = ""
-    strFileDBTime = ""
+  'Actualizo los registros o los agrego de acuerdo con los datos de los archivos existentes en el sistema de arcivos
+  'Pero antes vuelvo a lanzar la consulta para ver que es lo que esta en la base de datos
+  'Listar los archivos presentes en la base de datos
+  'strFilesDb = "select trackindx,trackpath,tracktimefile from track"
+  resFilesDb = conDB.Exec(strFilesDb)
+  stxFilesDbPath.Clear
+  stxFilesDbKey.Clear
+  stxFilesDbTime.Clear
 
-    strFileTempPath = stxFilesRaw[intR]
+  'Listo los archivos de DataBase ====================================="
+  While resFilesDb.Available
+    stxFilesDbPath.Add(resFilesDb["trackpath"])
+    stxFilesDbTime.Add(resFilesDb["tracktimefile"])
+    stxFilesDbKey.Add(resFilesDb["trackindx"])
+    resFilesDb.MoveNext
+  Wend
 
-    If Stat(stxFilesRaw[intR]).Type = gb.File Then
-      strFileTempTime = Format$((Stat(stxFilesRaw[intR]).Time), "yyyymmddhhnnss")
-      strFileTempDir = File.Dir(stxFilesRaw[intR])
-      strFileTempName = File.BaseName(stxFilesRaw[intR])
-      strFileTempExt = File.Ext(stxFilesRaw[intR])
+  strDirectory = ""
 
-    Endif
+  If stxFilesExist.Count > 0 Then
+    For intFile = 0 To stxFilesExist.Max
 
-    strQFiles = "select filpath,filtime from files where filpath='" & strFileTempPath & "'"
-    resFiles = FMain.conDB.Exec(strQFiles)
+      stxFileDataTmp.Clear
+      stxFileData.Clear
+      stxFileTag.Clear
 
-    If resFiles.Available Then
-      Select resFiles.Count
-        Case 1 ' El registro si existe [update]
+      intKey = stxFilesDbPath.Find(stxFilesExist[intFile])
+      strAction = "None"
 
-          'stxFilesTmp.Add(strFileTempPath)
-          resFiles.MoveFirst
-          strFileDBPath = resFiles["filpath"]
-          strFileDBTime = resFiles["filtime"]
+      Select intKey
+        Case -1 ' Insertar ya que no existe en db
+          strAction = "Insert"
+        Case Else ' Actualizar si los tiempos son diferentes
+          strFileTimeDb = stxFilesDbTime[intKey]
+          strFileTime = MUtility.Timestamp(Stat(stxFilesExist[intFile]).Time) ' El tiempo del archivo en el sistema
 
-          If strFileTempTime <> strFileDBTime Then
-            strQrefresh = "update files set filtime='" & strFileTempTime & "' where filpath='" & strFileTempPath & "'"
-            stxFiles.Add(strFileTempPath)
+          If strFileTime = strFileTimeDb Then
+            strAction = "None"
+          Else
+            If strFileTime > strFileTimeDb Then
+              strAction = "Update"
+            Else
+              Print "Error, el tiempo del archivo es inferior al de la base de datos"
+              strAction = "None"
+            Endif
+
           Endif
 
       End Select
 
-    Else ' El registro no existe [insert]
-      stxFiles.Add(strFileTempPath)
-      strQrefresh = "insert into files (filindx,filpath,filtime,filcrc32,fildir,filname,filext,filsize) values(Null" &
-        ",'" & strFileTempPath & "'" &
-        ",'" & strFileTempTime & "'" &
-        ",'" & "" & "'" &
-        ",'" & strFileTempDir & "'" &
-        ",'" & strFileTempName & "'" &
-        ",'" & strFileTempExt & "'" &
-        ",'" & "" & "')"
+      '----------------------------------------------------------------
+      Select strAction
+        Case "Update", "Insert"
 
-      resFilesRefresh = FMain.conDB.Exec(strQrefresh)
+          stxFileDataTmp.Clear
+          stxFileDataTmp.Insert(MUtility.FileInfo(stxFilesExist[intFile]))
+          stxFileDataTmp.Insert(MUtility.FileExif(stxFilesExist[intFile]))
 
-    Endif
-  Next
+          If stxFileDataTmp.Count > 0 Then
+            For intTmp = 0 To stxFileDataTmp.Max
+              stxFileTag.Add(Split(stxFileDataTmp[intTmp], ":")[0])
+              stxFileData.Add(Split(stxFileDataTmp[intTmp], ":")[1])
+            Next
+          Endif
+      End Select
+      '----------------------------------------------------------------
+      Wait 0.1
+      '----------------------------------------------------------------
+      Select strAction
+        Case "Update"
+          If stxFileData.Count > 0 Then
+            resUpdate = conDB.Edit("track", "trackpath=&1", stxFilesExist[intFile])
 
-  For intF = 0 To stxFiles.Max
-    strPathRaw = stxFiles[intF]
-    strPathPro = MUtility.ConvertPath(strPathRaw)
-    strPathPro = MUtility.Chek4SQL(strPathPro)
+            resUpdate["tracktitle"] = stxFileData[stxFileTag.Find("Title")]
+            resUpdate["tracknum"] = stxFileData[stxFileTag.Find("Track")]
+            resUpdate["trackartist"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Artist")], conDB, "artist", "artistindx", "artistname")
+            resUpdate["trackalbum"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Album")], conDB, "album", "albumindx", "albumname")
+            resUpdate["trackgenre"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Genre")], conDB, "genre", "genreindx", "genrename")
+            resUpdate["trackyear"] = stxFileData[stxFileTag.Find("Year")]
+            resUpdate["trackbits"] = stxFileData[stxFileTag.Find("AudioBitrate")]
+            resUpdate["trackchanels"] = stxFileData[stxFileTag.Find("ChannelMode")]
+            resUpdate["tracklength"] = stxFileData[stxFileTag.Find("Duration")]
+            resUpdate["tracksample"] = stxFileData[stxFileTag.Find("SampleRate")]
+            resUpdate["tracktimemeta"] = stxFileData[stxFileTag.Find("FileTime")]
 
-    If strPathRaw <> strPathPro Then
-      'Move strPathRaw To strPathPro
-      stxFileInfo.Clear
-      ' El nombre del archivo tiene problemas
-      stxFileError.Add("Bad File Name" & ":" & strPathRaw)
-    Else
-      stxFileInfo.Clear
-      stxFileInfo = MUtility.FileInfo(strPathPro)
-    Endif
-    Wait 0.1
+            resUpdate["tracktimefile"] = stxFileData[stxFileTag.Find("FileTime")]
+            'resUpdate["trackpath"] = stxFilesExist[intFile]
+            'resUpdate["trackdirectory"] = File.Dir(stxFilesExist[intFile])
+            'resUpdate["trackname"] = File.Name(stxFilesExist[intFile])
+            'resUpdate["trackextension"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("FileExt")], conDB, "filesclass", "fcsindx", "fcsname")
+            resUpdate["trackversion"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("FileVersion")], conDB, "filesversion", "fvnindx", "fvnname")
+            resUpdate["tracksize"] = stxFileData[stxFileTag.Find("FileSize")]
+            resUpdate["trackcrc32"] = stxFileData[stxFileTag.Find("FileCRC32")]
 
-    'Segundo analizo si el CRC32 cambio o no existe
+            resUpdate.update
 
-    'stxFileInfo.Clear
+            strMessageInfo = stxFilesExist[intFile]
 
-    'stxFileInfo = MUtility.FileInfo(strPathPro)
+          Endif
 
-    'Agrego la carpeta inicial porque RDir devuelvel la ruta relativa
+        Case "Insert"
+          If stxFileData.Count > 0 Then
+            resIns = conDB.Create("track")
 
-    stxTag.Clear
-    stxVal.Clear
+            resIns["tracktitle"] = stxFileData[stxFileTag.Find("Title")]
+            resIns["tracknum"] = stxFileData[stxFileTag.Find("Track")]
+            resIns["trackartist"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Artist")], conDB, "artist", "artistindx", "artistname")
+            resIns["trackalbum"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Album")], conDB, "album", "albumindx", "albumname")
+            resIns["trackgenre"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Genre")], conDB, "genre", "genreindx", "genrename")
+            resIns["trackyear"] = stxFileData[stxFileTag.Find("Year")]
+            resIns["trackbits"] = stxFileData[stxFileTag.Find("AudioBitrate")]
+            resIns["trackchanels"] = stxFileData[stxFileTag.Find("ChannelMode")]
+            resIns["tracklength"] = stxFileData[stxFileTag.Find("Duration")]
+            resIns["tracksample"] = stxFileData[stxFileTag.Find("SampleRate")]
+            resIns["tracktimemeta"] = stxFileData[stxFileTag.Find("FileTime")]
 
-    For intI = 0 To stxFileInfo.Max
+            resIns["tracktimefile"] = stxFileData[stxFileTag.Find("FileTime")]
+            resIns["trackpath"] = stxFilesExist[intFile]
+            resIns["trackdirectory"] = File.Dir(stxFilesExist[intFile])
+            resIns["trackname"] = File.Name(stxFilesExist[intFile])
+            resIns["trackextension"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("FileExt")], conDB, "filesclass", "fcsindx", "fcsname")
+            resIns["trackversion"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("FileVersion")], conDB, "filesversion", "fvnindx", "fvnname")
+            resIns["tracksize"] = stxFileData[stxFileTag.Find("FileSize")]
+            resIns["trackcrc32"] = stxFileData[stxFileTag.Find("FileCRC32")]
 
-      strTag = Split(stxFileInfo[intI], ":")[0]
-      strVal = MUtility.Chek4SQL(Split(stxFileInfo[intI], ":")[1])
+            resIns.update
 
-      Select String.LCase(strTag)
-        Case "year"
-          stxTag.Add(strTag)
-          Select strVal
-            Case ""
-              strVal = "1000"
-            Case Else
-              strVal = Format(strVal, "0000")
-          End Select
+            strMessageInfo = stxFilesExist[intFile]
 
-          stxVal.Add(strVal)
-
-        Case Else
-          stxTag.Add(strTag)
-          stxVal.Add(strVal)
-
+          Endif
+          '----------------------------------------------------------------
       End Select
 
-    Next
-
-    stxValues.Clear
-
-    stxValues.Add("Null") ' indx
-
-    For intK = 0 To stxTagOk.Max
-      intU = stxTag.Find(stxTagOk[intK])
-      If intU <> -1 Then
-        stxValues.Add(stxVal[intU])
-      Else
-        stxValues.Add("")
+      'Comprobacion de cambio de directorio
+      If strDirectory <> File.Dir(stxFilesExist[intFile]) Then
+        ArrangeNav()
+        strDirectory = File.Dir(stxFilesExist[intFile])
       Endif
 
     Next
 
-    stxTag.Clear
-    stxVal.Clear
+    strMessageInfo = ""
 
-    If stxValues.Find("") = -1 Then
-      MData.ImportFileMetadata(conDB, "track", stxReff, stxValues)
-    Else
-
-    Endif
-
-    stxValues.Clear
-
-    If strCurrTempDir <> strFileTempDir Then
-      ArrangeNav()
-      strCurrTempDir = strFileTempDir
-    Endif
-
-  Next
-  stxFiles.Clear
+  Endif
 
 End
 
@@ -705,7 +687,7 @@ Public Sub cmdConn()
   If conDB.Opened = True Then
     ArrangeNav()
   Else
-    'trvData.Clear
+
   Endif
 
 End
@@ -729,6 +711,7 @@ Public Sub ArrangeNav()
   Dim strAlbumPic As String
   Dim strAlbumPicNone As String
   Dim strNavArtist As String
+
   Dim picAlbum As Picture
   Dim imgAlbum As Image
 
@@ -747,6 +730,8 @@ Public Sub ArrangeNav()
 
   If conDB.Opened = True Then
 
+    'trvData.Clear
+
     If resNav.Available = True Then
 
       scwData1L.Children.Clear ' Borro todo control preexistente dentro del panel
@@ -764,8 +749,7 @@ Public Sub ArrangeNav()
         Select resArtists.Count
           Case 0
             strNavArtist = "#"
-            ' Case 1
-            '   strNavYear = resYears["trackyear"]
+
           Case Else
 
             While resArtists.Available
@@ -794,8 +778,7 @@ Public Sub ArrangeNav()
         Select resYears.Count
           Case 0
             strNavYear = "0000"
-            ' Case 1
-            '   strNavYear = resYears["trackyear"]
+
           Case Else
 
             While resYears.Available
@@ -815,11 +798,8 @@ Public Sub ArrangeNav()
 
         If Exist(strAlbumPic) = True Then
           imgAlbum = Image.Load(strAlbumPic)
-          'picAlbum = imgAlbum.Picture
         Else
           imgAlbum = Image.Load(strAlbumPicNone)
-          'imgAlbum.Stretch(32, 32)
-          'imgAlbum.Resize(32, 32)
         Endif
         picAlbum = imgAlbum.Picture
         'Creacion del bloque del disco, tapa y datos
@@ -827,7 +807,6 @@ Public Sub ArrangeNav()
         pnl = New Panel(scwData1L) ' Panel global
 
         With pnl
-          '.Width = 320
           .Width = 49
           .Height = 49
           .Name = "pnl" & strAlbumKey
@@ -836,22 +815,8 @@ Public Sub ArrangeNav()
           .Arrangement = 5 ' Horizontal
           .Border = 0
           .Padding = 3
-          '.Background = Color.TextBackground
         End With
 
-        '--------------------------------------------
-        ' pnlf = New Panel(pnl) ' Panel de la foto
-        '
-        ' With pnlf
-        '   .Name = "pnl" & strAlbumKey & "f"
-        '   .Expand = False
-        '   .Arrangement = 5
-        '   .Padding = 2
-        '   .Width = 47
-        '   .Height = 47
-        ' End With
-
-        'tob = New ToolButton(pnlf) As "GAlbumCommand"
         tob = New ToolButton(pnl) As "GAlbumCommand"
         With tob
           .AutoResize = False
@@ -863,40 +828,6 @@ Public Sub ArrangeNav()
           .Tooltip = strNavArtist & ":" & strNavAlbum & ":" & strNavYear
 
         End With
-        '--------------------------------------------
-        ' pnld = New Panel(pnl) ' Panel de los datos
-        '
-        ' With pnld
-        '   .Name = "pnl" & strAlbumKey & "d"
-        '   .AutoResize = False
-        '   .Expand = True
-        '   .Arrangement = 2 ' Vertical
-        ' End With
-        '
-        ' lbla = New Label(pnld) ' Etiqueta del album
-        ' With lbla
-        '   .Name = "lbl" & strAlbumKey & "a"
-        '   .Text = strNavAlbum
-        '   .Alignment = Align.Normal
-        '   .Expand = True
-        ' End With
-        '
-        ' lbly = New Label(pnld) ' Etiqueta de datos, año etc
-        ' With lbly
-        '   .Name = "lbl" & strAlbumKey & "y"
-        '   .Text = strNavYear
-        '   .Alignment = Align.Normal
-        '   .Expand = True
-        ' End With
-        '
-        ' lblt = New Label(pnld) ' Etiqueta del artista
-        ' With lblt
-        '   .Name = "lbl" & strAlbumKey & "t"
-        '   .Text = strNavArtist
-        '   .Alignment = Align.Normal
-        '   .Expand = True
-        ' End With
-        '--------------------------------------------
 
         resNav.MoveNext
       Wend
@@ -907,17 +838,9 @@ Public Sub ArrangeNav()
 
 End
 
-' Public Sub GAlbumCommand_Click()
-'
-'   SongsToGrid()
-'   grwData.Rows.Select(0, 1)
-'
-' End
-
 Public Sub GAlbumCommand_MouseDown()
 
   Dim intAction As Integer
-  'Dim intClick As Integer
   Dim strSearchText As String
   Dim tobLast As ToolButton
   Dim strCurrDir As String
@@ -970,18 +893,13 @@ Public Sub GAlbumCommand_Drop()
   Dim bolRefresh As Boolean
   Dim tobLast As ToolButton
   Dim strCurrDir As String
-  Dim strUrlTmp As Variant
 
   bolRefresh = False
 
   tobLast = Last
   strCurrDir = Split(CStr(tobLast.tag), ":")[4]
 
-  'strCurrentPic = "'" & strCurrDir &/ "cover.jpg'"
   strCurrentPic = strCurrDir &/ "cover.jpg"
-
-  strUrlTmp = Drag.Paste("text/uri-list")
-  Print strUrlTmp
 
   Select strCurrentPic
     Case ""
@@ -989,12 +907,9 @@ Public Sub GAlbumCommand_Drop()
     Case Else
 
       bolDownload = False
-      'Print Drag.Paste("text/uri-list")
-      'Print strUrlTmp
+      Print Drag.Paste("text/uri-list")
 
-      strUrl = Mutility.ArrangePath(strUrlTmp)
-      strCurrentPic = Mutility.ArrangePath(strCurrentPic)
-
+      strUrl = Mutility.ArrangePath((Drag.Paste("text/uri-list")))
       Print strUrl
       Print strCurrentPic
 
@@ -1014,9 +929,6 @@ Public Sub GAlbumCommand_Drop()
 
       Select bolDownload
         Case True
-
-          bolRefresh = True
-
           Select InStr(strUrl, "file://")
             Case 0
               If Exist("/tmp/cover.jpg") Then
@@ -1032,7 +944,7 @@ Public Sub GAlbumCommand_Drop()
               Wait 0.2
 
             Case Else
-              Shell "cp " & Replace(strUrl, "file://", "") & "'" & strCurrentPic & "'"
+              Shell "cp " & Replace(strUrl, "file://", "") & " '" & strCurrentPic & "'"
               Print "Copiando foto local a " & strCurrentPic
               Wait 0.2
 
@@ -1063,12 +975,10 @@ Public Sub SongsToGrid()
   Dim tobLast As ToolButton
   Dim strEntity As String ' Entidad que desencadenara las consultas, artista, carpeta, genero etc.
   Dim strShow As String
-  ' Dim strMod As String
   Dim stxTitles As New String[]
   Dim stxFields As New String[]
   Dim intT As Integer
   Dim inxWidths As New Integer[]
-  'Dim strKey As String
 
   tobLast = Last
 
@@ -1141,7 +1051,7 @@ Public Sub SongsToGrid()
   stxTitles.Add(("Muestreo"))
   inxWidths.Add(0)
 
-  stxFields.Add("tracktype")
+  stxFields.Add("trackclass")
   stxTitles.Add(("Tipo"))
   inxWidths.Add(75)
 
@@ -1149,11 +1059,11 @@ Public Sub SongsToGrid()
   stxTitles.Add(("Clase"))
   inxWidths.Add(0)
 
-  stxFields.Add("trackfolder")
+  stxFields.Add("trackdirectory")
   stxTitles.Add(("Carpeta"))
   inxWidths.Add(0)
 
-  stxFields.Add("trackfile")
+  stxFields.Add("trackname")
   stxTitles.Add(("Archivo"))
   inxWidths.Add(0)
 
@@ -1380,12 +1290,10 @@ Public Sub tobStop_Click()
 End
 
 Public Sub cmdPlay(Optional intR As Integer, Optional floPosition As Float)
-  'Optional strJump As String
 
   Dim stxCovers As New String[]
   Dim strPathFile As String
   Dim intCov As Integer
-  ' Dim strLyricFile As String
   Dim strLyric As String
   Dim stxLyric As New String[]
   Dim intLine As Integer
@@ -1471,11 +1379,7 @@ Public Sub cmdPlay(Optional intR As Integer, Optional floPosition As Float)
             Endif
 
             tobAlbum.Picture = Picture.Load(strCurrentPic)
-            'txaLyric.Clear
 
-            ' strLyricFile = Replace(String.LCase(strArtist), " ", "-") & "#" & Replace(String.LCase(strTitle), " ", "-")
-            ' strLyricFile = Replace(strLyricFile, "_", "-")
-            ' strLyricFile = Replace(strLyricFile, "--", "-")
             stxFileParts.Clear
             stxFileParts.Add(strArtist)
             stxFileParts.Add(strTitle)
@@ -1484,7 +1388,6 @@ Public Sub cmdPlay(Optional intR As Integer, Optional floPosition As Float)
             strLyricError = ""
 
             If Exist(strLyPath) = False Then
-              'txaLyric.Text = MHttp.ReadLyric(strArtist, strTitle)
               strLyric = MHttp.ReadLyric(strArtist, strTitle)
               ' Comprobaciones sobre la calidad del texto recuperado de internet
 
@@ -1603,7 +1506,8 @@ End
 
 Public Sub mnuScan_Click()
 
-  cmdLookup()
+  'cmdLookup()
+  cmdRefreshFiles()
 
 End
 
@@ -1872,6 +1776,7 @@ Public Sub tmrClock_Timer()
           cmdPlay(intRowPlaned)
           grwData.Row = intRowPlaned
           grwData.Refresh
+
         Endif
       Endif
   End Select
@@ -1994,5 +1899,22 @@ End
 Public Sub grwData_Click()
 
   Print grwData.Row
+
+End
+
+Public Sub tmrMessages_Timer()
+
+  If strMessageInfo <> "" Then
+    txlInfo4.Text = strMessageInfo
+    txlInfo4.Refresh
+    Print strMessageInfo
+  Endif
+
+End
+
+Public Sub mnuQuit_Click()
+
+  cmdStop()
+  Me.Close
 
 End

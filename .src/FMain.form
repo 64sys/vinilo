@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,119,73)
+  MoveScaled(0,0,119,76)
   Icon = Picture["logo.png"]
   Arrangement = Arrange.Vertical
   { mnuFile Menu
@@ -18,6 +18,11 @@
     { mnuDrop Menu
       Text = ("Borrar la base de datos")
       Picture = Picture["icon:/22/clear"]
+    }
+    { mnuQuit Menu
+      Text = ("Salir")
+      Picture = Picture["icon:/32/quit"]
+      Shortcut = "Alt+F4"
     }
   }
   { mnuControl Menu
@@ -97,7 +102,7 @@
           Picture = Picture["icon:/22/volume"]
         }
         { tobConnection ToolButton
-          MoveScaled(60,1,5,5)
+          MoveScaled(59,1,5,5)
           Picture = Picture["icon:/22/connect"]
         }
         { tobScan ToolButton
@@ -193,6 +198,9 @@
           MoveScaled(0,0,19,4)
           Expand = True
         }
+        { muoSet MenuButton
+          MoveScaled(20,0,6,4)
+        }
       }
       { scwData1L ScrollView
         MoveScaled(2,7,23,35)
@@ -208,7 +216,7 @@
       }
     }
     { pnlData1R Panel
-      MoveScaled(32,0,83,52)
+      MoveScaled(34,2,83,52)
       Expand = True
       Arrangement = Arrange.Vertical
       { Panel1 Panel
@@ -233,6 +241,21 @@
         Enabled = True
         Delay = 4000
       }
+      { tmrMessages #Timer
+        #MoveScaled(57,43)
+        Enabled = True
+        Delay = 250
+      }
+    }
+  }
+  { Panel10 Panel
+    MoveScaled(-1,68,118,4)
+    Arrangement = Arrange.Horizontal
+    Border = Border.Plain
+    { txlInfo4 TextLabel
+      MoveScaled(4,0,112,3)
+      Expand = True
+      Alignment = Align.Normal
     }
   }
   { tmrClock #Timer

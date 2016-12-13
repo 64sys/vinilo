@@ -4,8 +4,8 @@ Count=0
 [DebugWindow]
 Count=0
 
-[DebugWindow/FMain.conDB.Exec(strQFiles)]
-Geometry=[208,54,224,280]
+[DebugWindow/MUtility.FilesExist(stxSacanDir[intDir], stxFilesExistTmp, "mp3:ogg:flac")]
+Geometry=[1319,687,224,280]
 
 [DebugWindow/Me.Children]
 Geometry=[1480,484,227,496]
@@ -34,6 +34,9 @@ Geometry=[0,25,224,280]
 [DebugWindow/resCountry]
 Geometry=[0,32,224,280]
 
+[DebugWindow/resFilesDb]
+Geometry=[1624,38,224,280]
+
 [DebugWindow/resQry]
 Geometry=[1326,209,224,280]
 
@@ -55,11 +58,35 @@ Geometry=[1136,237,224,280]
 [DebugWindow/stxExt]
 Geometry=[229,490,224,280]
 
+[DebugWindow/stxFileData]
+Geometry=[1129,163,224,732]
+
+[DebugWindow/stxFileDataTmp]
+Geometry=[1556,470,224,280]
+
 [DebugWindow/stxFileInfo]
 Geometry=[827,797,349,1008]
 
+[DebugWindow/stxFileTag]
+Geometry=[930,162,224,777]
+
 [DebugWindow/stxFiles]
-Geometry=[841,585,1077,280]
+Geometry=[971,263,947,792]
+
+[DebugWindow/stxFilesDbKey]
+Geometry=[1392,47,224,280]
+
+[DebugWindow/stxFilesDbPath]
+Geometry=[1259,135,224,280]
+
+[DebugWindow/stxFilesDbTime]
+Geometry=[1152,42,224,280]
+
+[DebugWindow/stxFilesExist]
+Geometry=[1236,45,224,948]
+
+[DebugWindow/stxFilesExistTmp]
+Geometry=[978,25,224,827]
 
 [DebugWindow/stxFilesTmp]
 Geometry=[40,28,772,280]
@@ -161,10 +188,11 @@ Geometry=[929,451,224,280]
 Path="vinilo.gambas"
 
 [OpenFile]
-File[1]=".src/FMain.class:0.1805"
-Active=1
-Count=2
-File[2]=".src/FMain.form"
+File[1]=".src/FMain.form"
+Active=3
+Count=3
+File[2]=".src/FMain.class:11.336"
+File[3]=".src/MUtility.module:0.264"
 
 [Watches]
 Count=0
