@@ -1,342 +1,351 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: tradukisto 0.0.7\n"
-"POT-Creation-Date: 2016-11-09 04:00+CET\n"
-"PO-Revision-Date: 2016-11-09 04:04+CET\n"
-"Last-Translator: tincho planeta4@openmailbox.org\n"
+"Project-Id-Version: tradukisto 0.0.10\n"
+"POT-Creation-Date: 2016-12-15 15:54 UTC\n"
+"PO-Revision-Date: 2016-12-15 16:38+CET\n"
+"Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
 #: .project:1
-msgid "Catalogador musical"
-msgstr "Catalogador de música"
+msgid "Vinilo"
+msgstr "Vinyle"
 
 #: .project:2
 msgid "Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools y elinks."
-msgstr "Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. es necesario tener instalado en el sistema la libreria exiftools y elinks."
+msgstr "Pistes cataloger de support de divers formats tels que ogg, mp3, etc. il doit être installé dans le système et la bibliothèque de elinks."
 
-#: FLyric.class:89 FMain.class:1098
+#: FAbout.class:53
+msgid "Ejecutado desde"
+msgstr "Courir à partir de"
+
+#: FLyric.class:81 FMain.class:1010
 msgid "Artista"
-msgstr "Artista"
+msgstr "Artiste"
 
-#: FLyric.class:92 FMain.class:1118
+#: FLyric.class:84 FMain.class:1030
 msgid "Álbum"
-msgstr "Álbum"
+msgstr "Album"
 
-#: FLyric.class:95 FMain.class:1800
+#: FLyric.class:87 FMain.class:1706
 msgid "Título"
-msgstr "Título"
+msgstr "Titre"
 
-#: FLyric.class:173
+#: FLyric.class:164
 msgid "Ficha del Artista"
-msgstr "Ficha del artista"
+msgstr "Fiche artiste"
 
-#: FMain.form:64
-msgid "Archivo"
-msgstr "Archivo"
-
-#: FMain.form:67
-msgid "Conección"
-msgstr "Conección"
-
-#: FMain.form:72
-msgid "Actualizar coleccón"
-msgstr "Actualizar coleccón"
-
-#: FMain.form:78
-msgid "Borrar la base de datos"
-msgstr "Borrar la base de datos"
-
-#: FMain.form:84
-msgid "Control"
-msgstr "Control"
-
-#: FMain.form:87
-msgid "Previo"
-msgstr "Previo"
-
-#: FMain.form:92
-msgid "Reproducir"
-msgstr "Reproducir"
-
-#: FMain.form:97
-msgid "Pausa"
-msgstr "Pausa"
-
-#: FMain.form:102
-msgid "Parar"
-msgstr "Parar"
-
-#: FMain.form:107
-msgid "Siguiente"
-msgstr "Siguiente"
-
-#: FMain.form:113
-msgid "Herramientas"
-msgstr "Herramientas"
-
-#: FMain.form:116
-msgid "Preferencias"
-msgstr "Preferencias"
-
-#: FMain.form:122
-msgid "Ayuda"
-msgstr "Ayuda"
-
-#: FMain.form:125
-msgid "Acerca de"
-msgstr "Acerca de"
-
-#: FMain.class:214
+#: FMain.class:216
 msgid "Xml creado con exito"
-msgstr "Xml creado con exito"
+msgstr "Xml créé avec succès"
 
-#: FMain.class:235
+#: FMain.class:237
 msgid "Haga clic para abrir la carpeta contenedora con el administrador de archivos"
-msgstr "Haga clic para abrir la carpeta contenedora con el administrador de archivos"
+msgstr "Cliquez pour ouvrir le dossier parent avec le gestionnaire de fichiers"
+
+#: FMain.class:246
+msgid "Conexión a la base de datos"
+msgstr "Connexion à la base de données"
 
 #: FMain.class:247
-msgid "Conexión a la base de datos"
-msgstr "Conexión a la base de datos"
-
-#: FMain.class:248
 msgid "Clic izquierdo para abrir carpeta contenedora, derecho para buscar tapa en internet"
-msgstr "Clic izquierdo para abrir carpeta contenedora, derecho para buscar tapa en internet"
+msgstr "Clic gauche pour ouvrir le dossier parent, droit de fouiller le couvercle sur internet"
+
+#: FMain.class:249
+msgid "Actualizacion de la colección"
+msgstr "Mise à jour de collection"
 
 #: FMain.class:250
-msgid "Actualizacion de la colección"
-msgstr "Actualizacion de la colección"
-
-#: FMain.class:251
 msgid "Preferencias de"
-msgstr "Preferencias de"
+msgstr "Préférences"
 
-#: FMain.class:267
+#: FMain.class:266
 msgid "Falta instalar el paquete"
-msgstr "Falta instalar el paquete"
+msgstr "Besoin d'installer le paquet"
 
-#: FMain.class:269
+#: FMain.class:268
 msgid "Faltan instalar los siguientes paquetes"
-msgstr "Faltan instalar los siguientes paquetes"
+msgstr "Manquant installer les paquets suivants"
 
-#: FMain.class:289
-msgid "Puede usar el siguente commando"
-msgstr "Puede usar el siguente commando"
-
-#: FMain.class:289
-msgid "¿Quiere abrir la terminal para poceder?"
-msgstr "¿quiere abrir la terminal para poceder?"
-
-#: FMain.class:289
-msgid "Sí"
-msgstr "Sí"
-
-#: FMain.class:289
+#: FMain.class:288
 msgid "No"
-msgstr "No"
+msgstr "Pas"
 
-#: FMain.class:663
-msgid "El archivo "
-msgstr "El archivo"
+#: FMain.class:288
+msgid "Puede usar el siguente commando"
+msgstr "Vous pouvez utiliser le commando ci-dessous"
 
-#: FMain.class:663
-msgid "Tiene caracteres no ascii"
-msgstr "Tiene caracteres no ascii"
+#: FMain.class:288
+msgid "Sí"
+msgstr "Oui"
 
-#: FMain.class:958
-msgid "¿Que quiere hacer?"
-msgstr "¿que quiere hacer?"
+#: FMain.class:288
+msgid "¿Quiere abrir la terminal para poceder?"
+msgstr "Vous voulez ouvrir le terminal poceder?"
 
-#: FMain.class:958
-msgid "Puede abrir el directorio del disco"
-msgstr "Puede abrir el directorio del disco"
-
-#: FMain.class:958
-msgid "o buscar una caratula en internet"
-msgstr "O buscar una caratula en internet"
-
-#: FMain.class:958
+#: FMain.class:872
 msgid "Abrir directorio"
-msgstr "Abrir directorio"
+msgstr "Répertoire ouvert"
 
-#: FMain.class:958
+#: FMain.class:872
 msgid "Buscar con"
-msgstr "Buscar con"
+msgstr "Recherche"
 
-#: FMain.class:1011
-msgid "El archivo ya existe."
-msgstr "El archivo ya existe."
+#: FMain.class:872
+msgid "Puede abrir el directorio del disco"
+msgstr "Vous pouvez ouvrir le répertoire du disque"
 
-#: FMain.class:1011
-msgid "¿Desea remplazarlo?"
-msgstr "¿desea remplazarlo?"
+#: FMain.class:872
+msgid "o buscar una caratula en internet"
+msgstr "Ou trouver une caratula en ligne"
 
-#: FMain.class:1011
-msgid "Remplazar"
-msgstr "Remplazar"
+#: FMain.class:872
+msgid "¿Que quiere hacer?"
+msgstr "Qu'est-ce que vous voulez faire?"
 
-#: FMain.class:1011
+#: FMain.class:925
 msgid "Cancelar"
-msgstr "Cancelar"
+msgstr "Annuler"
 
-#: FMain.class:1086
+#: FMain.class:925
+msgid "El archivo ya existe."
+msgstr "Le fichier existe déjà."
+
+#: FMain.class:925
+msgid "Remplazar"
+msgstr "Remplacer"
+
+#: FMain.class:925
+msgid "¿Desea remplazarlo?"
+msgstr "Voulez-vous le remplacer?"
+
+#: FMain.class:998
 msgid "Nº"
-msgstr "Nº"
+msgstr "Non."
 
-#: FMain.class:1090
+#: FMain.class:1002
 msgid "Canción"
-msgstr "Canción"
+msgstr "Chanson"
 
-#: FMain.class:1094
+#: FMain.class:1006
 msgid "Canción índice"
-msgstr "Canción índice"
+msgstr "Indice de chanson"
 
-#: FMain.class:1102
+#: FMain.class:1014
 msgid "Artista índice"
-msgstr "Artista índice"
+msgstr "L'index des artistes"
 
-#: FMain.class:1106
+#: FMain.class:1018
 msgid "CC"
 msgstr "Cc"
 
-#: FMain.class:1110
+#: FMain.class:1022
 msgid "País"
-msgstr "País"
+msgstr "Pays"
 
-#: FMain.class:1114
+#: FMain.class:1026
 msgid "País índice"
-msgstr "País índice"
+msgstr "Index des pays"
 
-#: FMain.class:1122
+#: FMain.class:1034
 msgid "Álbum índice"
-msgstr "Álbum índice"
+msgstr "Index de l'album"
 
-#: FMain.class:1126
+#: FMain.class:1038
 msgid "Género"
-msgstr "Género"
+msgstr "Sexe"
 
-#: FMain.class:1130
+#: FMain.class:1042
 msgid "Género índice"
-msgstr "Género índice"
+msgstr "Index des genres"
 
-#: FMain.class:1134
+#: FMain.class:1046
 msgid "Año"
-msgstr "Año"
+msgstr "Année"
 
-#: FMain.class:1138
+#: FMain.class:1050
 msgid "Duración"
-msgstr "Duración"
+msgstr "Durée"
 
-#: FMain.class:1142
+#: FMain.class:1054
 msgid "Rango"
-msgstr "Rango"
+msgstr "Rang"
 
-#: FMain.class:1146
+#: FMain.class:1058
 msgid "Muestreo"
-msgstr "Muestreo"
+msgstr "Échantillonnage"
 
-#: FMain.class:1150
+#: FMain.class:1062
 msgid "Tipo"
-msgstr "Tipo"
+msgstr "Type"
 
-#: FMain.class:1154
+#: FMain.class:1066
 msgid "Clase"
-msgstr "Clase"
+msgstr "Classe"
 
-#: FMain.class:1158
+#: FMain.class:1070
 msgid "Carpeta"
-msgstr "Carpeta"
+msgstr "Dossier"
 
-#: FMain.class:1512
+#: FMain.class:1417
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
-msgstr "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
+msgstr "Le téléchargement automatique des paroles de la chanson ne fonctionne pas, essayez de le faire manuellement"
 
-#: FMain.class:1737
-msgid "Esta operacion borrara por completo la base de datos"
-msgstr "Esta operacion borrara por completo la base de datos"
-
-#: FMain.class:1737 MHttp.module:59
+#: FMain.class:1643 MHttp.module:59
 msgid "Aceptar"
-msgstr "Aceptar"
+msgstr "Accepter"
 
-#: FMain.class:1802
+#: FMain.class:1643
+msgid "Esta operacion borrara por completo la base de datos"
+msgstr "Cela effacera complètement la base de données"
+
+#: FMain.class:1708
 msgid "Album"
-msgstr "Álbum"
+msgstr "Album"
 
-#: FMain.class:1975
+#: FMain.class:1882
 msgid "Ficha de la canción"
-msgstr "Ficha de la canción"
+msgstr "Onglet chanson"
+
+#: FMain.form:69
+msgid "Archivo"
+msgstr "Archives"
+
+#: FMain.form:72
+msgid "Conección"
+msgstr "Raccordement"
+
+#: FMain.form:77
+msgid "Actualizar coleccón"
+msgstr "Recharger coleccón"
+
+#: FMain.form:83
+msgid "Borrar la base de datos"
+msgstr "Supprimer la base de données"
+
+#: FMain.form:88
+msgid "Salir"
+msgstr "Sortir"
+
+#: FMain.form:95
+msgid "Control"
+msgstr "Contrôle"
+
+#: FMain.form:98
+msgid "Previo"
+msgstr "Précédent"
+
+#: FMain.form:103
+msgid "Reproducir"
+msgstr "Reproduire"
+
+#: FMain.form:108
+msgid "Pausa"
+msgstr "Pause"
+
+#: FMain.form:113
+msgid "Parar"
+msgstr "Arrêter"
+
+#: FMain.form:118
+msgid "Siguiente"
+msgstr "Suivante"
+
+#: FMain.form:124
+msgid "Herramientas"
+msgstr "Outils"
+
+#: FMain.form:127
+msgid "Preferencias"
+msgstr "Préférences"
+
+#: FMain.form:133
+msgid "Ayuda"
+msgstr "Aider"
+
+#: FMain.form:136
+msgid "Acerca de"
+msgstr "À propos de"
 
 #: FPreferences.class:52
 msgid "Escanear"
-msgstr "Escanear"
+msgstr "Balayage"
 
 #: FPreferences.class:59
 msgid "Carpetas de música a escanear"
-msgstr "Carpetas de música a escanear"
+msgstr "Les dossiers musicaux scan"
 
 #: FPreferences.class:60
 msgid "Directorio personal"
-msgstr "Directorio personal"
+msgstr "Annuaire"
 
 #: FPreferences.class:61
 msgid "Aviso de paquetes no instalados"
-msgstr "Aviso de paquetes no instalados"
+msgstr "Avis désinstallé paquets"
 
 #: FPreferences.class:62
 msgid "Descargar letras automáticamente"
-msgstr "Descargar letras automáticamente"
+msgstr "Téléchargez les paroles automatiquement"
 
 #: FPreferences.class:63
 msgid "Nombre por defecto de la caratula"
-msgstr "Nombre por defecto de la caratula"
+msgstr "Nom par défaut du couvercle"
 
 #: FPreferences.class:64
 msgid "Delimitador de artistas"
-msgstr "Delimitador de artistas"
+msgstr "Artistes délimiteur"
 
 #: FPreferences.class:65
 msgid "Directorio de letras"
-msgstr "Directorio de letras"
+msgstr "Lettres directory"
 
 #: FPreferences.class:99
 msgid "La extensión debe ser"
-msgstr "La extensión debe ser"
+msgstr "L'extension doit être"
 
 #: MData.module:104
 msgid "Tenes que insertar la referencia a mano porque"
-msgstr "Tenes que insertar la referencia a mano porque"
+msgstr "Vous devez insérer la référence à la main, car"
 
 #: MData.module:104
 msgid "la forma automatica no funciono"
-msgstr "La forma automatica no funciono"
-
-#: MHttp.module:59
-msgid "Tiene que instalar el progrma"
-msgstr "Debe instalar el prgrm"
+msgstr "La forme automatique fonctionne pas"
 
 #: MHttp.module:59
 msgid "Instalar"
-msgstr "Instalar"
+msgstr "Installer"
 
-#: MUtility.module:35
+#: MHttp.module:59
+msgid "Tiene que instalar el progrma"
+msgstr "Vous devez installer le prgrm"
+
+#: MUtility.module:34
 msgid "Seleccionar directorio"
-msgstr "Seleccionar directorio"
+msgstr "Sélectionner le répertoire"
 
-#: MUtility.module:54
+#: MUtility.module:53
 msgid "Seleccionar archivo"
-msgstr "Seleccionar archivo"
+msgstr "Sélectionnez le fichier"
 
-#: MUtility.module:59
+#: MUtility.module:58
 msgid "Filtro por:"
-msgstr "Filtro por:"
+msgstr "Filtrer par:"
 
-#: MUtility.module:242
+#: MUtility.module:365
 msgid "Falta el paquete"
-msgstr "Falta el paquete"
+msgstr "Package manquant"
+
+#: MUtility.module:930
+msgid "El archivo "
+msgstr "L'archive"
+
+#: MUtility.module:930
+msgid "Tiene caracteres no ascii"
+msgstr "N'a pas des caractères ascii"
 
 #: Msys.module:273
 msgid "Desconocido"
-msgstr "Desconocido"
+msgstr "Inconnu"

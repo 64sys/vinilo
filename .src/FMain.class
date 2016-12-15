@@ -55,6 +55,7 @@ Public stxFDShow As New String[]
 
 'Variables para mostrar los datos (canciones)
 Public resQry As Result
+Public strQueryNavFilter As String ' Filtro para el navegador de Albumes
 
 'Variables para las carpetas y directorios
 Public strCurrentFolder As String ' La carpeta donde esta alojado el archivo que se esta escuchando
@@ -451,7 +452,7 @@ Public Sub cmdRefreshFiles() ''Actualiza la lista de archivos, agrega, actualiza
   Dim intDir As Integer
   Dim intFileDB As Integer
   Dim strAction As String
-  Dim strDirectory As String
+  Dim strDirectoryLoad As String
 
   'Listar los archivos presentes en la base de datos
   strFilesDb = "select trackindx,trackpath,tracktimefile from track"
@@ -507,7 +508,7 @@ Public Sub cmdRefreshFiles() ''Actualiza la lista de archivos, agrega, actualiza
     resFilesDb.MoveNext
   Wend
 
-  strDirectory = ""
+  strDirectoryLoad = ""
 
   If stxFilesExist.Count > 0 Then
     For intFile = 0 To stxFilesExist.Max
@@ -624,9 +625,9 @@ Public Sub cmdRefreshFiles() ''Actualiza la lista de archivos, agrega, actualiza
       End Select
 
       'Comprobacion de cambio de directorio
-      If strDirectory <> File.Dir(stxFilesExist[intFile]) Then
+      If strDirectoryLoad <> File.Dir(stxFilesExist[intFile]) Then
         ArrangeNav()
-        strDirectory = File.Dir(stxFilesExist[intFile])
+        strDirectoryLoad = File.Dir(stxFilesExist[intFile])
       Endif
 
     Next
@@ -702,7 +703,7 @@ End
 
 Public Sub ArrangeNav()
 
-  Dim strQuery1 As String ' Albums
+  Dim strQueryNav As String ' Albums
   Dim resNav As Result
   Dim strNavDir As String ' Artista
   Dim strNavAlbum As String ' Álbum
@@ -725,8 +726,14 @@ Public Sub ArrangeNav()
   Dim stxAlbumArtists As New String[]
   Dim resArtists As Result
 
-  strQuery1 = "select * from view_dirs_albums"
-  resNav = conDB.Exec(strQuery1)
+  If strQueryNavFilter <> "" Then
+    strQueryNav = "select * from view_dirs_albums where folder like '%" & strQueryNavFilter & "%'"
+  Else
+    strQueryNav = "select * from view_dirs_albums"
+  Endif
+  'strQueryNav = "select * from view_dirs_albums"
+
+  resNav = conDB.Exec(strQueryNav)
 
   If conDB.Opened = True Then
 
@@ -1916,5 +1923,12 @@ Public Sub mnuQuit_Click()
 
   cmdStop()
   Me.Close
+
+End
+
+Public Sub btoFilter_Change()
+
+  strQueryNavFilter = btoFilter.Text
+  ArrangeNav()
 
 End

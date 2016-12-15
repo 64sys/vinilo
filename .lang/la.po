@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
 "POT-Creation-Date: 2016-12-15 15:54 UTC\n"
-"PO-Revision-Date: 2016-12-15 16:36+CET\n"
+"PO-Revision-Date: 2016-12-15 16:41+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,11 @@ msgstr "Vinyl"
 
 #: .project:2
 msgid "Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools y elinks."
-msgstr "Cataloger of music tracks of various formats like ogg, mp3 etc. it is necessary to have the exiftools and elinks library installed on the system."
+msgstr "Cataloger gratiae vestigia variis ogg ut formats, etc. mp3 et est ratio, et potest installed in elinks exiftools library."
 
 #: FAbout.class:53
 msgid "Ejecutado desde"
-msgstr "Executed from"
+msgstr "Run a"
 
 #: FLyric.class:81 FMain.class:1010
 msgid "Artista"
@@ -32,59 +32,59 @@ msgstr "Album"
 
 #: FLyric.class:87 FMain.class:1706
 msgid "Título"
-msgstr "Title"
+msgstr "Title:"
 
 #: FLyric.class:164
 msgid "Ficha del Artista"
-msgstr "Artist details"
+msgstr "Artist sheet"
 
 #: FMain.class:216
 msgid "Xml creado con exito"
-msgstr "Xml created successfully"
+msgstr "Xml fecit prospere"
 
 #: FMain.class:237
 msgid "Haga clic para abrir la carpeta contenedora con el administrador de archivos"
-msgstr "Click to open the container folder with the file manager"
+msgstr "Click ut patefacio lima procurator parentis folder"
 
 #: FMain.class:246
 msgid "Conexión a la base de datos"
-msgstr "Connection to the database"
+msgstr "About ad database"
 
 #: FMain.class:247
 msgid "Clic izquierdo para abrir carpeta contenedora, derecho para buscar tapa en internet"
-msgstr "Left click to open container folder, right to search cover on the internet"
+msgstr "Left click to parentis folder patefacio, placitum, ut in internet search nomen operimentum"
 
 #: FMain.class:249
 msgid "Actualizacion de la colección"
-msgstr "Updating the collection"
+msgstr "Update collection"
 
 #: FMain.class:250
 msgid "Preferencias de"
-msgstr "Preferences"
+msgstr "Praeferentiae"
 
 #: FMain.class:266
 msgid "Falta instalar el paquete"
-msgstr "Package not installed"
+msgstr "Postulo ut install sarcina"
 
 #: FMain.class:268
 msgid "Faltan instalar los siguientes paquetes"
-msgstr "The following packages are missing"
+msgstr "Haec packages install missing"
 
 #: FMain.class:288
 msgid "No"
-msgstr "Do not"
+msgstr "Non"
 
 #: FMain.class:288
 msgid "Puede usar el siguente commando"
-msgstr "You can use the following command"
+msgstr "Te potest ad uti infra commando"
 
 #: FMain.class:288
 msgid "Sí"
-msgstr "Yes"
+msgstr "Etiam"
 
 #: FMain.class:288
 msgid "¿Quiere abrir la terminal para poceder?"
-msgstr "Do you want to open the terminal to poceder?"
+msgstr "Vis ad terminum poceder aperire?"
 
 #: FMain.class:872
 msgid "Abrir directorio"
@@ -92,35 +92,35 @@ msgstr "Open directory"
 
 #: FMain.class:872
 msgid "Buscar con"
-msgstr "Search with"
+msgstr "Quaerere"
 
 #: FMain.class:872
 msgid "Puede abrir el directorio del disco"
-msgstr "You can open the disk directory"
+msgstr "Vos can patefacio orbis directory"
 
 #: FMain.class:872
 msgid "o buscar una caratula en internet"
-msgstr "Or search for a cover on the internet"
+msgstr "Vel an online invenire caratula"
 
 #: FMain.class:872
 msgid "¿Que quiere hacer?"
-msgstr "You want to do?"
+msgstr "Quid tibi vis faciam?"
 
 #: FMain.class:925
 msgid "Cancelar"
-msgstr "Cancel"
+msgstr "Inrita"
 
 #: FMain.class:925
 msgid "El archivo ya existe."
-msgstr "The file already exists."
+msgstr "Et file iam est."
 
 #: FMain.class:925
 msgid "Remplazar"
-msgstr "Replace"
+msgstr "Pro"
 
 #: FMain.class:925
 msgid "¿Desea remplazarlo?"
-msgstr "Do you wish to replace it?"
+msgstr "Vis reponat?"
 
 #: FMain.class:998
 msgid "Nº"
@@ -128,7 +128,7 @@ msgstr "No."
 
 #: FMain.class:1002
 msgid "Canción"
-msgstr "Song"
+msgstr "Album"
 
 #: FMain.class:1006
 msgid "Canción índice"
@@ -140,23 +140,23 @@ msgstr "Artist index"
 
 #: FMain.class:1018
 msgid "CC"
-msgstr "Dc"
+msgstr "Cc"
 
 #: FMain.class:1022
 msgid "País"
-msgstr "Country"
+msgstr "Patriam"
 
 #: FMain.class:1026
 msgid "País índice"
-msgstr "Country index"
+msgstr "Index terra"
 
 #: FMain.class:1034
 msgid "Álbum índice"
-msgstr "Index album"
+msgstr "Album index"
 
 #: FMain.class:1038
 msgid "Género"
-msgstr "Gender"
+msgstr "Genus"
 
 #: FMain.class:1042
 msgid "Género índice"
@@ -164,15 +164,15 @@ msgstr "Index genre"
 
 #: FMain.class:1046
 msgid "Año"
-msgstr "Year"
+msgstr "Anno"
 
 #: FMain.class:1050
 msgid "Duración"
-msgstr "Duration"
+msgstr "Tempus"
 
 #: FMain.class:1054
 msgid "Rango"
-msgstr "Rank"
+msgstr "Dignitate"
 
 #: FMain.class:1058
 msgid "Muestreo"
@@ -180,27 +180,27 @@ msgstr "Sampling"
 
 #: FMain.class:1062
 msgid "Tipo"
-msgstr "Kind"
+msgstr "Genus"
 
 #: FMain.class:1066
 msgid "Clase"
-msgstr "Class"
+msgstr "Genus"
 
 #: FMain.class:1070
 msgid "Carpeta"
-msgstr "Binder"
+msgstr "Folder"
 
 #: FMain.class:1417
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
-msgstr "The automatic download of the lyrics of the song did not work, try doing it manually"
+msgstr "In ipso autem download carmina cantu non operari, conantur facere tincidunt"
 
 #: FMain.class:1643 MHttp.module:59
 msgid "Aceptar"
-msgstr "To accept"
+msgstr "Accipere"
 
 #: FMain.class:1643
 msgid "Esta operacion borrara por completo la base de datos"
-msgstr "This operation will completely erase the database"
+msgstr "Hoc omnino delebit database"
 
 #: FMain.class:1708
 msgid "Album"
@@ -208,7 +208,7 @@ msgstr "Album"
 
 #: FMain.class:1882
 msgid "Ficha de la canción"
-msgstr "Song sheet"
+msgstr "Song tab"
 
 #: FMain.form:69
 msgid "Archivo"
@@ -216,23 +216,23 @@ msgstr "Archive"
 
 #: FMain.form:72
 msgid "Conección"
-msgstr "Conection"
+msgstr "Connection"
 
 #: FMain.form:77
 msgid "Actualizar coleccón"
-msgstr "Update collection"
+msgstr "Reload coleccón"
 
 #: FMain.form:83
 msgid "Borrar la base de datos"
-msgstr "Delete the database"
+msgstr "Delete database"
 
 #: FMain.form:88
 msgid "Salir"
-msgstr "Get out"
+msgstr "Exitus"
 
 #: FMain.form:95
 msgid "Control"
-msgstr "Control"
+msgstr "Imperium"
 
 #: FMain.form:98
 msgid "Previo"
@@ -240,35 +240,35 @@ msgstr "Previous"
 
 #: FMain.form:103
 msgid "Reproducir"
-msgstr "Play"
+msgstr "Reproducat"
 
 #: FMain.form:108
 msgid "Pausa"
-msgstr "Pause"
+msgstr "Spatium"
 
 #: FMain.form:113
 msgid "Parar"
-msgstr "Stop"
+msgstr "Prohibere"
 
 #: FMain.form:118
 msgid "Siguiente"
-msgstr "Following"
+msgstr "Haec"
 
 #: FMain.form:124
 msgid "Herramientas"
-msgstr "Thread tools"
+msgstr "Tools"
 
 #: FMain.form:127
 msgid "Preferencias"
-msgstr "Preferences"
+msgstr "Praeferentiae"
 
 #: FMain.form:133
 msgid "Ayuda"
-msgstr "Help"
+msgstr "Auxilium"
 
 #: FMain.form:136
 msgid "Acerca de"
-msgstr "About"
+msgstr "De"
 
 #: FPreferences.class:52
 msgid "Escanear"
@@ -276,15 +276,15 @@ msgstr "Scan"
 
 #: FPreferences.class:59
 msgid "Carpetas de música a escanear"
-msgstr "Music folders to scan"
+msgstr "Music folders scan"
 
 #: FPreferences.class:60
 msgid "Directorio personal"
-msgstr "Personal directory"
+msgstr "Directory"
 
 #: FPreferences.class:61
 msgid "Aviso de paquetes no instalados"
-msgstr "Warning of uninstalled packages"
+msgstr "Notice uninstalled packages"
 
 #: FPreferences.class:62
 msgid "Descargar letras automáticamente"
@@ -292,27 +292,27 @@ msgstr "Download lyrics automatically"
 
 #: FPreferences.class:63
 msgid "Nombre por defecto de la caratula"
-msgstr "Default name of the title"
+msgstr "Default nomine cover"
 
 #: FPreferences.class:64
 msgid "Delimitador de artistas"
-msgstr "Artists delimiter"
+msgstr "Delimiter artists"
 
 #: FPreferences.class:65
 msgid "Directorio de letras"
-msgstr "Letter directory"
+msgstr "Directory litteras"
 
 #: FPreferences.class:99
 msgid "La extensión debe ser"
-msgstr "The extension must be"
+msgstr "Et erit extensio"
 
 #: MData.module:104
 msgid "Tenes que insertar la referencia a mano porque"
-msgstr "You have to insert the reference by hand because"
+msgstr "Et quia ad te autem inserere"
 
 #: MData.module:104
 msgid "la forma automatica no funciono"
-msgstr "The automatic form did not work"
+msgstr "Automatic forma non faceret"
 
 #: MHttp.module:59
 msgid "Instalar"
@@ -320,7 +320,7 @@ msgstr "Install"
 
 #: MHttp.module:59
 msgid "Tiene que instalar el progrma"
-msgstr "You have to install the program"
+msgstr "You must install prgrm"
 
 #: MUtility.module:34
 msgid "Seleccionar directorio"
@@ -336,15 +336,15 @@ msgstr "Filter by:"
 
 #: MUtility.module:365
 msgid "Falta el paquete"
-msgstr "Package missing"
+msgstr "Absentis sarcina"
 
 #: MUtility.module:930
 msgid "El archivo "
-msgstr "The file"
+msgstr "In file"
 
 #: MUtility.module:930
 msgid "Tiene caracteres no ascii"
-msgstr "It has non-ascii characters"
+msgstr "Nonne ascii"
 
 #: Msys.module:273
 msgid "Desconocido"

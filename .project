@@ -1,9 +1,9 @@
 # Gambas Project File 3.0
 # Compiled with Gambas 3.9.1
-Title=Catalogador musical
+Title=Vinilo
 Startup=FMain
 Icon=logo.png
-Version=0.0.21
+Version=0.0.24
 Component=gb.image
 Component=gb.gui.qt
 Component=gb.form
@@ -23,12 +23,12 @@ TabSize=2
 Translate=1
 Language=es_ES
 Maintainer=tincho
-Vendor=tincho
+Vendor=belmotek
 VendorPrefix=bmk
 Address=planeta4@openmailbox.org
 Url=www.endoftheinternet.com
 License=General Public License
-PackageName=vinilo-0.0.19
+PackageName=vinilo-0.0.24
 CreateEachDirectory=1
 MimeTypes="mp3","ogg"
 Packager=1
@@ -53,6 +53,6 @@ Menus=suse:"Audio Video/Audio/Player"
 Categories=suse:"Audio;AudioVideo;Player"
 Groups=suse:"Productivity/Multimedia/CD/Players"
 Menus=ubuntu:"Applications/Science/Physics"
-Categories=ubuntu:"Audio"
+Categories=ubuntu:"Audio;Physics;Science"
 Groups=ubuntu:"admin"
 ExtraDependencies=ubuntu:"elinks\t\t\nlibimage-exiftool-perl\t\t"

@@ -17,7 +17,7 @@
     }
     { tobWiki ToolButton
       MoveScaled(18,1,4,4)
-      Picture = Picture["Wikipedia-logo-v2.svg"]
+      Picture = Picture["wikipedia.png"]
     }
   }
   { Panel1 Panel

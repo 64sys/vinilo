@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
 "POT-Creation-Date: 2016-12-15 15:54 UTC\n"
-"PO-Revision-Date: 2016-12-15 16:36+CET\n"
+"PO-Revision-Date: 2016-12-15 16:42+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -12,340 +12,340 @@ msgstr ""
 
 #: .project:1
 msgid "Vinilo"
-msgstr "Vinyl"
+msgstr "Винил"
 
 #: .project:2
 msgid "Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools y elinks."
-msgstr "Cataloger of music tracks of various formats like ogg, mp3 etc. it is necessary to have the exiftools and elinks library installed on the system."
+msgstr "Cataloger минусовки различных форматов, таких как ogg, mp3 и т.д. он должен быть установлен в системе и elinks exiftools библиотеки."
 
 #: FAbout.class:53
 msgid "Ejecutado desde"
-msgstr "Executed from"
+msgstr "Бежать из"
 
 #: FLyric.class:81 FMain.class:1010
 msgid "Artista"
-msgstr "Artist"
+msgstr "Художник"
 
 #: FLyric.class:84 FMain.class:1030
 msgid "Álbum"
-msgstr "Album"
+msgstr "Альбом"
 
 #: FLyric.class:87 FMain.class:1706
 msgid "Título"
-msgstr "Title"
+msgstr "Название"
 
 #: FLyric.class:164
 msgid "Ficha del Artista"
-msgstr "Artist details"
+msgstr "Исполнитель лист"
 
 #: FMain.class:216
 msgid "Xml creado con exito"
-msgstr "Xml created successfully"
+msgstr "Xml успешно создана"
 
 #: FMain.class:237
 msgid "Haga clic para abrir la carpeta contenedora con el administrador de archivos"
-msgstr "Click to open the container folder with the file manager"
+msgstr "Нажмите, чтобы открыть родительскую папку с менеджером файлов"
 
 #: FMain.class:246
 msgid "Conexión a la base de datos"
-msgstr "Connection to the database"
+msgstr "Подключение к базе данных"
 
 #: FMain.class:247
 msgid "Clic izquierdo para abrir carpeta contenedora, derecho para buscar tapa en internet"
-msgstr "Left click to open container folder, right to search cover on the internet"
+msgstr "Щелчок левой кнопкой мыши, чтобы открыть родительскую папку, право искать крышку в интернете"
 
 #: FMain.class:249
 msgid "Actualizacion de la colección"
-msgstr "Updating the collection"
+msgstr "Обновление коллекции"
 
 #: FMain.class:250
 msgid "Preferencias de"
-msgstr "Preferences"
+msgstr "Предпочтения"
 
 #: FMain.class:266
 msgid "Falta instalar el paquete"
-msgstr "Package not installed"
+msgstr "Необходимо установить пакет"
 
 #: FMain.class:268
 msgid "Faltan instalar los siguientes paquetes"
-msgstr "The following packages are missing"
+msgstr "Потерялись установить следующие пакеты"
 
 #: FMain.class:288
 msgid "No"
-msgstr "Do not"
+msgstr "Не"
 
 #: FMain.class:288
 msgid "Puede usar el siguente commando"
-msgstr "You can use the following command"
+msgstr "Вы можете использовать ниже коммандос"
 
 #: FMain.class:288
 msgid "Sí"
-msgstr "Yes"
+msgstr "Да"
 
 #: FMain.class:288
 msgid "¿Quiere abrir la terminal para poceder?"
-msgstr "Do you want to open the terminal to poceder?"
+msgstr "Вы хотите, чтобы открыть терминал poceder?"
 
 #: FMain.class:872
 msgid "Abrir directorio"
-msgstr "Open directory"
+msgstr "Открыть каталог"
 
 #: FMain.class:872
 msgid "Buscar con"
-msgstr "Search with"
+msgstr "Поиск"
 
 #: FMain.class:872
 msgid "Puede abrir el directorio del disco"
-msgstr "You can open the disk directory"
+msgstr "Вы можете открыть каталог диска"
 
 #: FMain.class:872
 msgid "o buscar una caratula en internet"
-msgstr "Or search for a cover on the internet"
+msgstr "Или найти онлайн caratula"
 
 #: FMain.class:872
 msgid "¿Que quiere hacer?"
-msgstr "You want to do?"
+msgstr "Что вы хотите сделать?"
 
 #: FMain.class:925
 msgid "Cancelar"
-msgstr "Cancel"
+msgstr "Отменить"
 
 #: FMain.class:925
 msgid "El archivo ya existe."
-msgstr "The file already exists."
+msgstr "Файл уже существует."
 
 #: FMain.class:925
 msgid "Remplazar"
-msgstr "Replace"
+msgstr "Замещать"
 
 #: FMain.class:925
 msgid "¿Desea remplazarlo?"
-msgstr "Do you wish to replace it?"
+msgstr "Вы хотите, чтобы заменить его?"
 
 #: FMain.class:998
 msgid "Nº"
-msgstr "No."
+msgstr "Нет."
 
 #: FMain.class:1002
 msgid "Canción"
-msgstr "Song"
+msgstr "Песня"
 
 #: FMain.class:1006
 msgid "Canción índice"
-msgstr "Song index"
+msgstr "Индекс песни"
 
 #: FMain.class:1014
 msgid "Artista índice"
-msgstr "Artist index"
+msgstr "Индекс художника"
 
 #: FMain.class:1018
 msgid "CC"
-msgstr "Dc"
+msgstr "Cc"
 
 #: FMain.class:1022
 msgid "País"
-msgstr "Country"
+msgstr "Страна"
 
 #: FMain.class:1026
 msgid "País índice"
-msgstr "Country index"
+msgstr "Индекс страны"
 
 #: FMain.class:1034
 msgid "Álbum índice"
-msgstr "Index album"
+msgstr "Индекс альбом"
 
 #: FMain.class:1038
 msgid "Género"
-msgstr "Gender"
+msgstr "Пол"
 
 #: FMain.class:1042
 msgid "Género índice"
-msgstr "Index genre"
+msgstr "Индекс жанр"
 
 #: FMain.class:1046
 msgid "Año"
-msgstr "Year"
+msgstr "Год"
 
 #: FMain.class:1050
 msgid "Duración"
-msgstr "Duration"
+msgstr "Продолжительность"
 
 #: FMain.class:1054
 msgid "Rango"
-msgstr "Rank"
+msgstr "Ранг"
 
 #: FMain.class:1058
 msgid "Muestreo"
-msgstr "Sampling"
+msgstr "Отбор проб"
 
 #: FMain.class:1062
 msgid "Tipo"
-msgstr "Kind"
+msgstr "Тип"
 
 #: FMain.class:1066
 msgid "Clase"
-msgstr "Class"
+msgstr "Класс"
 
 #: FMain.class:1070
 msgid "Carpeta"
-msgstr "Binder"
+msgstr "Папка"
 
 #: FMain.class:1417
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
-msgstr "The automatic download of the lyrics of the song did not work, try doing it manually"
+msgstr "Автоматическая загрузка лирики песни не работает, попробуйте сделать это вручную"
 
 #: FMain.class:1643 MHttp.module:59
 msgid "Aceptar"
-msgstr "To accept"
+msgstr "Принимать"
 
 #: FMain.class:1643
 msgid "Esta operacion borrara por completo la base de datos"
-msgstr "This operation will completely erase the database"
+msgstr "Это приведет к удалению базы данных полностью"
 
 #: FMain.class:1708
 msgid "Album"
-msgstr "Album"
+msgstr "Альбом"
 
 #: FMain.class:1882
 msgid "Ficha de la canción"
-msgstr "Song sheet"
+msgstr "Вкладка песни"
 
 #: FMain.form:69
 msgid "Archivo"
-msgstr "Archive"
+msgstr "Архив"
 
 #: FMain.form:72
 msgid "Conección"
-msgstr "Conection"
+msgstr "Подключение"
 
 #: FMain.form:77
 msgid "Actualizar coleccón"
-msgstr "Update collection"
+msgstr "Обновить coleccón"
 
 #: FMain.form:83
 msgid "Borrar la base de datos"
-msgstr "Delete the database"
+msgstr "Удалить базу данных"
 
 #: FMain.form:88
 msgid "Salir"
-msgstr "Get out"
+msgstr "Выход"
 
 #: FMain.form:95
 msgid "Control"
-msgstr "Control"
+msgstr "Контроль"
 
 #: FMain.form:98
 msgid "Previo"
-msgstr "Previous"
+msgstr "Предыдущий"
 
 #: FMain.form:103
 msgid "Reproducir"
-msgstr "Play"
+msgstr "Воспроизводить"
 
 #: FMain.form:108
 msgid "Pausa"
-msgstr "Pause"
+msgstr "Пауза"
 
 #: FMain.form:113
 msgid "Parar"
-msgstr "Stop"
+msgstr "Остановить"
 
 #: FMain.form:118
 msgid "Siguiente"
-msgstr "Following"
+msgstr "После"
 
 #: FMain.form:124
 msgid "Herramientas"
-msgstr "Thread tools"
+msgstr "Инструменты"
 
 #: FMain.form:127
 msgid "Preferencias"
-msgstr "Preferences"
+msgstr "Предпочтения"
 
 #: FMain.form:133
 msgid "Ayuda"
-msgstr "Help"
+msgstr "Помощь"
 
 #: FMain.form:136
 msgid "Acerca de"
-msgstr "About"
+msgstr "О"
 
 #: FPreferences.class:52
 msgid "Escanear"
-msgstr "Scan"
+msgstr "Сканирование"
 
 #: FPreferences.class:59
 msgid "Carpetas de música a escanear"
-msgstr "Music folders to scan"
+msgstr "Музыкальные папки сканирования"
 
 #: FPreferences.class:60
 msgid "Directorio personal"
-msgstr "Personal directory"
+msgstr "Каталог"
 
 #: FPreferences.class:61
 msgid "Aviso de paquetes no instalados"
-msgstr "Warning of uninstalled packages"
+msgstr "Примечание неустановленные пакеты"
 
 #: FPreferences.class:62
 msgid "Descargar letras automáticamente"
-msgstr "Download lyrics automatically"
+msgstr "Скачать текст автоматически"
 
 #: FPreferences.class:63
 msgid "Nombre por defecto de la caratula"
-msgstr "Default name of the title"
+msgstr "Имя по умолчанию обложки"
 
 #: FPreferences.class:64
 msgid "Delimitador de artistas"
-msgstr "Artists delimiter"
+msgstr "Сами разделяющие художники"
 
 #: FPreferences.class:65
 msgid "Directorio de letras"
-msgstr "Letter directory"
+msgstr "Письма каталог"
 
 #: FPreferences.class:99
 msgid "La extensión debe ser"
-msgstr "The extension must be"
+msgstr "Расширение должно быть"
 
 #: MData.module:104
 msgid "Tenes que insertar la referencia a mano porque"
-msgstr "You have to insert the reference by hand because"
+msgstr "Вы должны вставить ссылку на руку, потому что"
 
 #: MData.module:104
 msgid "la forma automatica no funciono"
-msgstr "The automatic form did not work"
+msgstr "Автоматическая форма не работает"
 
 #: MHttp.module:59
 msgid "Instalar"
-msgstr "Install"
+msgstr "Устанавливать"
 
 #: MHttp.module:59
 msgid "Tiene que instalar el progrma"
-msgstr "You have to install the program"
+msgstr "Необходимо установить prgrm"
 
 #: MUtility.module:34
 msgid "Seleccionar directorio"
-msgstr "Select directory"
+msgstr "Выберите каталог"
 
 #: MUtility.module:53
 msgid "Seleccionar archivo"
-msgstr "Select file"
+msgstr "Выбрать файл"
 
 #: MUtility.module:58
 msgid "Filtro por:"
-msgstr "Filter by:"
+msgstr "Фильтр по:"
 
 #: MUtility.module:365
 msgid "Falta el paquete"
-msgstr "Package missing"
+msgstr "Недостающее пакет"
 
 #: MUtility.module:930
 msgid "El archivo "
-msgstr "The file"
+msgstr "Файл"
 
 #: MUtility.module:930
 msgid "Tiene caracteres no ascii"
-msgstr "It has non-ascii characters"
+msgstr "Не имеет символов ascii"
 
 #: Msys.module:273
 msgid "Desconocido"
-msgstr "Unknown"
+msgstr "Неизвестный"

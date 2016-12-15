@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
 "POT-Creation-Date: 2016-12-15 15:54 UTC\n"
-"PO-Revision-Date: 2016-12-15 16:36+CET\n"
+"PO-Revision-Date: 2016-12-15 16:35+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -12,79 +12,79 @@ msgstr ""
 
 #: .project:1
 msgid "Vinilo"
-msgstr "Vinyl"
+msgstr "Βινύλιο"
 
 #: .project:2
 msgid "Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools y elinks."
-msgstr "Cataloger of music tracks of various formats like ogg, mp3 etc. it is necessary to have the exiftools and elinks library installed on the system."
+msgstr "Κομμάτια υποστήριξη cataloger των διαφόρων μορφών, όπως ogg, mp3 κ.λπ. θα πρέπει να εγκατασταθεί στο σύστημα και elinks exiftools βιβλιοθήκη."
 
 #: FAbout.class:53
 msgid "Ejecutado desde"
-msgstr "Executed from"
+msgstr "Τρέχει από"
 
 #: FLyric.class:81 FMain.class:1010
 msgid "Artista"
-msgstr "Artist"
+msgstr "Καλλιτέχνης"
 
 #: FLyric.class:84 FMain.class:1030
 msgid "Álbum"
-msgstr "Album"
+msgstr "Άλμπουμ"
 
 #: FLyric.class:87 FMain.class:1706
 msgid "Título"
-msgstr "Title"
+msgstr "Τίτλος"
 
 #: FLyric.class:164
 msgid "Ficha del Artista"
-msgstr "Artist details"
+msgstr "Φύλλο καλλιτέχνη"
 
 #: FMain.class:216
 msgid "Xml creado con exito"
-msgstr "Xml created successfully"
+msgstr "Xml δημιουργήθηκε με επιτυχία"
 
 #: FMain.class:237
 msgid "Haga clic para abrir la carpeta contenedora con el administrador de archivos"
-msgstr "Click to open the container folder with the file manager"
+msgstr "Κάντε κλικ για να ανοίξετε το γονικό φάκελο με το διαχειριστή αρχείων"
 
 #: FMain.class:246
 msgid "Conexión a la base de datos"
-msgstr "Connection to the database"
+msgstr "Σύνδεση με τη βάση δεδομένων"
 
 #: FMain.class:247
 msgid "Clic izquierdo para abrir carpeta contenedora, derecho para buscar tapa en internet"
-msgstr "Left click to open container folder, right to search cover on the internet"
+msgstr "Αριστερό κλικ για να ανοίξετε γονικό φάκελο, το δικαίωμα να ψάξετε καπάκι στο διαδίκτυο"
 
 #: FMain.class:249
 msgid "Actualizacion de la colección"
-msgstr "Updating the collection"
+msgstr "Συλλογή ενημέρωση"
 
 #: FMain.class:250
 msgid "Preferencias de"
-msgstr "Preferences"
+msgstr "Προτιμήσεις"
 
 #: FMain.class:266
 msgid "Falta instalar el paquete"
-msgstr "Package not installed"
+msgstr "Πρέπει να εγκαταστήσετε το πακέτο"
 
 #: FMain.class:268
 msgid "Faltan instalar los siguientes paquetes"
-msgstr "The following packages are missing"
+msgstr "Λείπει εγκαταστήσετε τα ακόλουθα πακέτα"
 
 #: FMain.class:288
 msgid "No"
-msgstr "Do not"
+msgstr "Δεν"
 
 #: FMain.class:288
 msgid "Puede usar el siguente commando"
-msgstr "You can use the following command"
+msgstr "Μπορείτε να χρησιμοποιήσετε την παρακάτω καταδρομών"
 
 #: FMain.class:288
 msgid "Sí"
-msgstr "Yes"
+msgstr "Ναί"
 
 #: FMain.class:288
 msgid "¿Quiere abrir la terminal para poceder?"
-msgstr "Do you want to open the terminal to poceder?"
+msgstr "Θέλετε να ανοίξετε το τερματικό στο poceder;"
 
 #: FMain.class:872
 msgid "Abrir directorio"
@@ -92,260 +92,260 @@ msgstr "Open directory"
 
 #: FMain.class:872
 msgid "Buscar con"
-msgstr "Search with"
+msgstr "Έρευνα"
 
 #: FMain.class:872
 msgid "Puede abrir el directorio del disco"
-msgstr "You can open the disk directory"
+msgstr "Μπορείτε να ανοίξετε τον τηλεφωνικό κατάλογο στο δίσκο"
 
 #: FMain.class:872
 msgid "o buscar una caratula en internet"
-msgstr "Or search for a cover on the internet"
+msgstr "Ή να βρείτε ένα online caratula"
 
 #: FMain.class:872
 msgid "¿Que quiere hacer?"
-msgstr "You want to do?"
+msgstr "Τι θέλετε να κάνετε;"
 
 #: FMain.class:925
 msgid "Cancelar"
-msgstr "Cancel"
+msgstr "Ακυρώσει"
 
 #: FMain.class:925
 msgid "El archivo ya existe."
-msgstr "The file already exists."
+msgstr "Το αρχείο υπάρχει ήδη."
 
 #: FMain.class:925
 msgid "Remplazar"
-msgstr "Replace"
+msgstr "Αντικαταστήσει"
 
 #: FMain.class:925
 msgid "¿Desea remplazarlo?"
-msgstr "Do you wish to replace it?"
+msgstr "Θέλετε να το αντικαταστήσετε;"
 
 #: FMain.class:998
 msgid "Nº"
-msgstr "No."
+msgstr "Όχι."
 
 #: FMain.class:1002
 msgid "Canción"
-msgstr "Song"
+msgstr "Τραγούδι"
 
 #: FMain.class:1006
 msgid "Canción índice"
-msgstr "Song index"
+msgstr "Δείκτης τραγούδι"
 
 #: FMain.class:1014
 msgid "Artista índice"
-msgstr "Artist index"
+msgstr "Δείκτης καλλιτέχνη"
 
 #: FMain.class:1018
 msgid "CC"
-msgstr "Dc"
+msgstr "Cc"
 
 #: FMain.class:1022
 msgid "País"
-msgstr "Country"
+msgstr "Χώρα"
 
 #: FMain.class:1026
 msgid "País índice"
-msgstr "Country index"
+msgstr "Δείκτης χώρα"
 
 #: FMain.class:1034
 msgid "Álbum índice"
-msgstr "Index album"
+msgstr "Δείκτης άλμπουμ"
 
 #: FMain.class:1038
 msgid "Género"
-msgstr "Gender"
+msgstr "Γένος"
 
 #: FMain.class:1042
 msgid "Género índice"
-msgstr "Index genre"
+msgstr "Δείκτης είδος"
 
 #: FMain.class:1046
 msgid "Año"
-msgstr "Year"
+msgstr "Έτος"
 
 #: FMain.class:1050
 msgid "Duración"
-msgstr "Duration"
+msgstr "Διάρκεια"
 
 #: FMain.class:1054
 msgid "Rango"
-msgstr "Rank"
+msgstr "Τάξη"
 
 #: FMain.class:1058
 msgid "Muestreo"
-msgstr "Sampling"
+msgstr "Δειγματοληψία"
 
 #: FMain.class:1062
 msgid "Tipo"
-msgstr "Kind"
+msgstr "Τύπος"
 
 #: FMain.class:1066
 msgid "Clase"
-msgstr "Class"
+msgstr "Τάξη"
 
 #: FMain.class:1070
 msgid "Carpeta"
-msgstr "Binder"
+msgstr "Φάκελο"
 
 #: FMain.class:1417
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
-msgstr "The automatic download of the lyrics of the song did not work, try doing it manually"
+msgstr "Η αυτόματη λήψη τους στίχους του τραγουδιού δεν λειτούργησε, προσπαθήστε να το κάνετε μόνοι σας"
 
 #: FMain.class:1643 MHttp.module:59
 msgid "Aceptar"
-msgstr "To accept"
+msgstr "Δέχομαι"
 
 #: FMain.class:1643
 msgid "Esta operacion borrara por completo la base de datos"
-msgstr "This operation will completely erase the database"
+msgstr "Αυτό θα διαγράψει εντελώς η βάση δεδομένων"
 
 #: FMain.class:1708
 msgid "Album"
-msgstr "Album"
+msgstr "Άλμπουμ"
 
 #: FMain.class:1882
 msgid "Ficha de la canción"
-msgstr "Song sheet"
+msgstr "Καρτέλα τραγούδι"
 
 #: FMain.form:69
 msgid "Archivo"
-msgstr "Archive"
+msgstr "Αρχείο"
 
 #: FMain.form:72
 msgid "Conección"
-msgstr "Conection"
+msgstr "Σύνδεση"
 
 #: FMain.form:77
 msgid "Actualizar coleccón"
-msgstr "Update collection"
+msgstr "Ανανέωση coleccón"
 
 #: FMain.form:83
 msgid "Borrar la base de datos"
-msgstr "Delete the database"
+msgstr "Διαγραφή της βάσης δεδομένων"
 
 #: FMain.form:88
 msgid "Salir"
-msgstr "Get out"
+msgstr "Έξοδος"
 
 #: FMain.form:95
 msgid "Control"
-msgstr "Control"
+msgstr "Έλεγχος"
 
 #: FMain.form:98
 msgid "Previo"
-msgstr "Previous"
+msgstr "Προηγούμενος"
 
 #: FMain.form:103
 msgid "Reproducir"
-msgstr "Play"
+msgstr "Αναπαράγουν"
 
 #: FMain.form:108
 msgid "Pausa"
-msgstr "Pause"
+msgstr "Παύση"
 
 #: FMain.form:113
 msgid "Parar"
-msgstr "Stop"
+msgstr "Στάση"
 
 #: FMain.form:118
 msgid "Siguiente"
-msgstr "Following"
+msgstr "Εξής"
 
 #: FMain.form:124
 msgid "Herramientas"
-msgstr "Thread tools"
+msgstr "Εργαλεία"
 
 #: FMain.form:127
 msgid "Preferencias"
-msgstr "Preferences"
+msgstr "Προτιμήσεις"
 
 #: FMain.form:133
 msgid "Ayuda"
-msgstr "Help"
+msgstr "Βοήθεια"
 
 #: FMain.form:136
 msgid "Acerca de"
-msgstr "About"
+msgstr "Για"
 
 #: FPreferences.class:52
 msgid "Escanear"
-msgstr "Scan"
+msgstr "Σάρωση"
 
 #: FPreferences.class:59
 msgid "Carpetas de música a escanear"
-msgstr "Music folders to scan"
+msgstr "Μουσική φακέλους σάρωση"
 
 #: FPreferences.class:60
 msgid "Directorio personal"
-msgstr "Personal directory"
+msgstr "Κατάλογο"
 
 #: FPreferences.class:61
 msgid "Aviso de paquetes no instalados"
-msgstr "Warning of uninstalled packages"
+msgstr "Ανακοίνωση απεγκατασταθεί πακέτα"
 
 #: FPreferences.class:62
 msgid "Descargar letras automáticamente"
-msgstr "Download lyrics automatically"
+msgstr "Κατεβάστε στίχους αυτόματα"
 
 #: FPreferences.class:63
 msgid "Nombre por defecto de la caratula"
-msgstr "Default name of the title"
+msgstr "Προεπιλεγμένο όνομα του καλύμματος"
 
 #: FPreferences.class:64
 msgid "Delimitador de artistas"
-msgstr "Artists delimiter"
+msgstr "Καλλιτέχνες delimiter"
 
 #: FPreferences.class:65
 msgid "Directorio de letras"
-msgstr "Letter directory"
+msgstr "Γράμματα directory"
 
 #: FPreferences.class:99
 msgid "La extensión debe ser"
-msgstr "The extension must be"
+msgstr "Η παράταση θα πρέπει να είναι"
 
 #: MData.module:104
 msgid "Tenes que insertar la referencia a mano porque"
-msgstr "You have to insert the reference by hand because"
+msgstr "Πήρατε να εισάγετε την αναφορά στο χέρι, διότι"
 
 #: MData.module:104
 msgid "la forma automatica no funciono"
-msgstr "The automatic form did not work"
+msgstr "Η αυτόματη φόρμα δεν λειτουργούν"
 
 #: MHttp.module:59
 msgid "Instalar"
-msgstr "Install"
+msgstr "Εγκαταστήσετε"
 
 #: MHttp.module:59
 msgid "Tiene que instalar el progrma"
-msgstr "You have to install the program"
+msgstr "Πρέπει να εγκαταστήσετε το prgrm"
 
 #: MUtility.module:34
 msgid "Seleccionar directorio"
-msgstr "Select directory"
+msgstr "Επιλέξτε τον κατάλογο"
 
 #: MUtility.module:53
 msgid "Seleccionar archivo"
-msgstr "Select file"
+msgstr "Επιλογή αρχείου"
 
 #: MUtility.module:58
 msgid "Filtro por:"
-msgstr "Filter by:"
+msgstr "Φίλτρο ανά:"
 
 #: MUtility.module:365
 msgid "Falta el paquete"
-msgstr "Package missing"
+msgstr "Λείπει πακέτο"
 
 #: MUtility.module:930
 msgid "El archivo "
-msgstr "The file"
+msgstr "Το αρχείο"
 
 #: MUtility.module:930
 msgid "Tiene caracteres no ascii"
-msgstr "It has non-ascii characters"
+msgstr "Δεν έχει χαρακτήρες ascii"
 
 #: Msys.module:273
 msgid "Desconocido"
-msgstr "Unknown"
+msgstr "Άγνωστος"

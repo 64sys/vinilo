@@ -1,9 +1,9 @@
 ' Gambas module file
 
+' Gambas extra functions
+' Compilation of utilities and functions developed by the gambas comunity.
 '
-' Mdata modeule
-'
-' Copyright (C) Martín Belmonte
+' Copyright (C) Martín Belmonte.
 '
 ' This program is free software; you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by

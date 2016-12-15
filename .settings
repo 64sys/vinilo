@@ -1,3 +1,6 @@
+[Bookmarks]
+FMain=[726]
+
 [Breakpoints]
 Count=0
 
@@ -189,10 +192,16 @@ Path="vinilo.gambas"
 
 [OpenFile]
 File[1]=".src/FMain.form"
-Active=3
-Count=3
-File[2]=".src/FMain.class:11.336"
-File[3]=".src/MUtility.module:0.264"
+Active=9
+Count=9
+File[2]=".src/FMain.class:0.804"
+File[3]=".src/gef/Msys.module:0.200"
+File[4]=".src/gef/MUtility.module:0.833"
+File[5]=".src/FAbout.form"
+File[6]=".src/FAbout.class:17.15"
+File[7]=".src/FPreferences.form"
+File[8]=".src/FArtist.form"
+File[9]=".src/FLyric.form"
 
 [Watches]
 Count=0

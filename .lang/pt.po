@@ -1,18 +1,351 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: vinilo 0.0.4\n"
-"POT-Creation-Date: 2016-10-22 14:34+CET\n"
-"PO-Revision-Date: 2016-10-22 14:35+CET\n"
-"Last-Translator: Martín planeta4@openmailbox.org\n"
-"Language: pt\n"
+"Project-Id-Version: tradukisto 0.0.10\n"
+"POT-Creation-Date: 2016-12-15 15:54 UTC\n"
+"PO-Revision-Date: 2016-12-15 16:41+CET\n"
+"Last-Translator: Belmotek planeta4@openmailbox.org\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
 #: .project:1
-msgid "Catalogador musical"
-msgstr "/bin/sh: trans: no se encontró la orden"
+msgid "Vinilo"
+msgstr "Vinil"
 
 #: .project:2
-msgid "Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools."
-msgstr "/bin/sh: trans: no se encontró la orden"
+msgid "Catalogador de pistas de musica de varios formatos como ogg, mp3 etc. Es necesario tener instalado en el sistema la libreria exiftools y elinks."
+msgstr "Faixas catalogador apoio de vários formatos, como ogg, mp3 etc. deve ser instalado no sistema e elinks exiftools biblioteca."
+
+#: FAbout.class:53
+msgid "Ejecutado desde"
+msgstr "Executado a partir de"
+
+#: FLyric.class:81 FMain.class:1010
+msgid "Artista"
+msgstr "Artista"
+
+#: FLyric.class:84 FMain.class:1030
+msgid "Álbum"
+msgstr "Álbum"
+
+#: FLyric.class:87 FMain.class:1706
+msgid "Título"
+msgstr "Título"
+
+#: FLyric.class:164
+msgid "Ficha del Artista"
+msgstr "Artist sheet"
+
+#: FMain.class:216
+msgid "Xml creado con exito"
+msgstr "Xml criado com sucesso"
+
+#: FMain.class:237
+msgid "Haga clic para abrir la carpeta contenedora con el administrador de archivos"
+msgstr "Clique para abrir a pasta pai com o gerenciador de arquivos"
+
+#: FMain.class:246
+msgid "Conexión a la base de datos"
+msgstr "Conectando-se ao banco de dados"
+
+#: FMain.class:247
+msgid "Clic izquierdo para abrir carpeta contenedora, derecho para buscar tapa en internet"
+msgstr "Esquerda clique para abrir pasta pai, direito de procurar tampa sobre internet"
+
+#: FMain.class:249
+msgid "Actualizacion de la colección"
+msgstr "Atualização colecção"
+
+#: FMain.class:250
+msgid "Preferencias de"
+msgstr "Preferências"
+
+#: FMain.class:266
+msgid "Falta instalar el paquete"
+msgstr "Precisa de instalar o pacote"
+
+#: FMain.class:268
+msgid "Faltan instalar los siguientes paquetes"
+msgstr "Faltando instalar os seguintes pacotes"
+
+#: FMain.class:288
+msgid "No"
+msgstr "Não"
+
+#: FMain.class:288
+msgid "Puede usar el siguente commando"
+msgstr "Você pode usar o comando abaixo"
+
+#: FMain.class:288
+msgid "Sí"
+msgstr "Sim"
+
+#: FMain.class:288
+msgid "¿Quiere abrir la terminal para poceder?"
+msgstr "Você deseja abrir o terminal para poceder?"
+
+#: FMain.class:872
+msgid "Abrir directorio"
+msgstr "Open directory"
+
+#: FMain.class:872
+msgid "Buscar con"
+msgstr "Pesquisa"
+
+#: FMain.class:872
+msgid "Puede abrir el directorio del disco"
+msgstr "Você pode abrir o diretório do disco"
+
+#: FMain.class:872
+msgid "o buscar una caratula en internet"
+msgstr "Ou encontrar um caratula on-line"
+
+#: FMain.class:872
+msgid "¿Que quiere hacer?"
+msgstr "Que quer fazer?"
+
+#: FMain.class:925
+msgid "Cancelar"
+msgstr "Cancelar"
+
+#: FMain.class:925
+msgid "El archivo ya existe."
+msgstr "O arquivo já existe."
+
+#: FMain.class:925
+msgid "Remplazar"
+msgstr "Substituir"
+
+#: FMain.class:925
+msgid "¿Desea remplazarlo?"
+msgstr "Você deseja substituí-lo?"
+
+#: FMain.class:998
+msgid "Nº"
+msgstr "Não."
+
+#: FMain.class:1002
+msgid "Canción"
+msgstr "Canção"
+
+#: FMain.class:1006
+msgid "Canción índice"
+msgstr "Índice de músicas"
+
+#: FMain.class:1014
+msgid "Artista índice"
+msgstr "Índice artista"
+
+#: FMain.class:1018
+msgid "CC"
+msgstr "Cc"
+
+#: FMain.class:1022
+msgid "País"
+msgstr "País"
+
+#: FMain.class:1026
+msgid "País índice"
+msgstr "Índice país"
+
+#: FMain.class:1034
+msgid "Álbum índice"
+msgstr "Índice álbum"
+
+#: FMain.class:1038
+msgid "Género"
+msgstr "Sexo"
+
+#: FMain.class:1042
+msgid "Género índice"
+msgstr "Índice de gênero"
+
+#: FMain.class:1046
+msgid "Año"
+msgstr "Ano"
+
+#: FMain.class:1050
+msgid "Duración"
+msgstr "Duração"
+
+#: FMain.class:1054
+msgid "Rango"
+msgstr "Categoria"
+
+#: FMain.class:1058
+msgid "Muestreo"
+msgstr "Amostragem"
+
+#: FMain.class:1062
+msgid "Tipo"
+msgstr "Tipo"
+
+#: FMain.class:1066
+msgid "Clase"
+msgstr "Classe"
+
+#: FMain.class:1070
+msgid "Carpeta"
+msgstr "Dobrador"
+
+#: FMain.class:1417
+msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
+msgstr "A transferência automática dos letra da música não funcionou, tente fazê-lo manualmente"
+
+#: FMain.class:1643 MHttp.module:59
+msgid "Aceptar"
+msgstr "Aceitar"
+
+#: FMain.class:1643
+msgid "Esta operacion borrara por completo la base de datos"
+msgstr "Isto irá apagar completamente o banco de dados"
+
+#: FMain.class:1708
+msgid "Album"
+msgstr "Álbum"
+
+#: FMain.class:1882
+msgid "Ficha de la canción"
+msgstr "Tab canção"
+
+#: FMain.form:69
+msgid "Archivo"
+msgstr "Arquivo"
+
+#: FMain.form:72
+msgid "Conección"
+msgstr "Conexão"
+
+#: FMain.form:77
+msgid "Actualizar coleccón"
+msgstr "Recarregar coleccón"
+
+#: FMain.form:83
+msgid "Borrar la base de datos"
+msgstr "Excluir o banco de dados"
+
+#: FMain.form:88
+msgid "Salir"
+msgstr "Saída"
+
+#: FMain.form:95
+msgid "Control"
+msgstr "Controle"
+
+#: FMain.form:98
+msgid "Previo"
+msgstr "Anterior"
+
+#: FMain.form:103
+msgid "Reproducir"
+msgstr "Reproduzir"
+
+#: FMain.form:108
+msgid "Pausa"
+msgstr "Pausa"
+
+#: FMain.form:113
+msgid "Parar"
+msgstr "Parar"
+
+#: FMain.form:118
+msgid "Siguiente"
+msgstr "Seguinte"
+
+#: FMain.form:124
+msgid "Herramientas"
+msgstr "Ferramentas"
+
+#: FMain.form:127
+msgid "Preferencias"
+msgstr "Preferências"
+
+#: FMain.form:133
+msgid "Ayuda"
+msgstr "Ajudar"
+
+#: FMain.form:136
+msgid "Acerca de"
+msgstr "Sobre"
+
+#: FPreferences.class:52
+msgid "Escanear"
+msgstr "Digitalização"
+
+#: FPreferences.class:59
+msgid "Carpetas de música a escanear"
+msgstr "Pastas de música digitalizar"
+
+#: FPreferences.class:60
+msgid "Directorio personal"
+msgstr "Anuário"
+
+#: FPreferences.class:61
+msgid "Aviso de paquetes no instalados"
+msgstr "Aviso desinstalado pacotes"
+
+#: FPreferences.class:62
+msgid "Descargar letras automáticamente"
+msgstr "Letras baixar automaticamente"
+
+#: FPreferences.class:63
+msgid "Nombre por defecto de la caratula"
+msgstr "Nome padrão da cobertura"
+
+#: FPreferences.class:64
+msgid "Delimitador de artistas"
+msgstr "Artistas delimitadores"
+
+#: FPreferences.class:65
+msgid "Directorio de letras"
+msgstr "Letras diretório"
+
+#: FPreferences.class:99
+msgid "La extensión debe ser"
+msgstr "A extensão deve ser"
+
+#: MData.module:104
+msgid "Tenes que insertar la referencia a mano porque"
+msgstr "Você tem de inserir a referência para a mão, porque"
+
+#: MData.module:104
+msgid "la forma automatica no funciono"
+msgstr "A forma automática não funcionar"
+
+#: MHttp.module:59
+msgid "Instalar"
+msgstr "Instalar"
+
+#: MHttp.module:59
+msgid "Tiene que instalar el progrma"
+msgstr "É necessário instalar o prgrm"
+
+#: MUtility.module:34
+msgid "Seleccionar directorio"
+msgstr "Escolha um diretório"
+
+#: MUtility.module:53
+msgid "Seleccionar archivo"
+msgstr "Selecione o arquivo"
+
+#: MUtility.module:58
+msgid "Filtro por:"
+msgstr "Filtrar por:"
+
+#: MUtility.module:365
+msgid "Falta el paquete"
+msgstr "Pacote ausente"
+
+#: MUtility.module:930
+msgid "El archivo "
+msgstr "O arquivo"
+
+#: MUtility.module:930
+msgid "Tiene caracteres no ascii"
+msgstr "Não tem caracteres ascii"
+
+#: Msys.module:273
+msgid "Desconocido"
+msgstr "Desconhecido"

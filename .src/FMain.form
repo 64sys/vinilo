@@ -103,6 +103,7 @@
         }
         { tobConnection ToolButton
           MoveScaled(59,1,5,5)
+          Visible = False
           Picture = Picture["icon:/22/connect"]
         }
         { tobScan ToolButton

@@ -1,3 +1,9 @@
+* Tue Dec 13 2016 tincho <planeta4@openmailbox.org> 0.0.24
+- Prueba avisador de donde esta corriendo el programa
+
+* Tue Dec 13 2016 tincho <planeta4@openmailbox.org> 0.0.22
+- Optimización del escáner de archivos, agregado de MUtylity.module como link y algunoscreenshoots
+
 * Fri Nov 18 2016 tincho <planeta4@openmailbox.org> 0.0.19
 - Aviso de ejecucion desde el IDE otra prueba
 
