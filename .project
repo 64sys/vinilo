@@ -3,7 +3,7 @@
 Title=Vinilo
 Startup=FMain
 Icon=logo.png
-Version=0.0.24
+Version=0.0.25
 Component=gb.image
 Component=gb.gui.qt
 Component=gb.form

@@ -5,7 +5,8 @@ FMain=[726]
 Count=0
 
 [DebugWindow]
-Count=0
+Count=1
+DebugWindow[1]="resInsert"
 
 [DebugWindow/MUtility.FilesExist(stxSacanDir[intDir], stxFilesExistTmp, "mp3:ogg:flac")]
 Geometry=[1319,687,224,280]
@@ -39,6 +40,9 @@ Geometry=[0,32,224,280]
 
 [DebugWindow/resFilesDb]
 Geometry=[1624,38,224,280]
+
+[DebugWindow/resInsert]
+Geometry=[1605,166,224,280]
 
 [DebugWindow/resQry]
 Geometry=[1326,209,224,280]
@@ -86,7 +90,7 @@ Geometry=[1259,135,224,280]
 Geometry=[1152,42,224,280]
 
 [DebugWindow/stxFilesExist]
-Geometry=[1236,45,224,948]
+Geometry=[988,723,476,957]
 
 [DebugWindow/stxFilesExistTmp]
 Geometry=[978,25,224,827]
@@ -192,13 +196,13 @@ Path="vinilo.gambas"
 
 [OpenFile]
 File[1]=".src/FMain.form"
-Active=9
+Active=2
 Count=9
-File[2]=".src/FMain.class:0.804"
+File[2]=".src/FMain.class:44.656"
 File[3]=".src/gef/Msys.module:0.200"
-File[4]=".src/gef/MUtility.module:0.833"
+File[4]=".src/gef/MUtility.module:40.263"
 File[5]=".src/FAbout.form"
-File[6]=".src/FAbout.class:17.15"
+File[6]=".src/FAbout.class:18.52"
 File[7]=".src/FPreferences.form"
 File[8]=".src/FArtist.form"
 File[9]=".src/FLyric.form"

@@ -39,7 +39,7 @@ Public Sub Form_Open()
 
   strCompilationTimeStamp = Format(datCompilationTimeStamp, "yyyy-mm-dd.hh:nn:ss")
 
-  Select MUtility.WhereRun()
+  Select MUtility.WhereRunG()
     Case 0
       strIDE = ""
       lblIDE.Visible = False

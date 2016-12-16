@@ -454,6 +454,16 @@ Public Sub cmdRefreshFiles() ''Actualiza la lista de archivos, agrega, actualiza
   Dim strAction As String
   Dim strDirectoryLoad As String
 
+  ' Campos problematicos o que presentan problemas frecuentemente
+  Dim strNumberChk As String
+  Dim intNumberChk As Integer
+  Dim strGenreChk As String
+  Dim intGenreChk As Integer
+  Dim intYearChk As Integer
+  Dim strYearChk As String
+  Dim intAlbumChk As Integer
+  Dim strAlbumChk As String
+
   'Listar los archivos presentes en la base de datos
   strFilesDb = "select trackindx,trackpath,tracktimefile from track"
   resFilesDb = conDB.Exec(strFilesDb)
@@ -559,17 +569,65 @@ Public Sub cmdRefreshFiles() ''Actualiza la lista de archivos, agrega, actualiza
       '----------------------------------------------------------------
       Wait 0.1
       '----------------------------------------------------------------
+      intNumberChk = stxFileTag.Find("Track")
+      If intNumberChk <> -1 Then
+        strNumberChk = stxFileData[intNumberChk]
+        Select strNumberChk
+          Case "", " "
+            strNumberChk = "0"
+        End Select
+      Endif
+
+      intGenreChk = stxFileTag.Find("Genre")
+      If intGenreChk <> -1 Then
+        strGenreChk = stxFileData[intGenreChk]
+
+        Select strGenreChk
+          Case "", " "
+            strGenreChk = "None"
+        End Select
+      Else
+        strGenreChk = "None"
+      Endif
+
+      intYearChk = stxFileTag.Find("Year")
+      If intYearChk <> -1 Then
+        strYearChk = stxFileData[intYearChk]
+
+        Select strYearChk
+          Case "", " "
+            strYearChk = "0000"
+        End Select
+
+      Else
+        strYearChk = "9999"
+      Endif
+
+      intAlbumChk = stxFileTag.Find("Album")
+      If intAlbumChk <> -1 Then
+        strAlbumChk = stxFileData[intAlbumChk]
+
+        Select strAlbumChk
+          Case "", " "
+            strAlbumChk = "None"
+        End Select
+
+      Else
+        strAlbumChk = "None"
+      Endif
+      '----------------------------------------------------------------
+
       Select strAction
         Case "Update"
           If stxFileData.Count > 0 Then
             resUpdate = conDB.Edit("track", "trackpath=&1", stxFilesExist[intFile])
 
             resUpdate["tracktitle"] = stxFileData[stxFileTag.Find("Title")]
-            resUpdate["tracknum"] = stxFileData[stxFileTag.Find("Track")]
+            resUpdate["tracknum"] = strNumberChk 'stxFileData[stxFileTag.Find("Track")]
             resUpdate["trackartist"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Artist")], conDB, "artist", "artistindx", "artistname")
-            resUpdate["trackalbum"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Album")], conDB, "album", "albumindx", "albumname")
-            resUpdate["trackgenre"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Genre")], conDB, "genre", "genreindx", "genrename")
-            resUpdate["trackyear"] = stxFileData[stxFileTag.Find("Year")]
+            resUpdate["trackalbum"] = MUtility.GetForeignKey(strAlbumChk, conDB, "album", "albumindx", "albumname")
+            resUpdate["trackgenre"] = MUtility.GetForeignKey(strGenreChk, conDB, "genre", "genreindx", "genrename")
+            resUpdate["trackyear"] = strYearChk 'stxFileData[stxFileTag.Find("Year")]
             resUpdate["trackbits"] = stxFileData[stxFileTag.Find("AudioBitrate")]
             resUpdate["trackchanels"] = stxFileData[stxFileTag.Find("ChannelMode")]
             resUpdate["tracklength"] = stxFileData[stxFileTag.Find("Duration")]
@@ -596,17 +654,16 @@ Public Sub cmdRefreshFiles() ''Actualiza la lista de archivos, agrega, actualiza
             resIns = conDB.Create("track")
 
             resIns["tracktitle"] = stxFileData[stxFileTag.Find("Title")]
-            resIns["tracknum"] = stxFileData[stxFileTag.Find("Track")]
+            resIns["tracknum"] = strNumberChk 'stxFileData[stxFileTag.Find("Track")]
             resIns["trackartist"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Artist")], conDB, "artist", "artistindx", "artistname")
-            resIns["trackalbum"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Album")], conDB, "album", "albumindx", "albumname")
-            resIns["trackgenre"] = MUtility.GetForeignKey(stxFileData[stxFileTag.Find("Genre")], conDB, "genre", "genreindx", "genrename")
-            resIns["trackyear"] = stxFileData[stxFileTag.Find("Year")]
+            resIns["trackalbum"] = MUtility.GetForeignKey(strAlbumChk, conDB, "album", "albumindx", "albumname")
+            resIns["trackgenre"] = MUtility.GetForeignKey(strGenreChk, conDB, "genre", "genreindx", "genrename")
+            resIns["trackyear"] = strYearChk 'stxFileData[stxFileTag.Find("Year")]
             resIns["trackbits"] = stxFileData[stxFileTag.Find("AudioBitrate")]
             resIns["trackchanels"] = stxFileData[stxFileTag.Find("ChannelMode")]
             resIns["tracklength"] = stxFileData[stxFileTag.Find("Duration")]
             resIns["tracksample"] = stxFileData[stxFileTag.Find("SampleRate")]
             resIns["tracktimemeta"] = stxFileData[stxFileTag.Find("FileTime")]
-
             resIns["tracktimefile"] = stxFileData[stxFileTag.Find("FileTime")]
             resIns["trackpath"] = stxFilesExist[intFile]
             resIns["trackdirectory"] = File.Dir(stxFilesExist[intFile])
