@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
-"POT-Creation-Date: 2016-12-15 15:54 UTC\n"
+"POT-Creation-Date: 2016-12-16 22:44 UTC\n"
 "PO-Revision-Date: 2016-12-15 16:38+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
@@ -22,15 +22,15 @@ msgstr "Katalogazioaren babesarekin besteak beste, ogg, mp3 etab hainbat formatu
 msgid "Ejecutado desde"
 msgstr "Tik exekutatu"
 
-#: FLyric.class:81 FMain.class:1010
+#: FLyric.class:81 FMain.class:1067
 msgid "Artista"
 msgstr "Artistaren"
 
-#: FLyric.class:84 FMain.class:1030
+#: FLyric.class:84 FMain.class:1087
 msgid "Álbum"
 msgstr "Album"
 
-#: FLyric.class:87 FMain.class:1706
+#: FLyric.class:87 FMain.class:1763
 msgid "Título"
 msgstr "Izenburua"
 
@@ -86,127 +86,127 @@ msgstr "Bai"
 msgid "¿Quiere abrir la terminal para poceder?"
 msgstr "Terminal irekitzeko poceder nahi duzu?"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Abrir directorio"
 msgstr "Open direktorioa"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Buscar con"
 msgstr "Bilaketa"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Puede abrir el directorio del disco"
 msgstr "Diskoan direktorioa ireki dezakezu"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "o buscar una caratula en internet"
 msgstr "Edo online caratula bat aurkitu"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "¿Que quiere hacer?"
 msgstr "Zer egin nahi duzu?"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Cancelar"
 msgstr "Bertan behera"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "El archivo ya existe."
 msgstr "Fitxategi hau badago."
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Remplazar"
 msgstr "Ordeztu"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "¿Desea remplazarlo?"
 msgstr "Ez kendu nahi al duzu?"
 
-#: FMain.class:998
+#: FMain.class:1055
 msgid "Nº"
 msgstr "No."
 
-#: FMain.class:1002
+#: FMain.class:1059
 msgid "Canción"
 msgstr "Abestia"
 
-#: FMain.class:1006
+#: FMain.class:1063
 msgid "Canción índice"
 msgstr "Abesti indizea"
 
-#: FMain.class:1014
+#: FMain.class:1071
 msgid "Artista índice"
 msgstr "Artista indizea"
 
-#: FMain.class:1018
+#: FMain.class:1075
 msgid "CC"
 msgstr "Cc"
 
-#: FMain.class:1022
+#: FMain.class:1079
 msgid "País"
 msgstr "Herrialde"
 
-#: FMain.class:1026
+#: FMain.class:1083
 msgid "País índice"
 msgstr "Herrialde indizea"
 
-#: FMain.class:1034
+#: FMain.class:1091
 msgid "Álbum índice"
 msgstr "Album indizea"
 
-#: FMain.class:1038
+#: FMain.class:1095
 msgid "Género"
 msgstr "Genero"
 
-#: FMain.class:1042
+#: FMain.class:1099
 msgid "Género índice"
 msgstr "Generoaren indizea"
 
-#: FMain.class:1046
+#: FMain.class:1103
 msgid "Año"
 msgstr "Urte"
 
-#: FMain.class:1050
+#: FMain.class:1107
 msgid "Duración"
 msgstr "Iraupena"
 
-#: FMain.class:1054
+#: FMain.class:1111
 msgid "Rango"
 msgstr "Rank"
 
-#: FMain.class:1058
+#: FMain.class:1115
 msgid "Muestreo"
 msgstr "Laginketa"
 
-#: FMain.class:1062
+#: FMain.class:1119
 msgid "Tipo"
 msgstr "Mota"
 
-#: FMain.class:1066
+#: FMain.class:1123
 msgid "Clase"
 msgstr "Class"
 
-#: FMain.class:1070
+#: FMain.class:1127
 msgid "Carpeta"
 msgstr "Karpeta"
 
-#: FMain.class:1417
+#: FMain.class:1474
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
 msgstr "Abestiaren letra download automatikoak ez du funtzionatzen, saiatu eskuz egin"
 
-#: FMain.class:1643 MHttp.module:59
+#: FMain.class:1700 MHttp.module:59
 msgid "Aceptar"
 msgstr "Onartu"
 
-#: FMain.class:1643
+#: FMain.class:1700
 msgid "Esta operacion borrara por completo la base de datos"
 msgstr "Hau guztiz ezabatuko du datu-basean"
 
-#: FMain.class:1708
+#: FMain.class:1765
 msgid "Album"
 msgstr "Bilduma"
 
-#: FMain.class:1882
+#: FMain.class:1939
 msgid "Ficha de la canción"
 msgstr "Song fitxa"
 
@@ -338,11 +338,11 @@ msgstr "Filter by:"
 msgid "Falta el paquete"
 msgstr "Desagertutako pakete"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "El archivo "
 msgstr "Fitxategia"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "Tiene caracteres no ascii"
 msgstr "Ez ascii karaktereak ditu"
 

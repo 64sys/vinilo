@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
-"POT-Creation-Date: 2016-12-15 15:54 UTC\n"
+"POT-Creation-Date: 2016-12-16 22:44 UTC\n"
 "PO-Revision-Date: 2016-12-15 16:36+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
@@ -22,15 +22,15 @@ msgstr "Cataloger of music tracks of various formats like ogg, mp3 etc. it is ne
 msgid "Ejecutado desde"
 msgstr "Executed from"
 
-#: FLyric.class:81 FMain.class:1010
+#: FLyric.class:81 FMain.class:1067
 msgid "Artista"
 msgstr "Artist"
 
-#: FLyric.class:84 FMain.class:1030
+#: FLyric.class:84 FMain.class:1087
 msgid "Álbum"
 msgstr "Album"
 
-#: FLyric.class:87 FMain.class:1706
+#: FLyric.class:87 FMain.class:1763
 msgid "Título"
 msgstr "Title"
 
@@ -86,127 +86,127 @@ msgstr "Yes"
 msgid "¿Quiere abrir la terminal para poceder?"
 msgstr "Do you want to open the terminal to poceder?"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Abrir directorio"
 msgstr "Open directory"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Buscar con"
 msgstr "Search with"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Puede abrir el directorio del disco"
 msgstr "You can open the disk directory"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "o buscar una caratula en internet"
 msgstr "Or search for a cover on the internet"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "¿Que quiere hacer?"
 msgstr "You want to do?"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Cancelar"
 msgstr "Cancel"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "El archivo ya existe."
 msgstr "The file already exists."
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Remplazar"
 msgstr "Replace"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "¿Desea remplazarlo?"
 msgstr "Do you wish to replace it?"
 
-#: FMain.class:998
+#: FMain.class:1055
 msgid "Nº"
 msgstr "No."
 
-#: FMain.class:1002
+#: FMain.class:1059
 msgid "Canción"
 msgstr "Song"
 
-#: FMain.class:1006
+#: FMain.class:1063
 msgid "Canción índice"
 msgstr "Song index"
 
-#: FMain.class:1014
+#: FMain.class:1071
 msgid "Artista índice"
 msgstr "Artist index"
 
-#: FMain.class:1018
+#: FMain.class:1075
 msgid "CC"
 msgstr "Dc"
 
-#: FMain.class:1022
+#: FMain.class:1079
 msgid "País"
 msgstr "Country"
 
-#: FMain.class:1026
+#: FMain.class:1083
 msgid "País índice"
 msgstr "Country index"
 
-#: FMain.class:1034
+#: FMain.class:1091
 msgid "Álbum índice"
 msgstr "Index album"
 
-#: FMain.class:1038
+#: FMain.class:1095
 msgid "Género"
 msgstr "Gender"
 
-#: FMain.class:1042
+#: FMain.class:1099
 msgid "Género índice"
 msgstr "Index genre"
 
-#: FMain.class:1046
+#: FMain.class:1103
 msgid "Año"
 msgstr "Year"
 
-#: FMain.class:1050
+#: FMain.class:1107
 msgid "Duración"
 msgstr "Duration"
 
-#: FMain.class:1054
+#: FMain.class:1111
 msgid "Rango"
 msgstr "Rank"
 
-#: FMain.class:1058
+#: FMain.class:1115
 msgid "Muestreo"
 msgstr "Sampling"
 
-#: FMain.class:1062
+#: FMain.class:1119
 msgid "Tipo"
 msgstr "Kind"
 
-#: FMain.class:1066
+#: FMain.class:1123
 msgid "Clase"
 msgstr "Class"
 
-#: FMain.class:1070
+#: FMain.class:1127
 msgid "Carpeta"
 msgstr "Binder"
 
-#: FMain.class:1417
+#: FMain.class:1474
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
 msgstr "The automatic download of the lyrics of the song did not work, try doing it manually"
 
-#: FMain.class:1643 MHttp.module:59
+#: FMain.class:1700 MHttp.module:59
 msgid "Aceptar"
 msgstr "To accept"
 
-#: FMain.class:1643
+#: FMain.class:1700
 msgid "Esta operacion borrara por completo la base de datos"
 msgstr "This operation will completely erase the database"
 
-#: FMain.class:1708
+#: FMain.class:1765
 msgid "Album"
 msgstr "Album"
 
-#: FMain.class:1882
+#: FMain.class:1939
 msgid "Ficha de la canción"
 msgstr "Song sheet"
 
@@ -338,11 +338,11 @@ msgstr "Filter by:"
 msgid "Falta el paquete"
 msgstr "Package missing"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "El archivo "
 msgstr "The file"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "Tiene caracteres no ascii"
 msgstr "It has non-ascii characters"
 

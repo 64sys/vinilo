@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
-"POT-Creation-Date: 2016-12-15 15:54 UTC\n"
+"POT-Creation-Date: 2016-12-16 22:44 UTC\n"
 "PO-Revision-Date: 2016-12-15 16:34+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
@@ -22,15 +22,15 @@ msgstr "Cataloger backs verschiedener formate wie ogg, mp3 usw. es muß in dem s
 msgid "Ejecutado desde"
 msgstr "Laufen aus"
 
-#: FLyric.class:81 FMain.class:1010
+#: FLyric.class:81 FMain.class:1067
 msgid "Artista"
 msgstr "Künstler"
 
-#: FLyric.class:84 FMain.class:1030
+#: FLyric.class:84 FMain.class:1087
 msgid "Álbum"
 msgstr "Album"
 
-#: FLyric.class:87 FMain.class:1706
+#: FLyric.class:87 FMain.class:1763
 msgid "Título"
 msgstr "Titel"
 
@@ -86,127 +86,127 @@ msgstr "Ja"
 msgid "¿Quiere abrir la terminal para poceder?"
 msgstr "Sie wollen das terminal zu öffnen, um poceder?"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Abrir directorio"
 msgstr "Open directory"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Buscar con"
 msgstr "Suche"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Puede abrir el directorio del disco"
 msgstr "Sie können die plattenverzeichnis öffnen"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "o buscar una caratula en internet"
 msgstr "Oder ein online-caratula finden"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "¿Que quiere hacer?"
 msgstr "Was wollen sie tun?"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Cancelar"
 msgstr "Stornieren"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "El archivo ya existe."
 msgstr "Die datei ist bereits vorhanden."
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Remplazar"
 msgstr "Ersetzen"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "¿Desea remplazarlo?"
 msgstr "Wollen sie es ersetzen?"
 
-#: FMain.class:998
+#: FMain.class:1055
 msgid "Nº"
 msgstr "Nein."
 
-#: FMain.class:1002
+#: FMain.class:1059
 msgid "Canción"
 msgstr "Song"
 
-#: FMain.class:1006
+#: FMain.class:1063
 msgid "Canción índice"
 msgstr "Song-index"
 
-#: FMain.class:1014
+#: FMain.class:1071
 msgid "Artista índice"
 msgstr "Künstler-index"
 
-#: FMain.class:1018
+#: FMain.class:1075
 msgid "CC"
 msgstr "Cc"
 
-#: FMain.class:1022
+#: FMain.class:1079
 msgid "País"
 msgstr "Land"
 
-#: FMain.class:1026
+#: FMain.class:1083
 msgid "País índice"
 msgstr "Länderindex"
 
-#: FMain.class:1034
+#: FMain.class:1091
 msgid "Álbum índice"
 msgstr "Album-index"
 
-#: FMain.class:1038
+#: FMain.class:1095
 msgid "Género"
 msgstr "Geschlecht"
 
-#: FMain.class:1042
+#: FMain.class:1099
 msgid "Género índice"
 msgstr "Übersicht der genres"
 
-#: FMain.class:1046
+#: FMain.class:1103
 msgid "Año"
 msgstr "Jahr"
 
-#: FMain.class:1050
+#: FMain.class:1107
 msgid "Duración"
 msgstr "Dauer"
 
-#: FMain.class:1054
+#: FMain.class:1111
 msgid "Rango"
 msgstr "Rang"
 
-#: FMain.class:1058
+#: FMain.class:1115
 msgid "Muestreo"
 msgstr "Probenahme"
 
-#: FMain.class:1062
+#: FMain.class:1119
 msgid "Tipo"
 msgstr "Typ"
 
-#: FMain.class:1066
+#: FMain.class:1123
 msgid "Clase"
 msgstr "Klasse"
 
-#: FMain.class:1070
+#: FMain.class:1127
 msgid "Carpeta"
 msgstr "Mappe"
 
-#: FMain.class:1417
+#: FMain.class:1474
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
 msgstr "Der automatische download der text des liedes hat nicht funktioniert, versuchen sie es manuell zu tun"
 
-#: FMain.class:1643 MHttp.module:59
+#: FMain.class:1700 MHttp.module:59
 msgid "Aceptar"
 msgstr "Akzeptieren"
 
-#: FMain.class:1643
+#: FMain.class:1700
 msgid "Esta operacion borrara por completo la base de datos"
 msgstr "Dies wird vollständig löschen die datenbank"
 
-#: FMain.class:1708
+#: FMain.class:1765
 msgid "Album"
 msgstr "Album"
 
-#: FMain.class:1882
+#: FMain.class:1939
 msgid "Ficha de la canción"
 msgstr "Song-registerkarte"
 
@@ -338,11 +338,11 @@ msgstr "Filtern nach:"
 msgid "Falta el paquete"
 msgstr "Fehlende paket"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "El archivo "
 msgstr "Die datei"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "Tiene caracteres no ascii"
 msgstr "Hat nicht ascii-zeichen"
 

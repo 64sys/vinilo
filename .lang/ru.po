@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
-"POT-Creation-Date: 2016-12-15 15:54 UTC\n"
+"POT-Creation-Date: 2016-12-16 22:44 UTC\n"
 "PO-Revision-Date: 2016-12-15 16:42+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
@@ -22,15 +22,15 @@ msgstr "Cataloger минусовки различных форматов, так
 msgid "Ejecutado desde"
 msgstr "Бежать из"
 
-#: FLyric.class:81 FMain.class:1010
+#: FLyric.class:81 FMain.class:1067
 msgid "Artista"
 msgstr "Художник"
 
-#: FLyric.class:84 FMain.class:1030
+#: FLyric.class:84 FMain.class:1087
 msgid "Álbum"
 msgstr "Альбом"
 
-#: FLyric.class:87 FMain.class:1706
+#: FLyric.class:87 FMain.class:1763
 msgid "Título"
 msgstr "Название"
 
@@ -86,127 +86,127 @@ msgstr "Да"
 msgid "¿Quiere abrir la terminal para poceder?"
 msgstr "Вы хотите, чтобы открыть терминал poceder?"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Abrir directorio"
 msgstr "Открыть каталог"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Buscar con"
 msgstr "Поиск"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Puede abrir el directorio del disco"
 msgstr "Вы можете открыть каталог диска"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "o buscar una caratula en internet"
 msgstr "Или найти онлайн caratula"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "¿Que quiere hacer?"
 msgstr "Что вы хотите сделать?"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Cancelar"
 msgstr "Отменить"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "El archivo ya existe."
 msgstr "Файл уже существует."
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Remplazar"
 msgstr "Замещать"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "¿Desea remplazarlo?"
 msgstr "Вы хотите, чтобы заменить его?"
 
-#: FMain.class:998
+#: FMain.class:1055
 msgid "Nº"
 msgstr "Нет."
 
-#: FMain.class:1002
+#: FMain.class:1059
 msgid "Canción"
 msgstr "Песня"
 
-#: FMain.class:1006
+#: FMain.class:1063
 msgid "Canción índice"
 msgstr "Индекс песни"
 
-#: FMain.class:1014
+#: FMain.class:1071
 msgid "Artista índice"
 msgstr "Индекс художника"
 
-#: FMain.class:1018
+#: FMain.class:1075
 msgid "CC"
 msgstr "Cc"
 
-#: FMain.class:1022
+#: FMain.class:1079
 msgid "País"
 msgstr "Страна"
 
-#: FMain.class:1026
+#: FMain.class:1083
 msgid "País índice"
 msgstr "Индекс страны"
 
-#: FMain.class:1034
+#: FMain.class:1091
 msgid "Álbum índice"
 msgstr "Индекс альбом"
 
-#: FMain.class:1038
+#: FMain.class:1095
 msgid "Género"
 msgstr "Пол"
 
-#: FMain.class:1042
+#: FMain.class:1099
 msgid "Género índice"
 msgstr "Индекс жанр"
 
-#: FMain.class:1046
+#: FMain.class:1103
 msgid "Año"
 msgstr "Год"
 
-#: FMain.class:1050
+#: FMain.class:1107
 msgid "Duración"
 msgstr "Продолжительность"
 
-#: FMain.class:1054
+#: FMain.class:1111
 msgid "Rango"
 msgstr "Ранг"
 
-#: FMain.class:1058
+#: FMain.class:1115
 msgid "Muestreo"
 msgstr "Отбор проб"
 
-#: FMain.class:1062
+#: FMain.class:1119
 msgid "Tipo"
 msgstr "Тип"
 
-#: FMain.class:1066
+#: FMain.class:1123
 msgid "Clase"
 msgstr "Класс"
 
-#: FMain.class:1070
+#: FMain.class:1127
 msgid "Carpeta"
 msgstr "Папка"
 
-#: FMain.class:1417
+#: FMain.class:1474
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
 msgstr "Автоматическая загрузка лирики песни не работает, попробуйте сделать это вручную"
 
-#: FMain.class:1643 MHttp.module:59
+#: FMain.class:1700 MHttp.module:59
 msgid "Aceptar"
 msgstr "Принимать"
 
-#: FMain.class:1643
+#: FMain.class:1700
 msgid "Esta operacion borrara por completo la base de datos"
 msgstr "Это приведет к удалению базы данных полностью"
 
-#: FMain.class:1708
+#: FMain.class:1765
 msgid "Album"
 msgstr "Альбом"
 
-#: FMain.class:1882
+#: FMain.class:1939
 msgid "Ficha de la canción"
 msgstr "Вкладка песни"
 
@@ -338,11 +338,11 @@ msgstr "Фильтр по:"
 msgid "Falta el paquete"
 msgstr "Недостающее пакет"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "El archivo "
 msgstr "Файл"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "Tiene caracteres no ascii"
 msgstr "Не имеет символов ascii"
 

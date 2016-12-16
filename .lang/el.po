@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
-"POT-Creation-Date: 2016-12-15 15:54 UTC\n"
+"POT-Creation-Date: 2016-12-16 22:44 UTC\n"
 "PO-Revision-Date: 2016-12-15 16:35+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
@@ -22,15 +22,15 @@ msgstr "Κομμάτια υποστήριξη cataloger των διαφόρων 
 msgid "Ejecutado desde"
 msgstr "Τρέχει από"
 
-#: FLyric.class:81 FMain.class:1010
+#: FLyric.class:81 FMain.class:1067
 msgid "Artista"
 msgstr "Καλλιτέχνης"
 
-#: FLyric.class:84 FMain.class:1030
+#: FLyric.class:84 FMain.class:1087
 msgid "Álbum"
 msgstr "Άλμπουμ"
 
-#: FLyric.class:87 FMain.class:1706
+#: FLyric.class:87 FMain.class:1763
 msgid "Título"
 msgstr "Τίτλος"
 
@@ -86,127 +86,127 @@ msgstr "Ναί"
 msgid "¿Quiere abrir la terminal para poceder?"
 msgstr "Θέλετε να ανοίξετε το τερματικό στο poceder;"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Abrir directorio"
 msgstr "Open directory"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Buscar con"
 msgstr "Έρευνα"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Puede abrir el directorio del disco"
 msgstr "Μπορείτε να ανοίξετε τον τηλεφωνικό κατάλογο στο δίσκο"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "o buscar una caratula en internet"
 msgstr "Ή να βρείτε ένα online caratula"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "¿Que quiere hacer?"
 msgstr "Τι θέλετε να κάνετε;"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Cancelar"
 msgstr "Ακυρώσει"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "El archivo ya existe."
 msgstr "Το αρχείο υπάρχει ήδη."
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Remplazar"
 msgstr "Αντικαταστήσει"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "¿Desea remplazarlo?"
 msgstr "Θέλετε να το αντικαταστήσετε;"
 
-#: FMain.class:998
+#: FMain.class:1055
 msgid "Nº"
 msgstr "Όχι."
 
-#: FMain.class:1002
+#: FMain.class:1059
 msgid "Canción"
 msgstr "Τραγούδι"
 
-#: FMain.class:1006
+#: FMain.class:1063
 msgid "Canción índice"
 msgstr "Δείκτης τραγούδι"
 
-#: FMain.class:1014
+#: FMain.class:1071
 msgid "Artista índice"
 msgstr "Δείκτης καλλιτέχνη"
 
-#: FMain.class:1018
+#: FMain.class:1075
 msgid "CC"
 msgstr "Cc"
 
-#: FMain.class:1022
+#: FMain.class:1079
 msgid "País"
 msgstr "Χώρα"
 
-#: FMain.class:1026
+#: FMain.class:1083
 msgid "País índice"
 msgstr "Δείκτης χώρα"
 
-#: FMain.class:1034
+#: FMain.class:1091
 msgid "Álbum índice"
 msgstr "Δείκτης άλμπουμ"
 
-#: FMain.class:1038
+#: FMain.class:1095
 msgid "Género"
 msgstr "Γένος"
 
-#: FMain.class:1042
+#: FMain.class:1099
 msgid "Género índice"
 msgstr "Δείκτης είδος"
 
-#: FMain.class:1046
+#: FMain.class:1103
 msgid "Año"
 msgstr "Έτος"
 
-#: FMain.class:1050
+#: FMain.class:1107
 msgid "Duración"
 msgstr "Διάρκεια"
 
-#: FMain.class:1054
+#: FMain.class:1111
 msgid "Rango"
 msgstr "Τάξη"
 
-#: FMain.class:1058
+#: FMain.class:1115
 msgid "Muestreo"
 msgstr "Δειγματοληψία"
 
-#: FMain.class:1062
+#: FMain.class:1119
 msgid "Tipo"
 msgstr "Τύπος"
 
-#: FMain.class:1066
+#: FMain.class:1123
 msgid "Clase"
 msgstr "Τάξη"
 
-#: FMain.class:1070
+#: FMain.class:1127
 msgid "Carpeta"
 msgstr "Φάκελο"
 
-#: FMain.class:1417
+#: FMain.class:1474
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
 msgstr "Η αυτόματη λήψη τους στίχους του τραγουδιού δεν λειτούργησε, προσπαθήστε να το κάνετε μόνοι σας"
 
-#: FMain.class:1643 MHttp.module:59
+#: FMain.class:1700 MHttp.module:59
 msgid "Aceptar"
 msgstr "Δέχομαι"
 
-#: FMain.class:1643
+#: FMain.class:1700
 msgid "Esta operacion borrara por completo la base de datos"
 msgstr "Αυτό θα διαγράψει εντελώς η βάση δεδομένων"
 
-#: FMain.class:1708
+#: FMain.class:1765
 msgid "Album"
 msgstr "Άλμπουμ"
 
-#: FMain.class:1882
+#: FMain.class:1939
 msgid "Ficha de la canción"
 msgstr "Καρτέλα τραγούδι"
 
@@ -338,11 +338,11 @@ msgstr "Φίλτρο ανά:"
 msgid "Falta el paquete"
 msgstr "Λείπει πακέτο"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "El archivo "
 msgstr "Το αρχείο"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "Tiene caracteres no ascii"
 msgstr "Δεν έχει χαρακτήρες ascii"
 

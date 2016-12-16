@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
-"POT-Creation-Date: 2016-12-15 15:54 UTC\n"
+"POT-Creation-Date: 2016-12-16 22:44 UTC\n"
 "PO-Revision-Date: 2016-12-15 16:37+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
@@ -22,15 +22,15 @@ msgstr "Cataloger subtenon trakojn de diversaj formatoj kiel ogg, mp3 ktp ĝi de
 msgid "Ejecutado desde"
 msgstr "Kuru el"
 
-#: FLyric.class:81 FMain.class:1010
+#: FLyric.class:81 FMain.class:1067
 msgid "Artista"
 msgstr "Artisto"
 
-#: FLyric.class:84 FMain.class:1030
+#: FLyric.class:84 FMain.class:1087
 msgid "Álbum"
 msgstr "Albumo"
 
-#: FLyric.class:87 FMain.class:1706
+#: FLyric.class:87 FMain.class:1763
 msgid "Título"
 msgstr "Titolo"
 
@@ -86,127 +86,127 @@ msgstr "Jes"
 msgid "¿Quiere abrir la terminal para poceder?"
 msgstr "Vi volas malfermi la terminalo al poceder?"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Abrir directorio"
 msgstr "Malferma katalogo"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Buscar con"
 msgstr "Serĉo"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "Puede abrir el directorio del disco"
 msgstr "Vi povas malfermi la disko dosierujo"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "o buscar una caratula en internet"
 msgstr "Aŭ trovi reta caratula"
 
-#: FMain.class:872
+#: FMain.class:929
 msgid "¿Que quiere hacer?"
 msgstr "Kion vi volas fari?"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Cancelar"
 msgstr "Nuligi"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "El archivo ya existe."
 msgstr "La dosiero jam ekzistas."
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "Remplazar"
 msgstr "Anstataŭigi"
 
-#: FMain.class:925
+#: FMain.class:982
 msgid "¿Desea remplazarlo?"
 msgstr "Ĉu vi volas anstataŭigi ĝin?"
 
-#: FMain.class:998
+#: FMain.class:1055
 msgid "Nº"
 msgstr "Ne"
 
-#: FMain.class:1002
+#: FMain.class:1059
 msgid "Canción"
 msgstr "Kanto"
 
-#: FMain.class:1006
+#: FMain.class:1063
 msgid "Canción índice"
 msgstr "Kanto indekso"
 
-#: FMain.class:1014
+#: FMain.class:1071
 msgid "Artista índice"
 msgstr "Artisto indekso"
 
-#: FMain.class:1018
+#: FMain.class:1075
 msgid "CC"
 msgstr "Cc"
 
-#: FMain.class:1022
+#: FMain.class:1079
 msgid "País"
 msgstr "Lando"
 
-#: FMain.class:1026
+#: FMain.class:1083
 msgid "País índice"
 msgstr "Lando indekso"
 
-#: FMain.class:1034
+#: FMain.class:1091
 msgid "Álbum índice"
 msgstr "Albumo indekso"
 
-#: FMain.class:1038
+#: FMain.class:1095
 msgid "Género"
 msgstr "Sekso"
 
-#: FMain.class:1042
+#: FMain.class:1099
 msgid "Género índice"
 msgstr "Ĝenro indekso"
 
-#: FMain.class:1046
+#: FMain.class:1103
 msgid "Año"
 msgstr "Jaro"
 
-#: FMain.class:1050
+#: FMain.class:1107
 msgid "Duración"
 msgstr "Daŭro"
 
-#: FMain.class:1054
+#: FMain.class:1111
 msgid "Rango"
 msgstr "Rango"
 
-#: FMain.class:1058
+#: FMain.class:1115
 msgid "Muestreo"
 msgstr "Specimenigo"
 
-#: FMain.class:1062
+#: FMain.class:1119
 msgid "Tipo"
 msgstr "Tipo"
 
-#: FMain.class:1066
+#: FMain.class:1123
 msgid "Clase"
 msgstr "Klaso"
 
-#: FMain.class:1070
+#: FMain.class:1127
 msgid "Carpeta"
 msgstr "Dosierujo"
 
-#: FMain.class:1417
+#: FMain.class:1474
 msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
 msgstr "La aŭtomata malŝarĝo de la kantoteksto de la kanto ne funkcias, provu fari ĝin manualmente"
 
-#: FMain.class:1643 MHttp.module:59
+#: FMain.class:1700 MHttp.module:59
 msgid "Aceptar"
 msgstr "Akcepti"
 
-#: FMain.class:1643
+#: FMain.class:1700
 msgid "Esta operacion borrara por completo la base de datos"
 msgstr "Tio viŝos tute la datumbazo"
 
-#: FMain.class:1708
+#: FMain.class:1765
 msgid "Album"
 msgstr "Albumo"
 
-#: FMain.class:1882
+#: FMain.class:1939
 msgid "Ficha de la canción"
 msgstr "Kanto langeto"
 
@@ -338,11 +338,11 @@ msgstr "Filtrilo de:"
 msgid "Falta el paquete"
 msgstr "Mankanta pako"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "El archivo "
 msgstr "La dosiero"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "Tiene caracteres no ascii"
 msgstr "Havas ne ascii karakteroj"
 

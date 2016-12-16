@@ -2,13 +2,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tradukisto 0.0.10\n"
-"POT-Creation-Date: 2016-12-15 16:54+CET\n"
+"POT-Creation-Date: 2016-12-16 22:44 UTC\n"
 "PO-Revision-Date: 2016-12-15 17:45+CET\n"
 "Last-Translator: Belmotek planeta4@openmailbox.org\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
 #: .project:1
 msgid "Vinilo"
 msgstr "Vinyle"
@@ -21,21 +22,193 @@ msgstr "Pistes cataloger de support de divers formats tels que ogg, mp3, etc. il
 msgid "Ejecutado desde"
 msgstr "Courir à partir de"
 
-#: FLyric.class:81 FMain.class:1010
+#: FLyric.class:81 FMain.class:1067
 msgid "Artista"
 msgstr "Artiste"
 
-#: FLyric.class:84 FMain.class:1030
+#: FLyric.class:84 FMain.class:1087
 msgid "Álbum"
 msgstr "Album"
 
-#: FLyric.class:87 FMain.class:1706
+#: FLyric.class:87 FMain.class:1763
 msgid "Título"
 msgstr "Titre"
 
 #: FLyric.class:164
 msgid "Ficha del Artista"
 msgstr "Fiche artiste"
+
+#: FMain.class:216
+msgid "Xml creado con exito"
+msgstr "Xml créé avec succès"
+
+#: FMain.class:237
+msgid "Haga clic para abrir la carpeta contenedora con el administrador de archivos"
+msgstr "Cliquez pour ouvrir le dossier parent avec le gestionnaire de fichiers"
+
+#: FMain.class:246
+msgid "Conexión a la base de datos"
+msgstr "Connexion à la base de données"
+
+#: FMain.class:247
+msgid "Clic izquierdo para abrir carpeta contenedora, derecho para buscar tapa en internet"
+msgstr "Clic gauche pour ouvrir le dossier parent, droit de fouiller le couvercle sur internet"
+
+#: FMain.class:249
+msgid "Actualizacion de la colección"
+msgstr "Mise à jour de collection"
+
+#: FMain.class:250
+msgid "Preferencias de"
+msgstr "Préférences"
+
+#: FMain.class:266
+msgid "Falta instalar el paquete"
+msgstr "Besoin d'installer le paquet"
+
+#: FMain.class:268
+msgid "Faltan instalar los siguientes paquetes"
+msgstr "Manquant installer les paquets suivants"
+
+#: FMain.class:288
+msgid "No"
+msgstr "Pas"
+
+#: FMain.class:288
+msgid "Puede usar el siguente commando"
+msgstr "Vous pouvez utiliser le commando ci-dessous"
+
+#: FMain.class:288
+msgid "Sí"
+msgstr "Oui"
+
+#: FMain.class:288
+msgid "¿Quiere abrir la terminal para poceder?"
+msgstr "Vous voulez ouvrir le terminal poceder?"
+
+#: FMain.class:929
+msgid "Abrir directorio"
+msgstr "Répertoire ouvert"
+
+#: FMain.class:929
+msgid "Buscar con"
+msgstr "Recherche"
+
+#: FMain.class:929
+msgid "Puede abrir el directorio del disco"
+msgstr "Vous pouvez ouvrir le répertoire du disque"
+
+#: FMain.class:929
+msgid "o buscar una caratula en internet"
+msgstr "Ou trouver une caratula en ligne"
+
+#: FMain.class:929
+msgid "¿Que quiere hacer?"
+msgstr "Qu'est-ce que vous voulez faire?"
+
+#: FMain.class:982
+msgid "Cancelar"
+msgstr "Annuler"
+
+#: FMain.class:982
+msgid "El archivo ya existe."
+msgstr "Le fichier existe déjà."
+
+#: FMain.class:982
+msgid "Remplazar"
+msgstr "Remplacer"
+
+#: FMain.class:982
+msgid "¿Desea remplazarlo?"
+msgstr "Voulez-vous le remplacer?"
+
+#: FMain.class:1055
+msgid "Nº"
+msgstr "Non."
+
+#: FMain.class:1059
+msgid "Canción"
+msgstr "Chanson"
+
+#: FMain.class:1063
+msgid "Canción índice"
+msgstr "Indice de chanson"
+
+#: FMain.class:1071
+msgid "Artista índice"
+msgstr "L'index des artistes"
+
+#: FMain.class:1075
+msgid "CC"
+msgstr "Cc"
+
+#: FMain.class:1079
+msgid "País"
+msgstr "Pays"
+
+#: FMain.class:1083
+msgid "País índice"
+msgstr "Index des pays"
+
+#: FMain.class:1091
+msgid "Álbum índice"
+msgstr "Index de l'album"
+
+#: FMain.class:1095
+msgid "Género"
+msgstr "Sexe"
+
+#: FMain.class:1099
+msgid "Género índice"
+msgstr "Index des genres"
+
+#: FMain.class:1103
+msgid "Año"
+msgstr "Année"
+
+#: FMain.class:1107
+msgid "Duración"
+msgstr "Durée"
+
+#: FMain.class:1111
+msgid "Rango"
+msgstr "Rang"
+
+#: FMain.class:1115
+msgid "Muestreo"
+msgstr "Échantillonnage"
+
+#: FMain.class:1119
+msgid "Tipo"
+msgstr "Type"
+
+#: FMain.class:1123
+msgid "Clase"
+msgstr "Classe"
+
+#: FMain.class:1127
+msgid "Carpeta"
+msgstr "Dossier"
+
+#: FMain.class:1474
+msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
+msgstr "Le téléchargement automatique des paroles de la chanson ne fonctionne pas, essayez de le faire manuellement"
+
+#: FMain.class:1700 MHttp.module:59
+msgid "Aceptar"
+msgstr "Accepter"
+
+#: FMain.class:1700
+msgid "Esta operacion borrara por completo la base de datos"
+msgstr "Cela effacera complètement la base de données"
+
+#: FMain.class:1765
+msgid "Album"
+msgstr "Album"
+
+#: FMain.class:1939
+msgid "Ficha de la canción"
+msgstr "Onglet chanson"
 
 #: FMain.form:69
 msgid "Archivo"
@@ -97,178 +270,6 @@ msgstr "Aider"
 msgid "Acerca de"
 msgstr "À propos de"
 
-#: FMain.class:216
-msgid "Xml creado con exito"
-msgstr "Xml créé avec succès"
-
-#: FMain.class:237
-msgid "Haga clic para abrir la carpeta contenedora con el administrador de archivos"
-msgstr "Cliquez pour ouvrir le dossier parent avec le gestionnaire de fichiers"
-
-#: FMain.class:246
-msgid "Conexión a la base de datos"
-msgstr "Connexion à la base de données"
-
-#: FMain.class:247
-msgid "Clic izquierdo para abrir carpeta contenedora, derecho para buscar tapa en internet"
-msgstr "Clic gauche pour ouvrir le dossier parent, droit de fouiller le couvercle sur internet"
-
-#: FMain.class:249
-msgid "Actualizacion de la colección"
-msgstr "Mise à jour de collection"
-
-#: FMain.class:250
-msgid "Preferencias de"
-msgstr "Préférences"
-
-#: FMain.class:266
-msgid "Falta instalar el paquete"
-msgstr "Besoin d'installer le paquet"
-
-#: FMain.class:268
-msgid "Faltan instalar los siguientes paquetes"
-msgstr "Manquant installer les paquets suivants"
-
-#: FMain.class:288
-msgid "Puede usar el siguente commando"
-msgstr "Vous pouvez utiliser le commando ci-dessous"
-
-#: FMain.class:288
-msgid "¿Quiere abrir la terminal para poceder?"
-msgstr "Vous voulez ouvrir le terminal poceder?"
-
-#: FMain.class:288
-msgid "Sí"
-msgstr "Oui"
-
-#: FMain.class:288
-msgid "No"
-msgstr "Pas"
-
-#: FMain.class:872
-msgid "¿Que quiere hacer?"
-msgstr "Qu'est-ce que vous voulez faire?"
-
-#: FMain.class:872
-msgid "Puede abrir el directorio del disco"
-msgstr "Vous pouvez ouvrir le répertoire du disque"
-
-#: FMain.class:872
-msgid "o buscar una caratula en internet"
-msgstr "Ou trouver une caratula en ligne"
-
-#: FMain.class:872
-msgid "Abrir directorio"
-msgstr "Répertoire ouvert"
-
-#: FMain.class:872
-msgid "Buscar con"
-msgstr "Recherche"
-
-#: FMain.class:925
-msgid "El archivo ya existe."
-msgstr "Le fichier existe déjà."
-
-#: FMain.class:925
-msgid "¿Desea remplazarlo?"
-msgstr "Voulez-vous le remplacer?"
-
-#: FMain.class:925
-msgid "Remplazar"
-msgstr "Remplacer"
-
-#: FMain.class:925
-msgid "Cancelar"
-msgstr "Annuler"
-
-#: FMain.class:998
-msgid "Nº"
-msgstr "Non."
-
-#: FMain.class:1002
-msgid "Canción"
-msgstr "Chanson"
-
-#: FMain.class:1006
-msgid "Canción índice"
-msgstr "Indice de chanson"
-
-#: FMain.class:1014
-msgid "Artista índice"
-msgstr "L'index des artistes"
-
-#: FMain.class:1018
-msgid "CC"
-msgstr "Cc"
-
-#: FMain.class:1022
-msgid "País"
-msgstr "Pays"
-
-#: FMain.class:1026
-msgid "País índice"
-msgstr "Index des pays"
-
-#: FMain.class:1034
-msgid "Álbum índice"
-msgstr "Index de l'album"
-
-#: FMain.class:1038
-msgid "Género"
-msgstr "Sexe"
-
-#: FMain.class:1042
-msgid "Género índice"
-msgstr "Index des genres"
-
-#: FMain.class:1046
-msgid "Año"
-msgstr "Année"
-
-#: FMain.class:1050
-msgid "Duración"
-msgstr "Durée"
-
-#: FMain.class:1054
-msgid "Rango"
-msgstr "Rang"
-
-#: FMain.class:1058
-msgid "Muestreo"
-msgstr "Échantillonnage"
-
-#: FMain.class:1062
-msgid "Tipo"
-msgstr "Type"
-
-#: FMain.class:1066
-msgid "Clase"
-msgstr "Classe"
-
-#: FMain.class:1070
-msgid "Carpeta"
-msgstr "Dossier"
-
-#: FMain.class:1417
-msgid "La descarga automatica de la letra de la cancion no funciono, pruebe hacerlo manualmente"
-msgstr "Le téléchargement automatique des paroles de la chanson ne fonctionne pas, essayez de le faire manuellement"
-
-#: FMain.class:1643
-msgid "Esta operacion borrara por completo la base de datos"
-msgstr "Cela effacera complètement la base de données"
-
-#: FMain.class:1643 MHttp.module:59
-msgid "Aceptar"
-msgstr "Accepter"
-
-#: FMain.class:1708
-msgid "Album"
-msgstr "Album"
-
-#: FMain.class:1882
-msgid "Ficha de la canción"
-msgstr "Onglet chanson"
-
 #: FPreferences.class:52
 msgid "Escanear"
 msgstr "Balayage"
@@ -314,12 +315,12 @@ msgid "la forma automatica no funciono"
 msgstr "La forme automatique fonctionne pas"
 
 #: MHttp.module:59
-msgid "Tiene que instalar el progrma"
-msgstr "Vous devez installer le prgrm"
-
-#: MHttp.module:59
 msgid "Instalar"
 msgstr "Installer"
+
+#: MHttp.module:59
+msgid "Tiene que instalar el progrma"
+msgstr "Vous devez installer le prgrm"
 
 #: MUtility.module:34
 msgid "Seleccionar directorio"
@@ -337,11 +338,11 @@ msgstr "Filtrer par:"
 msgid "Falta el paquete"
 msgstr "Package manquant"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "El archivo "
 msgstr "L'archive"
 
-#: MUtility.module:930
+#: MUtility.module:932
 msgid "Tiene caracteres no ascii"
 msgstr "N'a pas des caractères ascii"
 
